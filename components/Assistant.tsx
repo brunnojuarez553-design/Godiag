@@ -63,12 +63,16 @@ export default function Assistant() {
         body: JSON.stringify({ messages: [], kickoff: true }),
       });
       const data = await res.json();
+      if (data?.debug || data?.error) {
+        console.error("[Go Diag Asistente] Error del servidor:", data.error, data.debug);
+      }
       const reply =
         typeof data?.reply === "string" && data.reply.trim()
           ? data.reply
           : "¡Hola! Soy el asistente de Autotrónica Go Diag. Contame, ¿qué le está pasando a tu vehículo?";
       setMessages([{ role: "assistant", content: reply }]);
-    } catch {
+    } catch (err) {
+      console.error("[Go Diag Asistente] Fallo de red en kickoff:", err);
       setMessages([
         {
           role: "assistant",
@@ -101,6 +105,9 @@ export default function Assistant() {
         body: JSON.stringify({ messages: next }),
       });
       const data = await res.json();
+      if (data?.debug || data?.error) {
+        console.error("[Go Diag Asistente] Error del servidor:", data.error, data.debug);
+      }
       const reply =
         typeof data?.reply === "string" && data.reply.trim()
           ? data.reply

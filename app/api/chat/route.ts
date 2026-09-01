@@ -78,12 +78,35 @@ async function callGroq(apiKey: string, body: Record<string, unknown>) {
   return res.json();
 }
 
+// Diagnóstico rápido: abrí https://TU-DOMINIO/api/chat en el navegador (GET).
+// Te dice, sin exponer la key, si el servidor la está viendo o no.
+export async function GET() {
+  const apiKey = process.env.GROQ_API_KEY;
+  return NextResponse.json({
+    ok: Boolean(apiKey),
+    groq_api_key_detectada: Boolean(apiKey),
+    largo_de_la_key: apiKey ? apiKey.length : 0,
+    modelo_chat: CHAT_MODEL,
+    modelo_extraccion: EXTRACT_MODEL,
+    nota: apiKey
+      ? "La variable de entorno está llegando al servidor. Si el chat igual falla, probá enviando un POST real (usá el chat de la web) y revisá los Runtime Logs en Vercel -> tu proyecto -> Logs."
+      : "GROQ_API_KEY NO está llegando a este deployment. Andá a Vercel -> Project Settings -> Environment Variables, confirmá que esté marcada para 'Production', y hacé un Redeploy (no alcanza con guardarla, Vercel no la inyecta en un build ya existente).",
+  });
+}
+
 export async function POST(req: NextRequest) {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
     return NextResponse.json(
-      { error: "GROQ_API_KEY no está configurada en el servidor." },
-      { status: 500 }
+      {
+        error: "GROQ_API_KEY no está configurada en el servidor.",
+        debug: "missing_api_key",
+        reply:
+          "Ahora mismo no puedo conectarme (falta configuración del lado del servidor). Escribinos directo por WhatsApp y te atendemos al toque.",
+        lead: { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, listo: true },
+        fallback: true,
+      },
+      { status: 200 }
     );
   }
 
@@ -161,13 +184,15 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ reply, lead });
   } catch (error) {
-    console.error("Groq chat error:", error);
+    const message = error instanceof Error ? error.message : String(error);
+    console.error("Groq chat error:", message);
     return NextResponse.json(
       {
         error: "No pude responder en este momento.",
+        debug: message.slice(0, 400),
         reply:
           "Se me complicó la conexión justo ahora 😅. Escribinos directo por WhatsApp y el especialista te atiende enseguida.",
-        lead: null,
+        lead: { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, listo: true },
         fallback: true,
       },
       { status: 200 }
