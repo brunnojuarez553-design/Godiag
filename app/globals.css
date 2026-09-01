@@ -242,10 +242,10 @@
 .ai-callout{max-width:180px;font-size:11px}
 }
 
-/* Cards de servicios: mismo tamaño exacto en mobile, sin importar el largo del texto */
-@media(max-width:600px){
-.service-grid article{min-height:300px;display:flex;flex-direction:column}
-.service-grid h3{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
-.service-grid p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
-.service-grid a{margin-top:auto}
+/* Cards de servicios: mismo tamaño exacto en todas las pantallas mobile/tablet, sin importar el largo del texto */
+@media(max-width:900px){
+.service-grid article{min-height:300px;padding:23px;display:flex;flex-direction:column}
+.service-grid h3{font-size:21px;margin:36px 0 12px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.service-grid p{font-size:12px;line-height:1.6;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.service-grid a{min-height:44px;margin-top:auto}
 }

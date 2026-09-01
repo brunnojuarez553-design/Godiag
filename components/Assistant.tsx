@@ -85,16 +85,11 @@ export default function Assistant() {
     }
   }
 
-  function handleOpen() {
-    setOpen(true);
-    setShowBubble(false);
-    if (!started) kickoff();
-  }
-
-  async function sendMessage() {
-    const text = input.trim();
-    if (!text || loading) return;
-    const next = [...messages, { role: "user" as Role, content: text }];
+  async function sendText(text: string) {
+    const clean = text.trim();
+    if (!clean || loading) return;
+    setStarted(true);
+    const next = [...messages, { role: "user" as Role, content: clean }];
     setMessages(next);
     setInput("");
     setLoading(true);
@@ -135,6 +130,34 @@ export default function Assistant() {
     } finally {
       setLoading(false);
     }
+  }
+
+  function handleOpen() {
+    setOpen(true);
+    setShowBubble(false);
+    if (!started) kickoff();
+  }
+
+  // Se dispara desde las cards de "Especialidades": abre el asistente y
+  // pregunta directamente por el servicio de la card que se presionó.
+  useEffect(() => {
+    function onOpenAssistant(e: Event) {
+      const service = (e as CustomEvent<{ service?: string }>).detail?.service;
+      setOpen(true);
+      setShowBubble(false);
+      if (service) {
+        sendText(`Quiero consultar sobre: ${service}`);
+      } else if (!started) {
+        kickoff();
+      }
+    }
+    window.addEventListener("open-assistant", onOpenAssistant);
+    return () => window.removeEventListener("open-assistant", onOpenAssistant);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messages, started, loading]);
+
+  async function sendMessage() {
+    await sendText(input);
   }
 
   return (
