@@ -4,8 +4,10 @@ export const runtime = "nodejs";
 
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 // Modelo conversacional (calidad de respuesta) y modelo de extracción (rápido/barato, JSON).
-const CHAT_MODEL = "llama-3.3-70b-versatile";
-const EXTRACT_MODEL = "llama-3.1-8b-instant";
+// OJO: llama-3.3-70b-versatile y llama-3.1-8b-instant fueron dados de baja por Groq
+// el 16/08/2026. Se reemplazan por los modelos GPT-OSS recomendados por Groq.
+const CHAT_MODEL = "openai/gpt-oss-120b";
+const EXTRACT_MODEL = "openai/gpt-oss-20b";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
@@ -111,6 +113,8 @@ export async function POST(req: NextRequest) {
       messages: [{ role: "system", content: SYSTEM_PROMPT }, ...conversationMessages],
       temperature: 0.65,
       max_tokens: 350,
+      reasoning_effort: "low",
+      include_reasoning: false,
     });
 
     const reply: string =
@@ -132,6 +136,8 @@ export async function POST(req: NextRequest) {
           ],
           temperature: 0,
           max_tokens: 300,
+          reasoning_effort: "low",
+          include_reasoning: false,
           response_format: { type: "json_object" },
         });
 

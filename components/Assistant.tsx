@@ -63,7 +63,11 @@ export default function Assistant() {
         body: JSON.stringify({ messages: [], kickoff: true }),
       });
       const data = await res.json();
-      setMessages([{ role: "assistant", content: data.reply }]);
+      const reply =
+        typeof data?.reply === "string" && data.reply.trim()
+          ? data.reply
+          : "¡Hola! Soy el asistente de Autotrónica Go Diag. Contame, ¿qué le está pasando a tu vehículo?";
+      setMessages([{ role: "assistant", content: reply }]);
     } catch {
       setMessages([
         {
@@ -97,14 +101,18 @@ export default function Assistant() {
         body: JSON.stringify({ messages: next }),
       });
       const data = await res.json();
-      setMessages((m) => [...m, { role: "assistant", content: data.reply }]);
+      const reply =
+        typeof data?.reply === "string" && data.reply.trim()
+          ? data.reply
+          : "Se me complicó la conexión justo ahora 😅. Escribinos directo por WhatsApp y el especialista te atiende enseguida.";
+      setMessages((m) => [...m, { role: "assistant", content: reply }]);
       if (data.lead) {
         setLead(data.lead);
         if (data.fallback && !data.lead.listo) {
           // si Groq falló, igual dejamos salida directa por WhatsApp
         }
       }
-      if (data.fallback) {
+      if (data.fallback || (data.error && !data.lead)) {
         setLead((prev) => prev ?? { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, listo: true });
       }
     } catch {
