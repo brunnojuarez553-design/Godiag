@@ -124,7 +124,7 @@ export default function Assistant() {
 
   return (
     <>
-      <div className="ai-fab-wrap notranslate" translate="no">
+      <div className="ai-fab-wrap">
         {showBubble && !open && (
           <div className="ai-callout">
             <button className="ai-callout-close" aria-label="Cerrar" onClick={() => setShowBubble(false)}>
@@ -133,22 +133,13 @@ export default function Assistant() {
             <span>Estoy para ayudarte con tu vehículo 👋</span>
           </div>
         )}
-        <button
-          className="ai-fab"
-          style={{ width: 64, height: 64, borderRadius: "50%", overflow: "hidden", padding: 0 }}
-          onClick={handleOpen}
-          aria-label="Abrir asistente virtual"
-        >
-          <img
-            src={logo}
-            alt="Asistente Go Diag"
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-          />
+        <button className="ai-fab" onClick={handleOpen} aria-label="Abrir asistente virtual">
+          <img src={logo} alt="Asistente Go Diag" />
         </button>
       </div>
 
       {open && (
-        <div className="ai-panel notranslate" translate="no">
+        <div className="ai-panel">
           <div className="ai-header">
             <div className="ai-header-id">
               <img src={logo} alt="Go Diag" />
