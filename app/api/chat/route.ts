@@ -4,7 +4,8 @@ export const runtime = "nodejs";
 
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 // Modelo conversacional (calidad de respuesta) y modelo de extracción (rápido/barato, JSON).
-const CHAT_MODEL = "llama-3.3-70b-versatile";
+// Si Groq descontinúa el primero, se reintenta automáticamente con el siguiente de la lista.
+const CHAT_MODELS = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "openai/gpt-oss-20b"];
 const EXTRACT_MODEL = "llama-3.1-8b-instant";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
@@ -71,9 +72,26 @@ async function callGroq(apiKey: string, body: Record<string, unknown>) {
   });
   if (!res.ok) {
     const text = await res.text().catch(() => "");
-    throw new Error(`Groq API error ${res.status}: ${text}`);
+    const err = new Error(`Groq API error ${res.status}: ${text}`) as Error & { status?: number };
+    err.status = res.status;
+    throw err;
   }
   return res.json();
+}
+
+// Prueba el modelo principal y, si Groq lo devuelve como no disponible (decommissioned/404/400 de modelo),
+// reintenta con los siguientes de la lista antes de rendirse.
+async function callGroqChat(apiKey: string, messages: unknown[], temperature: number, max_tokens: number) {
+  let lastError: unknown;
+  for (const model of CHAT_MODELS) {
+    try {
+      return await callGroq(apiKey, { model, messages, temperature, max_tokens });
+    } catch (e) {
+      lastError = e;
+      console.error(`Fallo el modelo ${model}:`, e);
+    }
+  }
+  throw lastError;
 }
 
 export async function POST(req: NextRequest) {
@@ -106,12 +124,12 @@ export async function POST(req: NextRequest) {
     : history.slice(-20);
 
   try {
-    const chatCompletion = await callGroq(apiKey, {
-      model: CHAT_MODEL,
-      messages: [{ role: "system", content: SYSTEM_PROMPT }, ...conversationMessages],
-      temperature: 0.65,
-      max_tokens: 350,
-    });
+    const chatCompletion = await callGroqChat(
+      apiKey,
+      [{ role: "system", content: SYSTEM_PROMPT }, ...conversationMessages],
+      0.65,
+      350
+    );
 
     const reply: string =
       chatCompletion?.choices?.[0]?.message?.content?.trim() ||
