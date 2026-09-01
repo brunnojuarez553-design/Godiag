@@ -12,7 +12,8 @@ const services=[
  {n:"03",title:"Tuning & programación ECU",text:"Calibración con HP Tuners, BitEdit y VFT Tuning. Reprogramación profesional.",icon:Gauge},
  {n:"04",title:"Inyección EFI / GDI",text:"Entonación y prueba de inyectores. Limpieza y descarbonización de válvulas.",icon:Activity},
  {n:"05",title:"Electricidad & cableado",text:"Localización de fallas, reparación de cableado y trazado con osciloscopio.",icon:Zap},
- {n:"06",title:"Diagnóstico diésel 12V / 24V",text:"Vehículos livianos, camionetas y equipos pesados con instrumentación dedicada.",icon:Settings2}
+ {n:"06",title:"Diagnóstico diésel 12V / 24V",text:"Vehículos livianos, camionetas y equipos pesados con instrumentación dedicada.",icon:Settings2},
+ {n:"07",title:"Eliminación EGR (EGR OFF)",text:"Anulación electrónica profesional para aplicaciones permitidas, competición u off-road, según normativa local.",icon:Wrench}
 ];
 const brands=["TOYOTA","FORD","CHEVROLET","MITSUBISHI","JEEP","DODGE","CHRYSLER"];
 const works=[
