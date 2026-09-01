@@ -37,6 +37,57 @@
  .expert-card{grid-template-columns:1fr}
  .expert-media{margin-bottom:45px}
 }
+
+/* Logo horizontal estándar dentro de la navegación */
+.nav .brand-logo{
+ width:176px!important;
+ min-width:176px!important;
+ max-width:176px!important;
+ height:58px!important;
+ min-height:58px!important;
+ max-height:58px!important;
+ flex:0 0 176px!important;
+ border-radius:3px!important;
+ background:#fff!important;
+ overflow:hidden!important;
+}
+.nav .brand-logo img{
+ width:100%!important;
+ height:176px!important;
+ max-width:none!important;
+ max-height:none!important;
+ inset:0 auto auto 0!important;
+ object-fit:cover!important;
+ object-position:center top!important;
+ transform:none!important;
+ border-radius:0!important;
+}
+.footer-logo{
+ width:160px!important;
+ min-width:160px!important;
+ max-width:160px!important;
+ height:54px!important;
+ min-height:54px!important;
+ max-height:54px!important;
+ flex:0 0 160px!important;
+ border-radius:3px!important;
+}
+.footer-logo img{
+ width:100%!important;
+ height:160px!important;
+ inset:0 auto auto 0!important;
+ object-fit:cover!important;
+ object-position:center top!important;
+ transform:none!important;
+}
+@media(max-width:600px){
+ .nav .brand-logo{
+  width:142px!important;min-width:142px!important;max-width:142px!important;
+  height:48px!important;min-height:48px!important;max-height:48px!important;
+  flex-basis:142px!important;
+ }
+ .nav .brand-logo img{height:142px!important}
+}
 @media(max-width:600px){
  .nav{height:76px}
  .brand-logo{height:50px}
