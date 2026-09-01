@@ -241,3 +241,11 @@
 .ai-panel{right:8px;left:8px;width:auto;bottom:calc(8px + env(safe-area-inset-bottom));height:min(78dvh,600px)}
 .ai-callout{max-width:180px;font-size:11px}
 }
+
+/* Cards de servicios: mismo tamaño exacto en mobile, sin importar el largo del texto */
+@media(max-width:600px){
+.service-grid article{min-height:300px;display:flex;flex-direction:column}
+.service-grid h3{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.service-grid p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.service-grid a{margin-top:auto}
+}
