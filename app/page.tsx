@@ -1,6 +1,6 @@
 "use client";
 import {useState} from "react";
-import {Activity,ArrowDownRight,ArrowRight,Award,Check,ChevronRight,CircuitBoard,Gauge,Menu,Microscope,Phone,ScanLine,Settings2,ShieldCheck,Sparkles,Wrench,X,Zap} from "lucide-react";
+import {Activity,ArrowDownRight,ArrowRight,Award,Check,ChevronRight,CircuitBoard,Gauge,Menu,Microscope,Phone,ScanLine,Settings2,ShieldCheck,Sparkles,Truck,Wrench,X,Zap} from "lucide-react";
 import {Dialog,DialogContent,DialogHeader,DialogTitle,DialogTrigger} from "@/components/ui/dialog";
 import {Select,SelectContent,SelectItem,SelectTrigger,SelectValue} from "@/components/ui/select";
 import {Input} from "@/components/ui/input";
@@ -8,13 +8,17 @@ import {Textarea} from "@/components/ui/textarea";
 import Assistant from "@/components/Assistant";
 const whatsapp="584222872237";
 const services=[
- {n:"01",title:"Diagnóstico electrónico",text:"Lectura avanzada, análisis de señales y diagnóstico preciso en gasolina, diésel y eléctricos.",icon:ScanLine,image:"https://res.cloudinary.com/dgp7uhps3/image/upload/v1788231885/ChatGPT_Image_1_sept_2026_00_01_50_2_nzmhqo.png"},
- {n:"02",title:"Reparación de módulos",text:"Diagnóstico y reparación de ECU, ABS, BCM, TIPM, tableros y clusters.",icon:CircuitBoard,image:"https://res.cloudinary.com/dgp7uhps3/image/upload/v1788231894/ChatGPT_Image_1_sept_2026_00_01_42_1_uxtqtq.png"},
- {n:"03",title:"Tuning & programación ECU",text:"Calibración con HP Tuners, BitEdit y VFT Tuning. Reprogramación profesional.",icon:Gauge,image:"https://res.cloudinary.com/dgp7uhps3/image/upload/v1788231889/ChatGPT_Image_1_sept_2026_00_02_08_4_1_kdnntp.png"},
- {n:"04",title:"Inyección EFI / GDI",text:"Entonación y prueba de inyectores. Limpieza y descarbonización de válvulas.",icon:Activity,image:"https://res.cloudinary.com/dgp7uhps3/image/upload/v1788231895/ChatGPT_Image_1_sept_2026_00_02_07_3_ou7mju.png"},
- {n:"05",title:"Electricidad & cableado",text:"Localización de fallas, reparación de cableado y trazado con osciloscopio.",icon:Zap,image:"https://res.cloudinary.com/dgp7uhps3/image/upload/v1788231889/ChatGPT_Image_1_sept_2026_00_02_19_6_1_vikp0j.png"},
- {n:"06",title:"Diagnóstico diésel 12V / 24V",text:"Vehículos livianos, camionetas y equipos pesados con instrumentación dedicada.",icon:Settings2,image:"https://res.cloudinary.com/dgp7uhps3/image/upload/v1788231893/ChatGPT_Image_1_sept_2026_00_02_17_5_1_nm7zon.png"},
- {n:"07",title:"Eliminación EGR (EGR OFF)",text:"Anulación electrónica profesional para aplicaciones permitidas, competición u off-road, según normativa local.",icon:Wrench,image:"https://res.cloudinary.com/dgp7uhps3/image/upload/v1788231888/ChatGPT_Image_1_sept_2026_00_02_26_7_1_qt1x2c.png"}
+ {n:"01",title:"Descarbonización de válvulas",text:"Limpieza profunda de válvulas y cámara de combustión para recuperar potencia, ahorro y suavidad de marcha.",icon:Sparkles,image:"https://res.cloudinary.com/dpiavcukm/image/upload/v1788305085/IMG_1033_y8wdqt.jpg"},
+ {n:"02",title:"Entonación de inyectores EFI/GDI",text:"Prueba, limpieza y calibración de inyectores en sistemas EFI y GDI para una inyección precisa y estable.",icon:Activity,image:"https://res.cloudinary.com/dpiavcukm/image/upload/v1788305085/IMG_1036_f5jobx.jpg"},
+ {n:"03",title:"Reparación de ECU",text:"Diagnóstico a nivel de componente y reparación de unidades de control del motor con fallas o daño interno.",icon:CircuitBoard,image:"https://res.cloudinary.com/dpiavcukm/image/upload/v1788305084/IMG_1037_jjr5kk.jpg"},
+ {n:"04",title:"EGR OFF Toyota",text:"Anulación electrónica del sistema EGR en Toyota, para aplicaciones permitidas según normativa local.",icon:Wrench,image:"https://res.cloudinary.com/dpiavcukm/image/upload/v1788305085/IMG_1038_ggdubh.jpg"},
+ {n:"05",title:"Diagnóstico electrónico",text:"Lectura avanzada, análisis de señales y diagnóstico preciso en gasolina, diésel y eléctricos.",icon:ScanLine,image:"https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1040_ioaslw.jpg"},
+ {n:"06",title:"Reparación de tablero",text:"Reparación de tableros y clusters con fallas de encendido, testigos erráticos o pérdida de comunicación.",icon:Gauge,image:"https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1043_svrvfn.jpg"},
+ {n:"07",title:"Reparación de ABS",text:"Diagnóstico y reparación de módulos ABS para restablecer el frenado antibloqueo con seguridad.",icon:ShieldCheck,image:"https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1042_jaz2yl.jpg"},
+ {n:"08",title:"Reparación de BCM/TIPM",text:"Reparación de módulos de carrocería BCM/TIPM: fallas eléctricas, de comunicación y control general del vehículo.",icon:Microscope,image:"https://res.cloudinary.com/dpiavcukm/image/upload/v1788305083/IMG_1041_i447vu.jpg"},
+ {n:"09",title:"Reparación de cableado",text:"Localización de fallas, empalmes y reparación de cableado con trazado por osciloscopio.",icon:Zap,image:"https://res.cloudinary.com/dpiavcukm/image/upload/v1788305084/IMG_1044_of37oy.jpg"},
+ {n:"10",title:"Repro tuning HP Tuners / BitEdit / VFT",text:"Calibración y reprogramación de ECU con HP Tuners, BitEdit y VFT Tuning para ajustes de potencia y comportamiento del motor.",icon:Settings2,image:"https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1039_pnpd8p.jpg"},
+ {n:"11",title:"Diagnóstico diésel 12V / 24V",text:"Vehículos livianos, camionetas y equipos pesados con instrumentación dedicada para 12V y 24V.",icon:Truck,image:"https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1045_i97gv3.jpg"}
 ];
 const brands=["TOYOTA","FORD","CHEVROLET","MITSUBISHI","JEEP","DODGE","CHRYSLER"];
 const works=[
