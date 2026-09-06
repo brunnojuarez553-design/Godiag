@@ -23,7 +23,7 @@ const categories: Category[] = [
   },
   {
     id: "potencia",
-    label: "Perdió potencia o tira menos",
+    label: "Perdió potencia o responde menos",
     icon: Zap,
     follow: { q: "¿Cuándo lo notás más?", options: ["Siempre", "En frío", "En caliente", "Al acelerar fuerte"] },
   },
@@ -35,15 +35,15 @@ const categories: Category[] = [
   },
   {
     id: "ruido",
-    label: "Ruido, vibración o tirón raro",
+    label: "Ruido, vibración o tirón inusual",
     icon: Wrench,
-    follow: { q: "¿Dónde lo sentís?", options: ["Al frenar", "Al acelerar", "En marcha constante", "Al girar"] },
+    follow: { q: "¿Cuándo lo sentís?", options: ["Al frenar", "Al acelerar", "En marcha constante", "Al girar"] },
   },
   {
     id: "tuning",
     label: "Quiero programar o calibrar la ECU",
     icon: Sparkles,
-    follow: { q: "¿Qué buscás?", options: ["Más potencia", "Anular EGR / testigo", "Corregir una falla", "Aún no sé, quiero asesoría"] },
+    follow: { q: "¿Qué buscás?", options: ["Más potencia", "EGR OFF / testigo", "Corregir una falla", "Quiero asesoramiento"] },
   },
 ];
 
@@ -80,14 +80,14 @@ export default function CarQuiz() {
 
   function send() {
     const msg = [
-      "Hola Autotrónica Go Diag. Hice el diagnóstico rápido en la web y esto es lo que me pasa:",
+      "Hola Autotrónica Go Diagnosis. Hice la orientación rápida en la web y esto es lo que me pasa:",
       "",
       `Síntoma: ${category?.label ?? "A confirmar"}`,
       `Detalle: ${detail || "A confirmar"}`,
       `Vehículo: ${vehicle || "A confirmar"}`,
       `Modalidad: ${mode || "A confirmar"}`,
       "",
-      "(Consulta generada por el diagnóstico rápido de la web)",
+      "(Consulta generada desde la web)",
     ].join("\n");
     window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
   }
@@ -95,17 +95,13 @@ export default function CarQuiz() {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger className="quiz-trigger">
-        <span className="quiz-trigger-icon">
-          <Gauge size={18} />
-        </span>
-        ¿Qué le pasa a tu auto? Hacé el diagnóstico rápido
+        <span className="quiz-trigger-icon"><Gauge size={18} /></span>
+        ¿Qué le pasa a tu auto? Hacé una orientación rápida
         <ArrowRight size={16} />
       </DialogTrigger>
 
       <DialogContent className="quote-modal quiz-modal">
-        <DialogHeader>
-          <DialogTitle>Diagnóstico rápido</DialogTitle>
-        </DialogHeader>
+        <DialogHeader><DialogTitle>Orientación rápida</DialogTitle></DialogHeader>
 
         <div className="quiz-steps" aria-hidden="true">
           <span className={step >= 0 ? "on" : ""} />
@@ -121,7 +117,7 @@ export default function CarQuiz() {
               return (
                 <button key={c.id} type="button" className="quiz-option" onClick={() => pickCategory(c)}>
                   <Icon size={18} />
-                  {c.label}
+                  <span>{c.label}</span>
                   <ArrowRight size={15} />
                 </button>
               );
@@ -134,7 +130,7 @@ export default function CarQuiz() {
             <p className="modal-lead">{category.follow.q}</p>
             {category.follow.options.map((o) => (
               <button key={o} type="button" className="quiz-option" onClick={() => pickDetail(o)}>
-                {o}
+                <span>{o}</span>
                 <ArrowRight size={15} />
               </button>
             ))}
@@ -146,7 +142,7 @@ export default function CarQuiz() {
 
         {step === 2 && (
           <div className="quiz-final">
-            <p className="modal-lead">Último paso: contanos de tu vehículo para que el especialista llegue con contexto.</p>
+            <p className="modal-lead">Último paso: contanos qué vehículo tenés y dónde preferís la atención.</p>
             <div className="form-grid">
               <label className="full">
                 <span>Marca, modelo y año</span>
@@ -155,20 +151,16 @@ export default function CarQuiz() {
               <label className="full">
                 <span>Modalidad</span>
                 <Select value={mode} onValueChange={setMode}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Seleccionar modalidad" />
-                  </SelectTrigger>
+                  <SelectTrigger><SelectValue placeholder="Seleccionar modalidad" /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="En el taller">En el taller</SelectItem>
-                    <SelectItem value="A domicilio">Diagnóstico a domicilio</SelectItem>
+                    <SelectItem value="A domicilio">A domicilio</SelectItem>
                   </SelectContent>
                 </Select>
               </label>
             </div>
-            <div className="quiz-summary">
-              <b>Resumen:</b> {category?.label} — {detail}
-            </div>
-            <button type="button" className="send-btn" onClick={send}>
+            <div className="quiz-summary"><b>Resumen:</b> {category?.label} — {detail}</div>
+            <button type="button" className="send-btn" onClick={send} disabled={!vehicle.trim() || !mode}>
               Enviar por WhatsApp <ArrowRight size={18} />
             </button>
             <button type="button" className="quiz-back" onClick={() => setStep(1)}>
