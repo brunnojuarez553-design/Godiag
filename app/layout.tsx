@@ -94,6 +94,49 @@ const localBusinessSchema = {
   ],
 };
 
+const navScrollScript = `
+(() => {
+  let lastY = window.scrollY;
+  let ticking = false;
+
+  const updateNav = () => {
+    const header = document.querySelector('.nav');
+    if (!header) {
+      ticking = false;
+      return;
+    }
+
+    const y = window.scrollY;
+    const menuOpen = header.querySelector('nav')?.classList.contains('open');
+    const goingUp = y < lastY - 4;
+    const goingDown = y > lastY + 8;
+
+    if (y < 90 || menuOpen || goingUp) {
+      header.classList.remove('nav-hidden');
+      header.classList.add('nav-visible');
+    } else if (goingDown && y > 140) {
+      header.classList.add('nav-hidden');
+      header.classList.remove('nav-visible');
+    }
+
+    lastY = y;
+    ticking = false;
+  };
+
+  const requestUpdate = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateNav);
+      ticking = true;
+    }
+  };
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate, { passive: true });
+  document.addEventListener('click', () => window.requestAnimationFrame(updateNav), true);
+  updateNav();
+})();
+`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
@@ -103,6 +146,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <img src={logo} alt="" />
         </div>
         {children}
+        <script dangerouslySetInnerHTML={{ __html: navScrollScript }} />
       </body>
     </html>
   );
