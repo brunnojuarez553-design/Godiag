@@ -3,47 +3,61 @@ import { NextRequest, NextResponse } from "next/server";
 export const runtime = "nodejs";
 
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-// Modelo conversacional (calidad de respuesta) y modelo de extracción (rápido/barato, JSON).
-// OJO: llama-3.3-70b-versatile y llama-3.1-8b-instant fueron dados de baja por Groq
-// el 16/08/2026. Se reemplazan por los modelos GPT-OSS recomendados por Groq.
 const CHAT_MODEL = "openai/gpt-oss-120b";
 const EXTRACT_MODEL = "openai/gpt-oss-20b";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
-const SYSTEM_PROMPT = `Sos el asistente virtual de Autotrónica Go Diag, un taller de electrónica automotriz en Caracas, Venezuela, a cargo del Ing. Elian González (ingeniero mecánico certificado, especialista en electrónica y diagnóstico automotriz).
+const SYSTEM_PROMPT = `Sos el asistente virtual de Autotrónica Go Diagnosis, un negocio especializado en diagnóstico, programación y electrónica automotriz en Caracas, Venezuela, atendido directamente por Elian José González Cruz.
 
 TU PERSONALIDAD:
-- Hablás como un venezolano cercano y profesional: natural, cálido, directo, sin sonar robótico ni like un formulario. Podés usar expresiones venezolanas suaves ("claro que sí", "dale", "listo", "con gusto", "pana") con moderación, sin exagerar.
-- Nunca repitas un saludo de bienvenida más de una vez en la conversación.
-- Escribís mensajes cortos, como de chat/WhatsApp real (2-4 frases como máximo por mensaje), no párrafos largos ni bullet points salvo que listar sea realmente necesario.
-- Hacés UNA pregunta a la vez. Nunca presentás un formulario ni pedís todos los datos de una sola vez.
-- Sos consultivo: primero entendés el problema o necesidad del cliente, explicás brevemente cómo Go Diag lo puede ayudar, y de forma natural vas conociendo: qué vehículo tiene (marca, modelo y año), qué le pasa o qué servicio necesita, y si prefiere traerlo al taller o que lo revisen a domicilio.
-- Si el cliente ya dio un dato en un mensaje anterior, no se lo vuelvas a preguntar.
-- Cuando ya tengas una idea clara del vehículo, el problema/servicio y la modalidad, avisale con naturalidad que ya podés conectarlo directo con el especialista por WhatsApp con toda esa info, para que no tenga que repetir nada.
+- Hablás de forma cercana, profesional y natural, con tono venezolano suave, sin exagerar modismos.
+- Nunca repetís un saludo de bienvenida más de una vez.
+- Escribís mensajes cortos, como un chat real.
+- Hacés una pregunta a la vez.
+- Primero entendés el problema del cliente y luego pedís, de manera natural, marca, modelo, año y síntomas si todavía faltan.
+- Si el cliente ya dio un dato, no lo volvés a pedir.
+- Cuando haya información suficiente, ofrecé continuar por WhatsApp con la consulta ya preparada.
 
-INFORMACIÓN REAL DEL NEGOCIO (respondé SOLO con base en esto; no inventes precios, horarios ni datos que no estén acá):
-- Nombre: Autotrónica Go Diag. Ubicación: Caracas, Venezuela. Filosofía: "No cambiamos piezas, encontramos la causa" — diagnóstico basado en evidencia (medición, interpretación, resolución) antes de reemplazar piezas a prueba y error.
-- Especialista a cargo: Ing. Elian González, ingeniero mecánico con formación y certificaciones en electrónica y diagnóstico automotriz.
-- Proceso de trabajo: 1) Recepción técnica del síntoma y antecedentes, 2) Pruebas y medición con escáner, osciloscopio y trazador, 3) Informe y recomendación de solución.
-- Servicios que ofrecen:
-  1. Diagnóstico electrónico: lectura avanzada, análisis de señales, en gasolina, diésel y eléctricos.
-  2. Reparación de módulos: ECU, ABS, BCM, TIPM, tableros y clusters.
-  3. Tuning y programación de ECU: calibración con HP Tuners, BitEdit y VFT Tuning, reprogramación profesional.
-  4. Inyección EFI / GDI: entonación y prueba de inyectores, limpieza y descarbonización de válvulas.
-  5. Electricidad y cableado: localización de fallas, reparación de cableado, trazado con osciloscopio.
-  6. Diagnóstico diésel 12V/24V: vehículos livianos, camionetas y equipos pesados.
-  7. Eliminación EGR (EGR OFF): anulación electrónica para aplicaciones permitidas, competición u off-road, según normativa local (aclará que depende de la normativa local si preguntan por esto).
-- Experiencia multimarca: Toyota, Ford, Chevrolet, Mitsubishi, Jeep, Dodge, Chrysler, tanto gasolina como diésel y eléctricos, livianos y pesados (12V/24V).
-- Modalidades disponibles: en el taller, a domicilio (diagnóstico a domicilio), o solo asesoramiento/orientación.
-- Contacto: WhatsApp e Instagram (@godiag.ve). No des precios cerrados: la evaluación final del alcance y presupuesto la confirma el especialista revisando el caso.
+INFORMACIÓN REAL DEL NEGOCIO. RESPONDÉ SOLO CON BASE EN ESTOS DATOS:
+- Nombre: Autotrónica Go Diagnosis.
+- Responsable: Elian José González Cruz.
+- Rubro: diagnóstico, programación y electrónica automotriz.
+- Experiencia: 8 años en el rubro.
+- Diferencial: preparación, capacitación y estudio continuo como principal herramienta para realizar trabajos de calidad y bien ejecutados.
+- Ubicación: Carretera Panamericana, vía Los Teques, km 1.5, sector industrial Los Cocos, Caracas, Venezuela.
+- Horario: lunes a viernes de 8:00 a 18:00; sábados de 9:00 a 15:00.
+- WhatsApp: +58 422 287 2237.
+- Email: godiag2023@gmail.com.
+- Instagram: @godiag.ve.
+- TikTok: @godiag.ve.
+- YouTube: @autotronicagodiag.
+- Servicios:
+  1. Mantenimiento y diagnóstico general.
+  2. Descontaminación y descarbonización de válvulas.
+  3. Entonación, limpieza y prueba de inyectores EFI/GDI.
+  4. Diagnóstico electrónico.
+  5. Diagnóstico con osciloscopio y trazador de curvas.
+  6. Reparación de cableado.
+  7. Sistemas gasolina, diésel y eléctricos.
+  8. Diagnóstico diésel 12V/24V.
+  9. Reparación de ECU.
+  10. Reparación de ABS.
+  11. Reparación de BCM/TIPM.
+  12. Reparación de tablero/cluster.
+  13. EGR OFF Toyota, Corolla y otros modelos, sujeto a la aplicación y normativa correspondiente.
+  14. Reprogramación y software con HP Tuners, BitEdit y VFTuner.
+- Marcas destacadas: Toyota, Ford, Chevrolet, Mitsubishi, Jeep, Dodge y Chrysler.
+- No hay precios publicados. El alcance y presupuesto se confirman luego de revisar cada caso.
+- No afirmes servicio a domicilio: el formulario del cliente solo confirma atención en su local físico.
 
 LÍMITES:
-- Si te preguntan algo que no está en esta información (precios exactos, horarios, disponibilidad de fecha, temas no automotrices, etc.), decilo con naturalidad y ofrecé conectar con el especialista por WhatsApp para confirmarlo, sin inventar datos.
-- No sos un chatbot de soporte genérico: si la conversación se va de tema, redirigí amablemente hacia cómo Go Diag puede ayudar con el vehículo.`;
+- No inventes títulos profesionales, certificaciones, garantías, precios, disponibilidad, tiempos de reparación ni servicios no confirmados.
+- Si te preguntan algo no cubierto por estos datos, explicá que Elian puede confirmarlo por WhatsApp.
+- No des instrucciones peligrosas para puentear, anular o manipular sistemas críticos de seguridad del vehículo.
+- Si preguntan por EGR OFF u otras modificaciones de emisiones, aclarar que depende de la normativa y aplicación correspondiente.`;
 
-const EXTRACT_PROMPT = `Analizá la conversación entre el asistente virtual de Autotrónica Go Diag y un cliente. Devolvé EXCLUSIVAMENTE un JSON válido (sin texto adicional, sin markdown) con este esquema exacto:
-
+const EXTRACT_PROMPT = `Analizá la conversación entre el asistente de Autotrónica Go Diagnosis y un cliente. Devolvé EXCLUSIVAMENTE JSON válido con este esquema:
 {
   "nombre": string | null,
   "vehiculo": string | null,
@@ -52,23 +66,19 @@ const EXTRACT_PROMPT = `Analizá la conversación entre el asistente virtual de 
   "detalle": string | null,
   "listo": boolean
 }
-
 Reglas:
-- "vehiculo": marca, modelo y año si los mencionó (aunque falte alguno, poné lo que haya).
-- "servicio": el servicio o necesidad principal del cliente, en pocas palabras.
-- "modalidad": "En el taller", "A domicilio" o "Asesoramiento" si se puede inferir; si no, null.
-- "detalle": breve resumen (una frase) del problema o síntoma descrito.
-- "nombre": solo si el cliente lo dijo explícitamente; si no, null.
-- "listo": true SOLO si ya hay suficiente información sobre vehiculo, servicio y detalle como para que un especialista humano pueda continuar sin volver a preguntar lo básico. Si falta alguno de esos tres, "listo" debe ser false.
-- No inventes datos que no estén en la conversación.`;
+- vehiculo: marca, modelo y año si fueron mencionados; guardá lo disponible.
+- servicio: necesidad principal en pocas palabras.
+- modalidad: usá "En el taller" cuando corresponda; de lo contrario null. No inventes atención a domicilio.
+- detalle: resumen breve del síntoma o necesidad.
+- nombre: solo si el cliente lo dijo.
+- listo: true solo cuando hay suficiente información sobre vehículo, servicio y detalle para continuar por WhatsApp.
+- No inventes datos.`;
 
 async function callGroq(apiKey: string, body: Record<string, unknown>) {
   const res = await fetch(GROQ_URL, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
-    },
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
     body: JSON.stringify(body),
   });
   if (!res.ok) {
@@ -78,8 +88,6 @@ async function callGroq(apiKey: string, body: Record<string, unknown>) {
   return res.json();
 }
 
-// Diagnóstico rápido: abrí https://TU-DOMINIO/api/chat en el navegador (GET).
-// Te dice, sin exponer la key, si el servidor la está viendo o no.
 export async function GET() {
   const apiKey = process.env.GROQ_API_KEY;
   return NextResponse.json({
@@ -89,25 +97,21 @@ export async function GET() {
     modelo_chat: CHAT_MODEL,
     modelo_extraccion: EXTRACT_MODEL,
     nota: apiKey
-      ? "La variable de entorno está llegando al servidor. Si el chat igual falla, probá enviando un POST real (usá el chat de la web) y revisá los Runtime Logs en Vercel -> tu proyecto -> Logs."
-      : "GROQ_API_KEY NO está llegando a este deployment. Andá a Vercel -> Project Settings -> Environment Variables, confirmá que esté marcada para 'Production', y hacé un Redeploy (no alcanza con guardarla, Vercel no la inyecta en un build ya existente).",
+      ? "La variable de entorno está llegando al servidor."
+      : "GROQ_API_KEY no está llegando a este deployment. Configurala en Vercel y redeployá.",
   });
 }
 
 export async function POST(req: NextRequest) {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
-    return NextResponse.json(
-      {
-        error: "GROQ_API_KEY no está configurada en el servidor.",
-        debug: "missing_api_key",
-        reply:
-          "Ahora mismo no puedo conectarme (falta configuración del lado del servidor). Escribinos directo por WhatsApp y te atendemos al toque.",
-        lead: { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, listo: true },
-        fallback: true,
-      },
-      { status: 200 }
-    );
+    return NextResponse.json({
+      error: "GROQ_API_KEY no está configurada en el servidor.",
+      debug: "missing_api_key",
+      reply: "Ahora mismo no puedo conectarme. Escribinos directo por WhatsApp y te atendemos por ahí.",
+      lead: { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, listo: true },
+      fallback: true,
+    });
   }
 
   let payload: { messages?: ChatMessage[]; kickoff?: boolean };
@@ -119,15 +123,8 @@ export async function POST(req: NextRequest) {
 
   const history = Array.isArray(payload.messages) ? payload.messages : [];
   const isKickoff = Boolean(payload.kickoff) && history.length === 0;
-
   const conversationMessages: ChatMessage[] = isKickoff
-    ? [
-        {
-          role: "user",
-          content:
-            "(El cliente acaba de abrir el chat. Saludalo una sola vez, presentate brevemente como el asistente de Go Diag y preguntale en qué lo podés ayudar hoy con su vehículo. No hagas más de una pregunta.)",
-        },
-      ]
+    ? [{ role: "user", content: "El cliente acaba de abrir el chat. Saludalo una sola vez, presentate brevemente como el asistente de Go Diagnosis y preguntale qué sucede con su vehículo. Hacé solo una pregunta." }]
     : history.slice(-20);
 
   try {
@@ -140,30 +137,23 @@ export async function POST(req: NextRequest) {
       include_reasoning: false,
     });
 
-    const reply: string =
-      chatCompletion?.choices?.[0]?.message?.content?.trim() ||
-      "Disculpá, se me trabó algo por acá. ¿Me contás de nuevo qué necesitás con tu vehículo?";
-
+    const reply: string = chatCompletion?.choices?.[0]?.message?.content?.trim() || "Disculpá, se me trabó algo. ¿Me contás de nuevo qué necesitás con tu vehículo?";
     let lead = null;
+
     if (!isKickoff) {
       try {
-        const transcript = [...history, { role: "assistant", content: reply }]
+        const transcript = [...history, { role: "assistant" as const, content: reply }]
           .map((m) => `${m.role === "user" ? "Cliente" : "Asistente"}: ${m.content}`)
           .join("\n");
-
         const extraction = await callGroq(apiKey, {
           model: EXTRACT_MODEL,
-          messages: [
-            { role: "system", content: EXTRACT_PROMPT },
-            { role: "user", content: transcript },
-          ],
+          messages: [{ role: "system", content: EXTRACT_PROMPT }, { role: "user", content: transcript }],
           temperature: 0,
           max_tokens: 300,
           reasoning_effort: "low",
           include_reasoning: false,
           response_format: { type: "json_object" },
         });
-
         const raw = extraction?.choices?.[0]?.message?.content;
         if (raw) {
           const parsed = JSON.parse(raw);
@@ -177,7 +167,6 @@ export async function POST(req: NextRequest) {
           };
         }
       } catch (e) {
-        // Si la extracción falla, seguimos igual: el chat sigue andando, solo no se activa el botón premium todavía.
         console.error("Extraction error:", e);
       }
     }
@@ -186,16 +175,12 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error("Groq chat error:", message);
-    return NextResponse.json(
-      {
-        error: "No pude responder en este momento.",
-        debug: message.slice(0, 400),
-        reply:
-          "Se me complicó la conexión justo ahora 😅. Escribinos directo por WhatsApp y el especialista te atiende enseguida.",
-        lead: { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, listo: true },
-        fallback: true,
-      },
-      { status: 200 }
-    );
+    return NextResponse.json({
+      error: "No pude responder en este momento.",
+      debug: message.slice(0, 400),
+      reply: "Se me complicó la conexión. Escribinos directo por WhatsApp y seguimos por ahí.",
+      lead: { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, listo: true },
+      fallback: true,
+    });
   }
 }
