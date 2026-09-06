@@ -7,12 +7,16 @@ const faqs = [
     a: "Trabajamos diagnóstico electrónico, programación, reparación de ECU, ABS, BCM/TIPM, tableros, cableado, inyección EFI/GDI, descarbonización de válvulas y diagnóstico diésel 12V/24V, entre otros servicios especializados.",
   },
   {
+    q: "¿Realizan servicios a domicilio?",
+    a: "Sí. Autotrónica Go Diagnosis ofrece todos sus servicios a domicilio, coordinando previamente la zona, el vehículo y el trabajo necesario por WhatsApp.",
+  },
+  {
     q: "¿Con qué marcas trabajan?",
     a: "Contamos con experiencia en Toyota, Ford, Chevrolet, Mitsubishi, Jeep, Dodge y Chrysler, además de diagnóstico multimarca según el sistema y la falla del vehículo.",
   },
   {
     q: "¿Dónde está ubicado el taller?",
-    a: "Estamos en Carretera Panamericana, vía Los Teques, km 1.5, sector industrial Los Cocos, Caracas, Venezuela.",
+    a: "Estamos en Carretera Panamericana, vía Los Teques, km 1.5, sector industrial Los Cocos, Caracas, Venezuela. También ofrecemos atención a domicilio.",
   },
   {
     q: "¿Cuál es el horario de atención?",
@@ -20,7 +24,7 @@ const faqs = [
   },
   {
     q: "¿Cómo solicito una evaluación?",
-    a: "Podés escribirnos por WhatsApp y contarnos la marca, modelo, año y síntomas del vehículo. Con esa información podemos orientarte sobre el siguiente paso y coordinar la revisión.",
+    a: "Podés escribirnos por WhatsApp y contarnos la marca, modelo, año, síntomas del vehículo y si preferís atención en el taller o a domicilio. Con esa información coordinamos el siguiente paso.",
   },
 ];
 
@@ -36,7 +40,7 @@ export default function Faq() {
             <em>esto te puede servir.</em>
           </h2>
         </div>
-        <p>Información concreta sobre nuestros servicios, ubicación y forma de atención.</p>
+        <p>Información concreta sobre nuestros servicios, ubicación y modalidades de atención.</p>
       </Reveal>
 
       <Reveal as="div" delay={80} className="faq-wrap">
