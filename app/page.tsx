@@ -34,6 +34,7 @@ import CarQuiz from "@/components/CarQuiz";
 import Faq from "@/components/Faq";
 import LocationMap from "@/components/LocationMap";
 import Lightbox from "@/components/Lightbox";
+import ProfessionalSections from "@/components/ProfessionalSections";
 
 const whatsapp = "584222872237";
 const email = "godiag2023@gmail.com";
@@ -117,10 +118,10 @@ export default function Home() {
         <a className="brand brand-logo" href="#top" onClick={closeMenu}><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg" alt="Autotrónica Go Diagnosis" /></a>
         <nav className={menu ? "open" : ""}>
           <a href="#especialidades" onClick={closeMenu}>Especialidades</a>
+          <a href="#domicilio" onClick={closeMenu}>A domicilio</a>
+          <a href="#tecnologia" onClick={closeMenu}>Tecnología</a>
           <a href="#trabajos" onClick={closeMenu}>Trabajos</a>
-          <a href="#metodo" onClick={closeMenu}>Método</a>
           <a href="#especialista" onClick={closeMenu}>Especialista</a>
-          <a href="#preguntas" onClick={closeMenu}>Preguntas</a>
           <a href="#contacto" onClick={closeMenu}>Contacto</a>
         </nav>
         <Magnetic><Quote label="Cotizar diagnóstico" className="nav-cta" /></Magnetic>
@@ -152,6 +153,8 @@ export default function Home() {
         <Reveal as="div" className="section-heading"><div><span className="kicker">CAPACIDAD TÉCNICA</span><h2>Electrónica automotriz<br />con método y preparación.</h2></div><p>Diagnóstico, reparación y programación para sistemas electrónicos que requieren medición, conocimiento y actualización constante. Todos los servicios pueden coordinarse a domicilio.</p></Reveal>
         <div className="service-grid">{services.map(({ n, title, text, icon: Icon, image }, i) => <Reveal as="article" key={n} delay={(i % 3) * 70} style={{ backgroundImage: `linear-gradient(105deg,rgba(5,7,9,.97) 0%,rgba(5,7,9,.86) 47%,rgba(5,7,9,.5) 100%),url("${image}")` }}><div className="service-top"><span>{n}</span><Icon /></div><h3>{title}</h3><p>{text}</p><a href="#" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent("open-assistant", { detail: { service: title } })); }}>Consultar <ArrowRight size={15} /></a></Reveal>)}</div>
       </section>
+
+      <ProfessionalSections />
 
       <section className="work-section section" id="trabajos">
         <Reveal as="div" className="section-heading work-heading"><div><span className="kicker">TRABAJO REAL</span><h2>La precisión se<br />demuestra trabajando.</h2></div><p>Intervenciones en diagnóstico, programación, inyección y reparación electrónica. Tocá una foto para verla en detalle.</p></Reveal>
