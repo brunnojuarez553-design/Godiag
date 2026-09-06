@@ -7,14 +7,14 @@ export default function LocationMap() {
     <section className="location-section section" id="ubicacion">
       <Reveal as="div" className="section-heading">
         <div>
-          <span className="kicker">DÓNDE ENCONTRARNOS</span>
+          <span className="kicker">TALLER + ATENCIÓN A DOMICILIO</span>
           <h2>
             Atención técnica
             <br />
-            <em>en Caracas.</em>
+            <em>donde la necesites.</em>
           </h2>
         </div>
-        <p>{ADDRESS}</p>
+        <p>Podés acercarte a nuestro taller en {ADDRESS} o coordinar cualquiera de nuestros servicios a domicilio.</p>
       </Reveal>
       <Reveal as="div" delay={80} className="map-wrap">
         <iframe
