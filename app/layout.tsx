@@ -3,15 +3,17 @@ import "./globals.css";
 
 const logo = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg";
 const ogImage = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788231287/IMG_1017_rx0uzq.jpg";
-const title = "Autotrónica Go Diagnosis | Diagnóstico Electrónico Automotriz en Caracas";
+const title = "Autotrónica Go Diagnosis | Diagnóstico Automotriz a Domicilio en Caracas";
 const description =
-  "Autotrónica Go Diagnosis en Caracas: diagnóstico electrónico avanzado, reparación de ECU, ABS, BCM/TIPM y tableros, inyección EFI/GDI, programación ECU y diagnóstico diésel 12V/24V.";
+  "Autotrónica Go Diagnosis en Caracas: diagnóstico, programación y electrónica automotriz en taller y a domicilio. ECU, ABS, BCM/TIPM, tableros, EFI/GDI, EGR OFF, programación ECU y diésel 12V/24V.";
 
 export const metadata: Metadata = {
   title,
   description,
   keywords: [
     "diagnóstico electrónico automotriz Caracas",
+    "diagnóstico automotriz a domicilio Caracas",
+    "electrónica automotriz a domicilio Caracas",
     "reparación ECU Caracas",
     "reparación computadora de carro",
     "reparación módulo ABS",
