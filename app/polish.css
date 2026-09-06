@@ -1,0 +1,36 @@
+/* Final visual QA overrides: navigation, contact grid and responsive safety */
+.nav{z-index:60!important;will-change:transform}
+
+/* Keep the desktop navigation comfortable before the mobile breakpoint. */
+@media(min-width:901px) and (max-width:1180px){
+  .nav{padding-inline:3vw}
+  .nav nav{gap:18px;font-size:11px}
+  .nav-cta{padding-inline:15px}
+}
+
+/* Contact information has four real data points; give each one a stable column. */
+.cta-section .work-proof{
+  max-width:1180px;
+  margin:38px auto 0;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  text-align:left;
+  border-top:1px solid var(--line);
+}
+.cta-section .work-proof div{min-width:0}
+.cta-section .work-proof span{overflow-wrap:anywhere;line-height:1.5}
+
+footer>div{flex-wrap:wrap;justify-content:flex-end}
+
+@media(max-width:900px){
+  .cta-section .work-proof{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:600px){
+  .nav nav{top:76px;min-height:calc(100dvh - 76px)}
+  .cta-section .work-proof{grid-template-columns:1fr;margin-top:30px;text-align:center}
+  footer>div{justify-content:center}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .nav{transition:none!important}
+}
