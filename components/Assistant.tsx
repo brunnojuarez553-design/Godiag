@@ -19,7 +19,7 @@ type Lead = {
 
 function buildWhatsappMessage(lead: Lead) {
   const lines = [
-    "Hola Autotrónica Go Diag. Vengo del asistente virtual de la página, ya te dejo mis datos:",
+    "Hola Autotrónica Go Diagnosis. Vengo del asistente virtual de la página y te dejo mis datos:",
     "",
     `Vehículo: ${lead.vehiculo || "A confirmar"}`,
     `Servicio: ${lead.servicio || "A confirmar"}`,
@@ -41,7 +41,6 @@ export default function Assistant() {
   const [started, setStarted] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Viñeta chiquita a los 45s recordando que el asistente está para ayudar.
   useEffect(() => {
     const t = setTimeout(() => {
       setShowBubble((prev) => (open ? prev : true));
@@ -52,6 +51,15 @@ export default function Assistant() {
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, loading]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   async function kickoff() {
     setStarted(true);
@@ -64,20 +72,20 @@ export default function Assistant() {
       });
       const data = await res.json();
       if (data?.debug || data?.error) {
-        console.error("[Go Diag Asistente] Error del servidor:", data.error, data.debug);
+        console.error("[Go Diagnosis Asistente] Error del servidor:", data.error, data.debug);
       }
       const reply =
         typeof data?.reply === "string" && data.reply.trim()
           ? data.reply
-          : "¡Hola! Soy el asistente de Autotrónica Go Diag. Contame, ¿qué le está pasando a tu vehículo?";
+          : "Hola. Soy el asistente de Autotrónica Go Diagnosis. Contame, ¿qué le está pasando a tu vehículo?";
       setMessages([{ role: "assistant", content: reply }]);
     } catch (err) {
-      console.error("[Go Diag Asistente] Fallo de red en kickoff:", err);
+      console.error("[Go Diagnosis Asistente] Fallo de red en kickoff:", err);
       setMessages([
         {
           role: "assistant",
           content:
-            "¡Hola! Soy el asistente de Autotrónica Go Diag. Contame, ¿qué le está pasando a tu vehículo?",
+            "Hola. Soy el asistente de Autotrónica Go Diagnosis. Contame, ¿qué le está pasando a tu vehículo?",
         },
       ]);
     } finally {
@@ -101,19 +109,14 @@ export default function Assistant() {
       });
       const data = await res.json();
       if (data?.debug || data?.error) {
-        console.error("[Go Diag Asistente] Error del servidor:", data.error, data.debug);
+        console.error("[Go Diagnosis Asistente] Error del servidor:", data.error, data.debug);
       }
       const reply =
         typeof data?.reply === "string" && data.reply.trim()
           ? data.reply
-          : "Se me complicó la conexión justo ahora 😅. Escribinos directo por WhatsApp y el especialista te atiende enseguida.";
+          : "Ahora mismo se complicó la conexión. Escribinos directo por WhatsApp y el especialista continúa con tu consulta.";
       setMessages((m) => [...m, { role: "assistant", content: reply }]);
-      if (data.lead) {
-        setLead(data.lead);
-        if (data.fallback && !data.lead.listo) {
-          // si Groq falló, igual dejamos salida directa por WhatsApp
-        }
-      }
+      if (data.lead) setLead(data.lead);
       if (data.fallback || (data.error && !data.lead)) {
         setLead((prev) => prev ?? { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, listo: true });
       }
@@ -123,7 +126,7 @@ export default function Assistant() {
         {
           role: "assistant",
           content:
-            "Se me complicó la conexión justo ahora 😅. Escribinos directo por WhatsApp y el especialista te atiende enseguida.",
+            "Ahora mismo se complicó la conexión. Escribinos directo por WhatsApp y el especialista continúa con tu consulta.",
         },
       ]);
       setLead((prev) => prev ?? { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, listo: true });
@@ -138,8 +141,6 @@ export default function Assistant() {
     if (!started) kickoff();
   }
 
-  // Se dispara desde las cards de "Especialidades": abre el asistente y
-  // pregunta directamente por el servicio de la card que se presionó.
   useEffect(() => {
     function onOpenAssistant(e: Event) {
       const service = (e as CustomEvent<{ service?: string }>).detail?.service;
@@ -165,24 +166,24 @@ export default function Assistant() {
       <div className="ai-fab-wrap">
         {showBubble && !open && (
           <div className="ai-callout">
-            <button className="ai-callout-close" aria-label="Cerrar" onClick={() => setShowBubble(false)}>
+            <button className="ai-callout-close" aria-label="Cerrar aviso" onClick={() => setShowBubble(false)}>
               <X size={12} />
             </button>
-            <span>Estoy para ayudarte con tu vehículo 👋</span>
+            <span>¿Necesitás orientación con tu vehículo?</span>
           </div>
         )}
         <button className="ai-fab" onClick={handleOpen} aria-label="Abrir asistente virtual">
-          <img src={logo} alt="Asistente Go Diag" />
+          <img src={logo} alt="Asistente Go Diagnosis" />
         </button>
       </div>
 
       {open && (
-        <div className="ai-panel">
+        <div className="ai-panel" role="dialog" aria-modal="true" aria-label="Asistente Go Diagnosis">
           <div className="ai-header">
             <div className="ai-header-id">
-              <img src={logo} alt="Go Diag" />
+              <img src={logo} alt="Go Diagnosis" />
               <div>
-                <b>Asistente Go Diag</b>
+                <b>Asistente Go Diagnosis</b>
                 <span><i className="ai-dot" />En línea</span>
               </div>
             </div>
@@ -191,21 +192,21 @@ export default function Assistant() {
             </button>
           </div>
 
-          <div className="ai-messages" ref={scrollRef}>
+          <div className="ai-messages" ref={scrollRef} aria-live="polite">
             {messages.map((m, i) => (
               <div key={i} className={`ai-msg ${m.role}`}>
                 {m.content}
               </div>
             ))}
             {loading && (
-              <div className="ai-msg assistant ai-typing">
+              <div className="ai-msg assistant ai-typing" aria-label="Escribiendo">
                 <span /><span /><span />
               </div>
             )}
 
             {lead?.listo && (
               <div className="ai-premium-wrap">
-                <p>Ya tengo todo lo que necesita el especialista. Seguimos por WhatsApp para que te atienda directo 👇</p>
+                <p>Ya tengo la información básica. Podés continuar por WhatsApp sin volver a explicar todo.</p>
                 <a
                   className="ai-premium-btn"
                   href={`https://wa.me/${whatsapp}?text=${encodeURIComponent(buildWhatsappMessage(lead))}`}
@@ -231,6 +232,7 @@ export default function Assistant() {
               }}
               placeholder="Escribí tu mensaje..."
               rows={1}
+              aria-label="Mensaje para el asistente"
             />
             <button onClick={sendMessage} disabled={loading || !input.trim()} aria-label="Enviar">
               <Send size={18} />
