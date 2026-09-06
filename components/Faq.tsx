@@ -3,24 +3,24 @@ import Reveal from "@/components/Reveal";
 
 const faqs = [
   {
-    q: "¿Cuánto cuesta el diagnóstico?",
-    a: "El diagnóstico tiene un costo fijo que te confirmamos antes de agendar la cita, según el tipo de vehículo y la falla reportada. Ese valor se descuenta del total si avanzás con la reparación en el taller.",
+    q: "¿Qué tipo de trabajos realizan?",
+    a: "Trabajamos diagnóstico electrónico, programación, reparación de ECU, ABS, BCM/TIPM, tableros, cableado, inyección EFI/GDI, descarbonización de válvulas y diagnóstico diésel 12V/24V, entre otros servicios especializados.",
   },
   {
-    q: "¿Cuánto tiempo tarda el proceso?",
-    a: "Un diagnóstico electrónico estándar se resuelve el mismo día. Reparaciones de ECU, tablero o módulos pueden requerir más tiempo según la disponibilidad de repuestos o la complejidad de la falla, y siempre te avisamos el plazo estimado antes de empezar.",
+    q: "¿Con qué marcas trabajan?",
+    a: "Contamos con experiencia en Toyota, Ford, Chevrolet, Mitsubishi, Jeep, Dodge y Chrysler, además de diagnóstico multimarca según el sistema y la falla del vehículo.",
   },
   {
-    q: "¿Dan garantía sobre el trabajo?",
-    a: "Sí. Toda intervención de diagnóstico y reparación queda respaldada por garantía sobre el trabajo realizado. Las condiciones específicas dependen del tipo de servicio y se detallan en el informe que te entregamos al finalizar.",
+    q: "¿Dónde está ubicado el taller?",
+    a: "Estamos en Carretera Panamericana, vía Los Teques, km 1.5, sector industrial Los Cocos, Caracas, Venezuela.",
   },
   {
-    q: "¿Atienden a domicilio o solo en el taller?",
-    a: "Ambas modalidades están disponibles. Para diagnóstico a domicilio coordinamos según zona y disponibilidad; algunas reparaciones que requieren instrumentación de laboratorio deben hacerse en el taller.",
+    q: "¿Cuál es el horario de atención?",
+    a: "Atendemos de lunes a viernes de 8:00 a 18:00 y los sábados de 9:00 a 15:00.",
   },
   {
-    q: "¿Qué pasa si el diagnóstico no encuentra una solución clara?",
-    a: "Nuestro método está basado en medición, no en prueba y error. Si el caso requiere pruebas adicionales, te lo explicamos con evidencia antes de continuar, para que nunca pagues por una suposición.",
+    q: "¿Cómo solicito una evaluación?",
+    a: "Podés escribirnos por WhatsApp y contarnos la marca, modelo, año y síntomas del vehículo. Con esa información podemos orientarte sobre el siguiente paso y coordinar la revisión.",
   },
 ];
 
@@ -36,7 +36,7 @@ export default function Faq() {
             <em>esto te puede servir.</em>
           </h2>
         </div>
-        <p>Las preguntas que más nos hacen los clientes antes de agendar una evaluación.</p>
+        <p>Información concreta sobre nuestros servicios, ubicación y forma de atención.</p>
       </Reveal>
 
       <Reveal as="div" delay={80} className="faq-wrap">
