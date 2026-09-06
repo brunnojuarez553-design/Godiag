@@ -106,15 +106,20 @@ const navScrollScript = `
       return;
     }
 
+    header.style.willChange = 'transform';
+    header.style.transition = 'transform .34s cubic-bezier(.16,1,.3,1), background-color .35s ease, border-color .35s ease, backdrop-filter .35s ease';
+
     const y = window.scrollY;
     const menuOpen = header.querySelector('nav')?.classList.contains('open');
     const goingUp = y < lastY - 4;
     const goingDown = y > lastY + 8;
 
     if (y < 90 || menuOpen || goingUp) {
+      header.style.transform = 'translateY(0)';
       header.classList.remove('nav-hidden');
       header.classList.add('nav-visible');
     } else if (goingDown && y > 140) {
+      header.style.transform = 'translateY(calc(-100% - 10px))';
       header.classList.add('nav-hidden');
       header.classList.remove('nav-visible');
     }
