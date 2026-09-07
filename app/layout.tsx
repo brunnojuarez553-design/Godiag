@@ -6,6 +6,7 @@ import "./audit.css";
 import "./brand-marquee.css";
 import "./mobile-experience.css";
 import "./mobile-masonry.css";
+import "./case-lightbox.css";
 
 const logo = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg";
 const ogImage = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788231287/IMG_1017_rx0uzq.jpg";
