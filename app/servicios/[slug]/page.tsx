@@ -63,14 +63,17 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     },
     provider: {
       "@type": "AutoRepair",
+      "@id": `${SITE_URL}/#business`,
       name: BUSINESS_NAME,
       url: SITE_URL,
       telephone: PHONE_DISPLAY,
       email: EMAIL,
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Carretera Panamericana, vía Los Teques, km 1.5, sector industrial Los Cocos",
+        streetAddress: "F338+3R",
         addressLocality: "Caracas",
+        postalCode: "1090",
+        addressRegion: "Distrito Capital",
         addressCountry: "VE",
       },
     },
