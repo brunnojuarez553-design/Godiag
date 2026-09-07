@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
+const poster =
+  "https://res.cloudinary.com/dvvuwigmy/video/upload/so_0,f_jpg,q_auto:good,w_1600/v1788231305/InDown_jrusrr.jpg";
+
 export default function HeroVideo() {
   const [ready, setReady] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -8,23 +11,25 @@ export default function HeroVideo() {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    // Fuerza el play apenas se monta, sin esperar interacción del usuario.
+
     const tryPlay = () => {
       v.play().catch(() => {
-        // Si el navegador bloquea el autoplay, reintenta en la primera interacción.
-        const resume = () => {
-          v.play().catch(() => {});
-          window.removeEventListener("pointerdown", resume);
-          window.removeEventListener("touchstart", resume);
-        };
+        const resume = () => v.play().catch(() => {});
         window.addEventListener("pointerdown", resume, { once: true });
         window.addEventListener("touchstart", resume, { once: true });
       });
     };
-    tryPlay();
-    document.addEventListener("visibilitychange", () => {
+
+    const onVisibility = () => {
       if (document.visibilityState === "visible") tryPlay();
-    });
+    };
+
+    tryPlay();
+    document.addEventListener("visibilitychange", onVisibility);
+
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
   }, []);
 
   return (
@@ -37,19 +42,21 @@ export default function HeroVideo() {
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
+        poster={poster}
         aria-hidden="true"
         onLoadedData={() => setReady(true)}
         onCanPlay={() => setReady(true)}
         onPlaying={() => setReady(true)}
       >
         <source
-          src="https://res.cloudinary.com/dvvuwigmy/video/upload/f_mp4/v1788231305/InDown_jrusrr.mp4"
+          media="(max-width: 700px)"
+          src="https://res.cloudinary.com/dvvuwigmy/video/upload/f_mp4,q_auto:good,vc_auto,w_900/v1788231305/InDown_jrusrr.mp4"
           type="video/mp4"
         />
         <source
-          src="https://res.cloudinary.com/dvvuwigmy/video/upload/v1788231305/InDown_jrusrr.mov"
-          type="video/quicktime"
+          src="https://res.cloudinary.com/dvvuwigmy/video/upload/f_mp4,q_auto:good,vc_auto,w_1920/v1788231305/InDown_jrusrr.mp4"
+          type="video/mp4"
         />
       </video>
     </>
