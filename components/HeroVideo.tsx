@@ -1,9 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-const poster =
-  "https://res.cloudinary.com/dvvuwigmy/video/upload/so_0,f_jpg,q_auto:good,w_1600/v1788231305/InDown_jrusrr.jpg";
-
 export default function HeroVideo() {
   const [ready, setReady] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -14,7 +11,11 @@ export default function HeroVideo() {
 
     const tryPlay = () => {
       v.play().catch(() => {
-        const resume = () => v.play().catch(() => {});
+        const resume = () => {
+          v.play().catch(() => {});
+          window.removeEventListener("pointerdown", resume);
+          window.removeEventListener("touchstart", resume);
+        };
         window.addEventListener("pointerdown", resume, { once: true });
         window.addEventListener("touchstart", resume, { once: true });
       });
@@ -42,21 +43,19 @@ export default function HeroVideo() {
         muted
         loop
         playsInline
-        preload="metadata"
-        poster={poster}
+        preload="auto"
         aria-hidden="true"
         onLoadedData={() => setReady(true)}
         onCanPlay={() => setReady(true)}
         onPlaying={() => setReady(true)}
       >
         <source
-          media="(max-width: 700px)"
-          src="https://res.cloudinary.com/dvvuwigmy/video/upload/f_mp4,q_auto:good,vc_auto,w_900/v1788231305/InDown_jrusrr.mp4"
+          src="https://res.cloudinary.com/dvvuwigmy/video/upload/f_mp4/v1788231305/InDown_jrusrr.mp4"
           type="video/mp4"
         />
         <source
-          src="https://res.cloudinary.com/dvvuwigmy/video/upload/f_mp4,q_auto:good,vc_auto,w_1920/v1788231305/InDown_jrusrr.mp4"
-          type="video/mp4"
+          src="https://res.cloudinary.com/dvvuwigmy/video/upload/v1788231305/InDown_jrusrr.mov"
+          type="video/quicktime"
         />
       </video>
     </>
