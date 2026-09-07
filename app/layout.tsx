@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import { seoServices } from "@/lib/seo-services";
 import "./globals.css";
 import "./premium.css";
 import "./polish.css";
@@ -7,34 +9,56 @@ import "./brand-marquee.css";
 import "./mobile-experience.css";
 import "./mobile-masonry.css";
 import "./case-lightbox.css";
+import "./seo-pages.css";
 
 const logo = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg";
 const ogImage = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788231287/IMG_1017_rx0uzq.jpg";
 const siteUrl = "https://www.autotronicagodiag.com";
-const title = "Autotrónica Go Diagnosis | Diagnóstico Automotriz a Domicilio en Caracas";
+const title = "Autotrónica Go Diagnosis | Diagnóstico Electrónico en Caracas";
 const description =
-  "Autotrónica Go Diagnosis en Caracas: diagnóstico, programación y electrónica automotriz en taller y a domicilio. ECU, ABS, BCM/TIPM, tableros, EFI/GDI, EGR OFF, programación ECU y diésel 12V/24V.";
+  "Autotrónica Go Diagnosis en Caracas: diagnóstico electrónico, reparación ECU, ABS, BCM/TIPM, inyectores EFI/GDI, programación ECU y diésel 12V/24V. Atención en taller y a domicilio.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title,
+  title: {
+    default: title,
+    template: "%s",
+  },
   description,
+  applicationName: "Autotrónica Go Diagnosis",
+  category: "Automotive",
   keywords: [
     "diagnóstico electrónico automotriz Caracas",
     "diagnóstico automotriz a domicilio Caracas",
-    "electrónica automotriz a domicilio Caracas",
+    "electrónica automotriz Caracas",
     "reparación ECU Caracas",
     "reparación computadora de carro",
-    "reparación módulo ABS",
-    "reparación BCM TIPM",
+    "reparación módulo ABS Caracas",
+    "reparación BCM TIPM Caracas",
     "diagnóstico con osciloscopio automotriz",
-    "reprogramación ECU HP Tuners",
-    "EGR OFF Toyota",
-    "limpieza inyectores GDI EFI",
-    "diagnóstico diésel 12V 24V",
+    "reprogramación ECU HP Tuners Caracas",
+    "VFTuner Toyota Caracas",
+    "BitEdit ECU Caracas",
+    "EGR OFF Toyota Caracas",
+    "limpieza inyectores GDI EFI Caracas",
+    "diagnóstico diésel 12V 24V Caracas",
   ],
   alternates: { canonical: "/" },
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg", apple: logo },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
   openGraph: {
     title,
     description,
@@ -42,7 +66,7 @@ export const metadata: Metadata = {
     siteName: "Autotrónica Go Diagnosis",
     locale: "es_VE",
     type: "website",
-    images: [{ url: ogImage, width: 1200, height: 1600, alt: "Elian José González Cruz - Autotrónica Go Diagnosis" }],
+    images: [{ url: ogImage, width: 1200, height: 1600, alt: "Autotrónica Go Diagnosis - electrónica automotriz en Caracas" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -50,14 +74,21 @@ export const metadata: Metadata = {
     description,
     images: [ogImage],
   },
+  other: {
+    "geo.region": "VE-A",
+    "geo.placename": "Caracas, Venezuela",
+    "content-language": "es-VE",
+  },
 };
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "AutoRepair",
+  "@id": `${siteUrl}/#business`,
   name: "Autotrónica Go Diagnosis",
   url: siteUrl,
   image: logo,
+  logo,
   email: "godiag2023@gmail.com",
   telephone: "+58 422 287 2237",
   description,
@@ -81,7 +112,10 @@ const localBusinessSchema = {
       closes: "15:00",
     },
   ],
-  areaServed: "Caracas, Venezuela",
+  areaServed: {
+    "@type": "City",
+    name: "Caracas",
+  },
   sameAs: [
     "https://www.instagram.com/godiag.ve",
     "https://www.tiktok.com/@godiag.ve",
@@ -98,6 +132,28 @@ const localBusinessSchema = {
     "Diagnóstico diésel 12V y 24V",
     "Servicio automotriz a domicilio",
   ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Servicios de Autotrónica Go Diagnosis",
+    itemListElement: seoServices.map((service) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: service.name,
+        url: `${siteUrl}/servicios/${service.slug}`,
+      },
+    })),
+  },
+};
+
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  url: siteUrl,
+  name: "Autotrónica Go Diagnosis",
+  inLanguage: "es-VE",
+  publisher: { "@id": `${siteUrl}/#business` },
 };
 
 const navScrollScript = `
@@ -150,13 +206,15 @@ const navScrollScript = `
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="es-VE">
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }} />
         <div className="preloader" aria-hidden="true">
           <img src={logo} alt="" />
         </div>
         {children}
+        <GoogleAnalytics />
         <script dangerouslySetInnerHTML={{ __html: navScrollScript }} />
       </body>
     </html>
