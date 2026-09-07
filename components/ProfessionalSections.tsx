@@ -1,7 +1,8 @@
 "use client";
 
-import { ArrowRight, CircuitBoard, Gauge, MapPin, Microscope, ScanLine, Settings2, ShieldCheck, Truck, Wrench, Zap } from "lucide-react";
+import { ArrowRight, CircuitBoard, Gauge, MapPin, Microscope, ScanLine, Settings2, ShieldCheck, Truck, Wrench } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import SeoServiceHub from "@/components/SeoServiceHub";
 
 const whatsapp = "584222872237";
 
@@ -106,6 +107,8 @@ export default function ProfessionalSections() {
           ))}
         </div>
       </section>
+
+      <SeoServiceHub />
 
       <section className="reviews-ready section" id="resenas">
         <Reveal as="div" className="reviews-ready-card">
