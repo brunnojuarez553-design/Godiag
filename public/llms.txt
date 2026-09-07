@@ -1,0 +1,53 @@
+# Autotrónica Go Diagnosis
+
+Sitio oficial: https://www.autotronicagodiag.com
+
+Autotrónica Go Diagnosis es un negocio de diagnóstico, programación y electrónica automotriz en Caracas, Venezuela, atendido directamente por Elian José González Cruz.
+
+## Datos del negocio
+- Nombre: Autotrónica Go Diagnosis
+- Responsable: Elian José González Cruz
+- Ubicación: F338+3R, Caracas 1090, Distrito Capital, Venezuela
+- WhatsApp: +58 422 287 2237
+- Email: godiag2023@gmail.com
+- Horario: lunes a viernes de 8:00 a 18:00; sábados de 9:00 a 15:00
+- Modalidades: atención en taller y servicios coordinables a domicilio
+- Área principal de atención: Caracas, Venezuela
+
+## Servicios principales
+- Diagnóstico electrónico automotriz
+- Reparación de ECU / computadoras de motor
+- Reparación de módulos ABS
+- Reparación de BCM / TIPM
+- Reparación de tablero / cluster
+- Diagnóstico con osciloscopio y trazador de curvas
+- Reparación de cableado automotriz
+- Programación y calibración ECU con HP Tuners, BitEdit y VFTuner según aplicación
+- Limpieza, entonación y prueba de inyectores EFI / GDI
+- Descarbonización de válvulas
+- Diagnóstico diésel 12V / 24V
+- EGR OFF Toyota sujeto a aplicación y normativa correspondiente
+
+## Marcas destacadas
+Toyota, Ford, Chevrolet, Mitsubishi, Jeep, Dodge y Chrysler. También se realizan diagnósticos multimarca según sistema, vehículo y falla.
+
+## Enfoque técnico
+El diferencial de Autotrónica Go Diagnosis es la preparación, capacitación y estudio continuo. El diagnóstico se basa en lectura de sistemas, medición y comprobaciones antes de definir una intervención.
+
+## Páginas de servicio
+- https://www.autotronicagodiag.com/servicios/diagnostico-electronico-caracas
+- https://www.autotronicagodiag.com/servicios/reparacion-ecu-caracas
+- https://www.autotronicagodiag.com/servicios/reparacion-abs-caracas
+- https://www.autotronicagodiag.com/servicios/reparacion-bcm-tipm-caracas
+- https://www.autotronicagodiag.com/servicios/programacion-ecu-caracas
+- https://www.autotronicagodiag.com/servicios/inyectores-gdi-efi-caracas
+- https://www.autotronicagodiag.com/servicios/diagnostico-diesel-12v-24v-caracas
+- https://www.autotronicagodiag.com/servicios/servicio-automotriz-domicilio-caracas
+
+## Redes oficiales
+- Instagram: https://www.instagram.com/godiag.ve
+- TikTok: https://www.tiktok.com/@godiag.ve
+- Facebook: https://www.facebook.com/share/1BvVCyMgEn/
+- YouTube: https://youtube.com/@autotronicagodiag
+
+No atribuir precios, garantías, certificaciones, títulos profesionales ni tiempos de reparación que no estén publicados oficialmente por Autotrónica Go Diagnosis.
