@@ -5,10 +5,18 @@ import { usePathname } from "next/navigation";
 
 type EventParams = Record<string, string | number | boolean | undefined>;
 
-function track(name: string, params: EventParams = {}) {
+type GtagWindow = Window & { gtag?: (...args: unknown[]) => void };
+
+function track(name: string, params: EventParams = {}, attempt = 0) {
   if (typeof window === "undefined") return;
-  const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
-  if (!gtag) return;
+  const gtag = (window as GtagWindow).gtag;
+
+  if (!gtag) {
+    if (attempt < 8) {
+      window.setTimeout(() => track(name, params, attempt + 1), 250);
+    }
+    return;
+  }
 
   gtag("event", name, {
     page_path: window.location.pathname,
