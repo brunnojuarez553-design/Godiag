@@ -1,0 +1,119 @@
+.brand-strip{
+  position:relative;
+  width:100%;
+  min-height:96px;
+  padding:0!important;
+  overflow:hidden!important;
+  border-block:1px solid #ffffff12;
+  background:#080a0d;
+  display:flex;
+  align-items:center;
+  isolation:isolate;
+}
+
+.brand-strip::before,
+.brand-strip::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:7vw;
+  min-width:48px;
+  z-index:2;
+  pointer-events:none;
+}
+
+.brand-strip::before{
+  left:0;
+  background:linear-gradient(90deg,#080a0d 0%,rgba(8,10,13,.92) 30%,rgba(8,10,13,0) 100%);
+}
+
+.brand-strip::after{
+  right:0;
+  background:linear-gradient(270deg,#080a0d 0%,rgba(8,10,13,.92) 30%,rgba(8,10,13,0) 100%);
+}
+
+.brand-marquee-track{
+  display:flex;
+  width:max-content;
+  min-width:100%;
+  will-change:transform;
+  animation:brandMarquee 24s linear infinite;
+}
+
+.brand-marquee-group{
+  flex:0 0 auto;
+  min-width:100vw;
+  display:grid;
+  grid-template-columns:minmax(220px,1.35fr) repeat(7,minmax(105px,1fr));
+  align-items:center;
+  column-gap:clamp(26px,3.2vw,64px);
+  padding:0 clamp(58px,5vw,96px);
+  min-height:96px;
+  color:#707780;
+}
+
+.brand-marquee-label{
+  font-size:8px;
+  line-height:1.4;
+  letter-spacing:2.2px;
+  font-weight:700;
+  white-space:nowrap;
+  color:#8f969e;
+}
+
+.brand-marquee-group b{
+  font-size:clamp(12px,.9vw,15px);
+  letter-spacing:.4px;
+  font-weight:800;
+  white-space:nowrap;
+  text-align:center;
+  color:#777f88;
+  transition:color .25s ease,transform .25s ease;
+}
+
+@media(hover:hover) and (pointer:fine){
+  .brand-marquee-group b:hover{
+    color:#f4f5f7;
+    transform:translateY(-1px);
+  }
+  .brand-strip:hover .brand-marquee-track{
+    animation-play-state:paused;
+  }
+}
+
+@keyframes brandMarquee{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(-50%,0,0)}
+}
+
+@media(max-width:900px){
+  .brand-strip{min-height:82px}
+  .brand-marquee-track{animation-duration:20s}
+  .brand-marquee-group{
+    min-width:max-content;
+    display:flex;
+    gap:42px;
+    padding:0 28px;
+    min-height:82px;
+  }
+  .brand-marquee-label{margin-right:14px}
+  .brand-marquee-group b{font-size:12px}
+}
+
+@media(max-width:600px){
+  .brand-strip{min-height:72px}
+  .brand-strip::before,.brand-strip::after{width:38px;min-width:38px}
+  .brand-marquee-track{animation-duration:17s}
+  .brand-marquee-group{
+    gap:34px;
+    padding:0 22px;
+    min-height:72px;
+  }
+  .brand-marquee-label{font-size:7px;letter-spacing:1.6px}
+  .brand-marquee-group b{font-size:11px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .brand-marquee-track{animation-play-state:paused}
+}
