@@ -95,8 +95,10 @@ const localBusinessSchema = {
   description,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Carretera Panamericana, vía Los Teques, km 1.5, sector industrial Los Cocos",
+    streetAddress: "F338+3R",
     addressLocality: "Caracas",
+    postalCode: "1090",
+    addressRegion: "Distrito Capital",
     addressCountry: "VE",
   },
   openingHoursSpecification: [
