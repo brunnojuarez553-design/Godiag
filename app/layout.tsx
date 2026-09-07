@@ -93,6 +93,7 @@ const localBusinessSchema = {
   email: "godiag2023@gmail.com",
   telephone: "+58 422 287 2237",
   description,
+  employee: { "@id": `${siteUrl}/#elian-gonzalez` },
   address: {
     "@type": "PostalAddress",
     streetAddress: "F338+3R",
@@ -147,6 +148,24 @@ const localBusinessSchema = {
       },
     })),
   },
+};
+
+const specialistSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${siteUrl}/#elian-gonzalez`,
+  name: "Elian José González Cruz",
+  image: ogImage,
+  worksFor: { "@id": `${siteUrl}/#business` },
+  jobTitle: "Especialista en diagnóstico y electrónica automotriz",
+  knowsAbout: [
+    "Diagnóstico electrónico automotriz",
+    "Programación ECU",
+    "Reparación de módulos electrónicos automotrices",
+    "Osciloscopio automotriz",
+    "Inyección EFI y GDI",
+    "Diagnóstico diésel 12V y 24V",
+  ],
 };
 
 const webSiteSchema = {
@@ -212,6 +231,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es-VE">
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(specialistSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }} />
         <div className="preloader" aria-hidden="true">
           <img src={logo} alt="" />
