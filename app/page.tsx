@@ -144,7 +144,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="brand-strip"><span>SERVICIO ESPECIALIZADO POR MARCA</span>{brands.map((b) => <b key={b}>{b}</b>)}</section>
+      <section className="brand-strip" aria-label="Marcas especializadas">
+        <div className="brand-marquee-track">
+          {[0, 1].map((copy) => (
+            <div className="brand-marquee-group" key={copy} aria-hidden={copy === 1}>
+              <span className="brand-marquee-label">SERVICIO ESPECIALIZADO POR MARCA</span>
+              {brands.map((brand) => <b key={`${copy}-${brand}`}>{brand}</b>)}
+            </div>
+          ))}
+        </div>
+      </section>
       <Stats />
 
       <section className="quiz-band"><Reveal as="div" className="quiz-band-inner"><div className="quiz-band-copy"><span className="kicker">ORIENTACIÓN INICIAL</span><h3>¿No sabés qué tiene tu auto? Contanos en 3 pasos y llevamos la consulta directo al especialista.</h3></div><CarQuiz /></Reveal></section>
