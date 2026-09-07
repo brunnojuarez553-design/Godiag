@@ -38,7 +38,7 @@ import ProfessionalSections from "@/components/ProfessionalSections";
 
 const whatsapp = "584222872237";
 const email = "godiag2023@gmail.com";
-const address = "Carretera Panamericana, vía Los Teques, km 1.5, sector industrial Los Cocos, Caracas, Venezuela";
+const address = "F338+3R, Caracas 1090, Distrito Capital, Venezuela";
 
 const services = [
   { n: "01", title: "Mantenimiento y diagnóstico general", text: "Evaluación técnica del vehículo para localizar fallas y definir el camino de reparación con criterio y medición.", icon: Wrench, image: "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1040_ioaslw.jpg" },
