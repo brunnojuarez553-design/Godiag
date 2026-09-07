@@ -1,6 +1,6 @@
 import Reveal from "@/components/Reveal";
 
-const ADDRESS = "Carretera Panamericana, vía Los Teques, km 1.5, sector industrial Los Cocos, Caracas, Venezuela";
+const ADDRESS = "F338+3R, Caracas 1090, Distrito Capital, Venezuela";
 
 export default function LocationMap() {
   return (
