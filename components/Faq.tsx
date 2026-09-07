@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: "¿Dónde está ubicado el taller?",
-    a: "Estamos en Carretera Panamericana, vía Los Teques, km 1.5, sector industrial Los Cocos, Caracas, Venezuela. También ofrecemos atención a domicilio.",
+    a: "Estamos en F338+3R, Caracas 1090, Distrito Capital, Venezuela. También ofrecemos atención a domicilio.",
   },
   {
     q: "¿Cuál es el horario de atención?",
