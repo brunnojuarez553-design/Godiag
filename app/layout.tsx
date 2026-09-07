@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import AnalyticsEvents from "@/components/AnalyticsEvents";
 import { seoServices } from "@/lib/seo-services";
 import "./globals.css";
 import "./premium.css";
@@ -215,6 +216,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </div>
         {children}
         <GoogleAnalytics />
+        <AnalyticsEvents />
         <script dangerouslySetInnerHTML={{ __html: navScrollScript }} />
       </body>
     </html>
