@@ -16,6 +16,7 @@ import "./quiz-background.css";
 import "./section-order.css";
 import "./section-backgrounds.css";
 import "./expert-premium.css";
+import "./location-access.css";
 
 const logo = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg";
 const specialistImage = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788231287/IMG_1017_rx0uzq.jpg";
@@ -23,7 +24,7 @@ const ogImage = logo;
 const siteUrl = "https://www.autotronicagodiag.com";
 const title = "Autotrónica Go Diagnosis | Diagnóstico Electrónico en Caracas";
 const description =
-  "Autotrónica Go Diagnosis en Caracas: diagnóstico electrónico, reparación ECU, ABS, BCM/TIPM, inyectores EFI/GDI, programación ECU y diésel 12V/24V. Atención en taller y a domicilio.";
+  "Autotrónica Go Diagnosis en Caracas: diagnóstico electrónico, reparación ECU, ABS, BCM/TIPM, inyectores EFI/GDI, programación ECU y diésel 12V/24V. Atención principal en taller; programación y EGR OFF a domicilio con turno previo.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -36,7 +37,6 @@ export const metadata: Metadata = {
   category: "Automotive",
   keywords: [
     "diagnóstico electrónico automotriz Caracas",
-    "diagnóstico automotriz a domicilio Caracas",
     "electrónica automotriz Caracas",
     "reparación ECU Caracas",
     "reparación computadora de carro",
@@ -140,7 +140,7 @@ const localBusinessSchema = {
     "Programación ECU",
     "Inyección EFI y GDI",
     "Diagnóstico diésel 12V y 24V",
-    "Servicio automotriz a domicilio",
+    "Programación y EGR OFF a domicilio con turno previo",
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
