@@ -52,23 +52,23 @@ export default function ProfessionalSections() {
       <section className="mobile-service section" id="domicilio">
         <Reveal as="div" className="mobile-service-shell">
           <div className="mobile-service-copy">
-            <span className="kicker">SERVICIO TÉCNICO A DOMICILIO</span>
-            <h2>La electrónica automotriz<br /><em>va hasta tu vehículo.</em></h2>
-            <p>Todos los servicios de Autotrónica Go Diagnosis pueden coordinarse a domicilio. Elian evalúa previamente el caso para organizar la visita, el equipo necesario y la modalidad de trabajo.</p>
+            <span className="kicker">PROGRAMACIÓN + EGR OFF A DOMICILIO</span>
+            <h2>Programación y EGR OFF<br /><em>hasta tu vehículo.</em></h2>
+            <p>El servicio a domicilio está disponible únicamente para trabajos de programación y eliminación de EGR, siempre con coordinación previa de turno. Antes de la visita se valida vehículo, zona, compatibilidad y alcance del trabajo.</p>
             <div className="mobile-benefits">
               <span><MapPin /> Atención coordinada en Caracas</span>
-              <span><Wrench /> Todos los servicios disponibles</span>
-              <span><ShieldCheck /> Evaluación previa por WhatsApp</span>
+              <span><Wrench /> Programación y EGR OFF</span>
+              <span><ShieldCheck /> Turno y validación previa</span>
             </div>
-            <a className="primary-btn" href={wa("Hola Autotrónica Go Diagnosis. Quiero coordinar un servicio a domicilio. Mi vehículo es: ")} target="_blank" rel="noreferrer">
-              Solicitar servicio a domicilio <ArrowRight size={17} />
+            <a className="primary-btn" href={wa("Hola Autotrónica Go Diagnosis. Quiero coordinar programación o EGR OFF a domicilio. Mi vehículo es: ")} target="_blank" rel="noreferrer">
+              Coordinar servicio a domicilio <ArrowRight size={17} />
             </a>
           </div>
           <div className="mobile-service-panel" aria-label="Proceso del servicio a domicilio">
-            <div><b>01</b><span><strong>Contanos el caso</strong>Vehículo, falla y ubicación.</span></div>
-            <div><b>02</b><span><strong>Pre-evaluación</strong>Se define qué equipamiento llevar.</span></div>
-            <div><b>03</b><span><strong>Coordinación</strong>Zona, horario y alcance de la visita.</span></div>
-            <div><b>04</b><span><strong>Intervención</strong>Diagnóstico o servicio en el lugar.</span></div>
+            <div><b>01</b><span><strong>Contanos el vehículo</strong>Marca, modelo, año y trabajo requerido.</span></div>
+            <div><b>02</b><span><strong>Validación previa</strong>Se confirma compatibilidad y alcance.</span></div>
+            <div><b>03</b><span><strong>Coordinación</strong>Zona, día y horario de la visita.</span></div>
+            <div><b>04</b><span><strong>Intervención</strong>Programación o EGR OFF en el lugar acordado.</span></div>
           </div>
         </Reveal>
       </section>
