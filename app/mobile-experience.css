@@ -5,6 +5,18 @@
   .section-heading{display:grid!important;grid-template-columns:1fr!important;gap:18px!important;margin-bottom:26px!important}
   .section-heading>p{max-width:92%!important;margin:0!important}
 
+  /* Keep the complete hero copy safely below the mobile navigation. */
+  .video-hero{
+    height:auto!important;
+    min-height:100svh!important;
+    align-items:flex-start!important;
+    padding-top:164px!important;
+    padding-bottom:72px!important;
+  }
+  .video-hero .hero-copy{width:100%!important;margin:0!important}
+  .video-hero .eyebrow{position:relative!important;z-index:2!important;margin-top:0!important}
+  .video-hero .brand-slogan{margin-top:14px!important;max-width:100%!important}
+
   /* Stats: compact 2x2 dashboard instead of a vertical strip */
   .stats-band{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:1px!important;padding:0 18px!important;background:#ffffff12!important}
   .stat-item{min-height:118px!important;padding:22px 18px!important;background:#0b0e12!important;border:0!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:flex-start!important}
@@ -98,6 +110,7 @@
 }
 
 @media(max-width:390px){
+  .video-hero{padding-top:154px!important}
   .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important;padding-inline:10px!important}
   .service-grid article{min-height:218px!important;padding:14px!important}
   .service-grid h3{font-size:15.5px!important;margin-top:44px!important}
