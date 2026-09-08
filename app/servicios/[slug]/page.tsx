@@ -13,6 +13,17 @@ import {
   seoServices,
 } from "@/lib/seo-services";
 
+const serviceHeroImages: Record<string, string> = {
+  "diagnostico-electronico-caracas": "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1040_ioaslw.jpg",
+  "reparacion-ecu-caracas": "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305084/IMG_1037_jjr5kk.jpg",
+  "reparacion-abs-caracas": "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1042_jaz2yl.jpg",
+  "reparacion-bcm-tipm-caracas": "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305083/IMG_1041_i447vu.jpg",
+  "programacion-ecu-caracas": "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1039_pnpd8p.jpg",
+  "inyectores-gdi-efi-caracas": "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305085/IMG_1036_f5jobx.jpg",
+  "diagnostico-diesel-12v-24v-caracas": "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1045_i97gv3.jpg",
+  "servicio-automotriz-domicilio-caracas": "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305085/IMG_1038_ggdubh.jpg",
+};
+
 export function generateStaticParams() {
   return seoServices.map((service) => ({ slug: service.slug }));
 }
@@ -21,6 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const service = getSeoService(slug);
   if (!service) return {};
+  const heroImage = serviceHeroImages[service.slug];
 
   return {
     title: service.title,
@@ -34,11 +46,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       type: "website",
       locale: "es_VE",
       siteName: BUSINESS_NAME,
+      images: heroImage ? [{ url: heroImage, alt: service.name }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
       title: service.title,
       description: service.description,
+      images: heroImage ? [heroImage] : undefined,
     },
   };
 }
@@ -49,6 +63,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   if (!service) notFound();
 
   const serviceUrl = `${SITE_URL}/servicios/${service.slug}`;
+  const heroImage = serviceHeroImages[service.slug];
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -99,7 +114,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <Link href="/servicios" className="seo-page-nav-cta">Volver</Link>
       </header>
 
-      <section className="seo-page-hero">
+      <section
+        className="seo-page-hero seo-page-hero-cover"
+        style={heroImage ? { backgroundImage: `linear-gradient(90deg, rgba(3,5,7,.94) 0%, rgba(3,5,7,.78) 45%, rgba(3,5,7,.42) 100%), linear-gradient(180deg, rgba(3,5,7,.2) 0%, rgba(3,5,7,.7) 100%), url(${heroImage})` } : undefined}
+      >
         <div className="seo-page-inner">
           <nav className="seo-breadcrumb" aria-label="Breadcrumb">
             <Link href="/">Inicio</Link><span>/</span><Link href="/servicios">Servicios</Link><span>/</span><b>{service.shortName}</b>
