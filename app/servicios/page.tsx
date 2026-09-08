@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ServicesVisualGrid from "@/components/ServicesVisualGrid";
+import Assistant from "@/components/Assistant";
+import ServiceAssistantActions from "@/components/ServiceAssistantActions";
 import {
   ADDRESS,
   BUSINESS_NAME,
   PHONE_DISPLAY,
   SITE_URL,
-  WHATSAPP,
   seoServices,
 } from "@/lib/seo-services";
 
@@ -16,12 +17,12 @@ const HERO_IMAGE = "https://res.cloudinary.com/dpiavcukm/image/upload/v178830508
 export const metadata: Metadata = {
   title: "Servicios de Electrónica Automotriz en Caracas | Autotrónica Go Diagnosis",
   description:
-    "Servicios de diagnóstico, reparación y programación automotriz en Caracas: ECU, ABS, BCM/TIPM, inyectores GDI/EFI, diésel 12V/24V, EGR OFF y atención a domicilio.",
+    "Servicios de diagnóstico, reparación y programación automotriz en Caracas: ECU, ABS, BCM/TIPM, inyectores GDI/EFI, diésel 12V/24V y programación/EGR OFF a domicilio con coordinación previa.",
   alternates: { canonical: "/servicios" },
   openGraph: {
     title: "Servicios de Autotrónica Go Diagnosis en Caracas",
     description:
-      "Diagnóstico electrónico, reparación de módulos, programación ECU, inyectores, diésel y atención a domicilio en Caracas.",
+      "Diagnóstico electrónico, reparación de módulos, programación ECU, inyectores, diésel y programación/EGR OFF a domicilio con coordinación previa.",
     url: `${SITE_URL}/servicios`,
     type: "website",
     locale: "es_VE",
@@ -31,10 +32,6 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
-  const whatsappText = encodeURIComponent(
-    "Hola Autotrónica Go Diagnosis. Quiero consultar por uno de sus servicios automotrices."
-  );
-
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -80,19 +77,9 @@ export default function ServicesPage() {
           <span className="kicker">DIAGNÓSTICO · REPARACIÓN · PROGRAMACIÓN · CARACAS</span>
           <h1>Servicios de electrónica automotriz en Caracas.</h1>
           <p>
-            Diagnóstico basado en medición, reparación electrónica y programación para vehículos que requieren una evaluación técnica antes de reemplazar piezas. Atención en taller y servicios coordinables a domicilio.
+            Diagnóstico basado en medición, reparación electrónica y programación para vehículos que requieren una evaluación técnica antes de reemplazar piezas. La atención se realiza en taller; programación y EGR OFF pueden coordinarse a domicilio con turno previo.
           </p>
-          <div className="seo-page-actions">
-            <a
-              href={`https://wa.me/${WHATSAPP}?text=${whatsappText}`}
-              target="_blank"
-              rel="noreferrer"
-              className="primary-btn"
-            >
-              Consultar por WhatsApp
-            </a>
-            <Link href="/#trabajos" className="seo-secondary-link">Ver trabajos realizados</Link>
-          </div>
+          <ServiceAssistantActions service="Servicios de electrónica automotriz" />
         </div>
       </section>
 
@@ -103,7 +90,7 @@ export default function ServicesPage() {
             <h2>Elegí el área que necesitás.</h2>
           </div>
           <p>
-            Tocá cualquier servicio para ver qué se evalúa, cómo se trabaja y consultar directamente con el especialista.
+            Tocá cualquier servicio para ver qué se evalúa, cómo se trabaja y consultar directamente con el asistente virtual.
           </p>
         </div>
         <ServicesVisualGrid />
@@ -137,15 +124,15 @@ export default function ServicesPage() {
         <article className="seo-local-card services-local-premium">
           <div>
             <span className="seo-card-label">ATENCIÓN EN CARACAS</span>
-            <h2>Taller y servicio a domicilio.</h2>
+            <h2>Atención técnica en taller.</h2>
             <p>
-              Podés acercarte al taller o coordinar atención a domicilio. La zona, el vehículo y el alcance del trabajo se confirman previamente por WhatsApp.
+              La atención principal se realiza en taller. Programación y EGR OFF pueden coordinarse a domicilio con turno y validación previa de vehículo, zona y compatibilidad.
             </p>
           </div>
           <div className="seo-local-data">
             <p><b>Dirección</b><span>{ADDRESS}</span></p>
             <p><b>Horario</b><span>Lunes a viernes 8:00–18:00 · Sábados 9:00–15:00</span></p>
-            <p><b>WhatsApp</b><span>{PHONE_DISPLAY}</span></p>
+            <p><b>Contacto</b><span>{PHONE_DISPLAY}</span></p>
           </div>
         </article>
       </section>
@@ -157,6 +144,7 @@ export default function ServicesPage() {
           <Link href="/">Volver al sitio principal</Link>
         </div>
       </footer>
+      <Assistant />
     </main>
   );
 }
