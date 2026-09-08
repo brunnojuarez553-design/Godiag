@@ -4,8 +4,6 @@ import Link from "next/link";
 import { ArrowRight, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const WHATSAPP = "584222872237";
-
 type ServiceItem = {
   title: string;
   tag: string;
@@ -84,9 +82,9 @@ const services: ServiceItem[] = [
     title: "Servicio a domicilio",
     tag: "CARACAS",
     image: "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1040_ioaslw.jpg",
-    summary: "Diagnóstico, programación y electrónica automotriz coordinable en la ubicación del vehículo.",
-    detail: "Antes de la visita se realiza una preevaluación por WhatsApp para conocer vehículo, síntoma, zona y equipamiento necesario.",
-    includes: ["Preevaluación por WhatsApp", "Coordinación de zona", "Atención técnica en el lugar"],
+    summary: "Programación y EGR OFF coordinables en la ubicación del vehículo, con turno y validación previa.",
+    detail: "Antes de la visita se valida vehículo, zona, compatibilidad y alcance. La atención a domicilio aplica únicamente a programación y EGR OFF.",
+    includes: ["Programación ECU", "EGR OFF", "Coordinación y validación previa"],
     href: "/servicios/servicio-automotriz-domicilio-caracas",
   },
   {
@@ -131,6 +129,10 @@ const services: ServiceItem[] = [
   },
 ];
 
+function openAssistant(service?: string) {
+  window.dispatchEvent(new CustomEvent("open-assistant", { detail: service ? { service } : {} }));
+}
+
 export default function ServicesVisualGrid() {
   const [active, setActive] = useState<ServiceItem | null>(null);
 
@@ -146,9 +148,6 @@ export default function ServicesVisualGrid() {
       window.removeEventListener("keydown", onKey);
     };
   }, [active]);
-
-  const wa = (service: ServiceItem) =>
-    `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Hola Autotrónica Go Diagnosis. Quiero consultar por ${service.title}. Mi vehículo es: `)}`;
 
   return (
     <>
@@ -190,7 +189,17 @@ export default function ServicesVisualGrid() {
                 {active.includes.map((item) => <span key={item}>{item}</span>)}
               </div>
               <div className="service-detail-actions">
-                <a href={wa(active)} target="_blank" rel="noreferrer" className="primary-btn">Consultar por WhatsApp <ArrowRight size={16} /></a>
+                <button
+                  type="button"
+                  className="primary-btn"
+                  onClick={() => {
+                    const service = active.title;
+                    setActive(null);
+                    window.setTimeout(() => openAssistant(service), 0);
+                  }}
+                >
+                  Consultar por este servicio <ArrowRight size={16} />
+                </button>
                 {active.href && <Link href={active.href} className="service-detail-more">Ver detalle técnico</Link>}
               </div>
             </div>
