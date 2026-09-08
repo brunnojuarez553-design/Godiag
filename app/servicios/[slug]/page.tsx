@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Assistant from "@/components/Assistant";
+import ServiceAssistantActions from "@/components/ServiceAssistantActions";
 import {
   ADDRESS,
   BUSINESS_NAME,
   EMAIL,
   PHONE_DISPLAY,
   SITE_URL,
-  WHATSAPP,
   getSeoService,
   seoServices,
 } from "@/lib/seo-services";
@@ -48,7 +49,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   if (!service) notFound();
 
   const serviceUrl = `${SITE_URL}/servicios/${service.slug}`;
-  const whatsappText = encodeURIComponent(`Hola Autotrónica Go Diagnosis. Quiero consultar por ${service.shortName}.`);
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -84,7 +84,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
-      { "@type": "ListItem", position: 2, name: "Servicios", item: `${SITE_URL}/#especialidades` },
+      { "@type": "ListItem", position: 2, name: "Servicios", item: `${SITE_URL}/servicios` },
       { "@type": "ListItem", position: 3, name: service.shortName, item: serviceUrl },
     ],
   };
@@ -96,21 +96,18 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       <header className="seo-page-nav">
         <Link href="/" className="seo-page-brand">AUTOTRÓNICA GO DIAGNOSIS</Link>
-        <Link href="/#contacto" className="seo-page-nav-cta">Solicitar diagnóstico</Link>
+        <Link href="/servicios" className="seo-page-nav-cta">Volver</Link>
       </header>
 
       <section className="seo-page-hero">
         <div className="seo-page-inner">
           <nav className="seo-breadcrumb" aria-label="Breadcrumb">
-            <Link href="/">Inicio</Link><span>/</span><Link href="/#especialidades">Servicios</Link><span>/</span><b>{service.shortName}</b>
+            <Link href="/">Inicio</Link><span>/</span><Link href="/servicios">Servicios</Link><span>/</span><b>{service.shortName}</b>
           </nav>
           <span className="kicker">SERVICIO ESPECIALIZADO · CARACAS</span>
           <h1>{service.name}</h1>
           <p>{service.intro}</p>
-          <div className="seo-page-actions">
-            <a href={`https://wa.me/${WHATSAPP}?text=${whatsappText}`} target="_blank" rel="noreferrer" className="primary-btn">Consultar por WhatsApp</a>
-            <Link href="/#trabajos" className="seo-secondary-link">Ver trabajos realizados</Link>
-          </div>
+          <ServiceAssistantActions service={service.shortName} />
         </div>
       </section>
 
@@ -135,13 +132,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <article className="seo-local-card">
           <div>
             <span className="seo-card-label">ATENCIÓN EN CARACAS</span>
-            <h2>Taller y servicio a domicilio.</h2>
-            <p>Podés coordinar la evaluación en nuestro taller o solicitar atención a domicilio. La zona, el vehículo y el alcance del trabajo se confirman previamente por WhatsApp.</p>
+            <h2>Atención técnica en taller.</h2>
+            <p>La atención principal se realiza en nuestro taller. Programación y EGR OFF pueden coordinarse a domicilio con turno y validación previa de vehículo, zona y compatibilidad.</p>
           </div>
           <div className="seo-local-data">
             <p><b>Dirección</b><span>{ADDRESS}</span></p>
             <p><b>Horario</b><span>Lunes a viernes 8:00–18:00 · Sábados 9:00–15:00</span></p>
-            <p><b>WhatsApp</b><span>{PHONE_DISPLAY}</span></p>
+            <p><b>Contacto</b><span>{PHONE_DISPLAY}</span></p>
           </div>
         </article>
 
@@ -163,6 +160,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <Link href="/">Volver al sitio principal</Link>
         </div>
       </footer>
+      <Assistant />
     </main>
   );
 }
