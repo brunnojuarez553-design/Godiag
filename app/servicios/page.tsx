@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ServicesVisualGrid from "@/components/ServicesVisualGrid";
 import Assistant from "@/components/Assistant";
-import ServiceAssistantActions from "@/components/ServiceAssistantActions";
 import {
   ADDRESS,
   BUSINESS_NAME,
@@ -79,11 +78,13 @@ export default function ServicesPage() {
           <p>
             Diagnóstico basado en medición, reparación electrónica y programación para vehículos que requieren una evaluación técnica antes de reemplazar piezas. La atención se realiza en taller; programación y EGR OFF pueden coordinarse a domicilio con turno previo.
           </p>
-          <ServiceAssistantActions service="Servicios de electrónica automotriz" />
+          <div className="seo-page-actions">
+            <a href="#todos-los-servicios" className="primary-btn">Ver todos los servicios</a>
+          </div>
         </div>
       </section>
 
-      <section className="services-showcase seo-page-inner">
+      <section className="services-showcase seo-page-inner" id="todos-los-servicios">
         <div className="services-showcase-heading">
           <div>
             <span className="seo-card-label">SERVICIOS ESPECIALIZADOS</span>
