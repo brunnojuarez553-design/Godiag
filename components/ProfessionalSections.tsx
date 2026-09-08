@@ -2,7 +2,6 @@
 
 import { ArrowRight, CircuitBoard, Gauge, MapPin, Microscope, ScanLine, Settings2, ShieldCheck, Truck, Wrench } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import SeoServiceHub from "@/components/SeoServiceHub";
 
 const whatsapp = "584222872237";
 
@@ -43,6 +42,13 @@ function wa(text: string) {
 export default function ProfessionalSections() {
   return (
     <>
+      <div className="services-more-wrap">
+        <a href="/servicios" className="services-more-btn">
+          Ver todos los servicios <ArrowRight size={17} />
+        </a>
+        <span>Diagnóstico, reparación, programación y electrónica automotriz.</span>
+      </div>
+
       <section className="mobile-service section" id="domicilio">
         <Reveal as="div" className="mobile-service-shell">
           <div className="mobile-service-copy">
@@ -107,8 +113,6 @@ export default function ProfessionalSections() {
           ))}
         </div>
       </section>
-
-      <SeoServiceHub />
 
       <section className="reviews-ready section" id="resenas">
         <Reveal as="div" className="reviews-ready-card">
