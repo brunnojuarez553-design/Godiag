@@ -1,5 +1,6 @@
-/* Visible section background imagery for service-at-home and technology areas */
+/* Visible section background imagery for service-at-home, cases and technology areas */
 .mobile-service,
+.cases-section,
 .technology-section{
   position:relative;
   isolation:isolate;
@@ -8,6 +9,7 @@
 }
 
 .mobile-service::before,
+.cases-section::before,
 .technology-section::before{
   content:"";
   position:absolute;
@@ -20,6 +22,7 @@
 }
 
 .mobile-service::after,
+.cases-section::after,
 .technology-section::after{
   content:"";
   position:absolute;
@@ -36,6 +39,14 @@
   background:linear-gradient(90deg,rgba(5,7,9,.72) 0%,rgba(5,7,9,.58) 46%,rgba(5,7,9,.36) 78%,rgba(5,7,9,.5) 100%),linear-gradient(180deg,rgba(6,8,10,.12),rgba(6,8,10,.48));
 }
 
+.cases-section::before{
+  background-image:url("https://res.cloudinary.com/dgp7uhps3/image/upload/v1788825945/619295eb-c142-4e79-94ea-558f80f4062e_qpu1ie.jpg");
+  background-position:center 46%;
+}
+.cases-section::after{
+  background:linear-gradient(180deg,rgba(5,7,9,.58) 0%,rgba(5,7,9,.46) 44%,rgba(5,7,9,.72) 100%),radial-gradient(circle at 80% 24%,rgba(237,28,36,.14),transparent 38%);
+}
+
 .technology-section::before{
   background-image:url("https://res.cloudinary.com/dgp7uhps3/image/upload/v1788825949/a5f8ef09-7147-45a9-80e2-e73408d3455c_nmqifc.jpg");
   background-position:center 48%;
@@ -45,6 +56,8 @@
 }
 
 .mobile-service-shell,
+.cases-section .section-heading,
+.case-grid,
 .technology-section .section-heading,
 .technology-grid{
   position:relative;
@@ -56,9 +69,19 @@
   background:rgba(9,12,15,.74)!important;
   backdrop-filter:blur(2px);
 }
+.case-grid article{
+  background:linear-gradient(160deg,rgba(16,20,25,.76),rgba(8,11,14,.64))!important;
+  backdrop-filter:blur(2px);
+}
 .technology-grid article{
   background:linear-gradient(160deg,rgba(16,20,25,.78),rgba(8,11,14,.68))!important;
   backdrop-filter:blur(2px);
+}
+
+@keyframes swipeHintCard{
+  0%,72%,100%{transform:translateX(0)}
+  82%{transform:translateX(-16px)}
+  90%{transform:translateX(5px)}
 }
 
 @media(max-width:600px){
@@ -68,6 +91,13 @@
   }
   .mobile-service::after{
     background:linear-gradient(180deg,rgba(5,7,9,.55) 0%,rgba(5,7,9,.48) 48%,rgba(5,7,9,.68) 100%);
+  }
+  .cases-section::before{
+    background-position:center center;
+    transform:scale(1.035);
+  }
+  .cases-section::after{
+    background:linear-gradient(180deg,rgba(5,7,9,.5) 0%,rgba(5,7,9,.42) 48%,rgba(5,7,9,.7) 100%);
   }
   .technology-section::before{
     background-position:center center;
@@ -79,7 +109,18 @@
   .mobile-service-shell{
     background:rgba(8,11,14,.68)!important;
   }
+  .case-grid article{
+    background:linear-gradient(160deg,rgba(14,18,22,.7),rgba(7,10,13,.6))!important;
+  }
+  .case-grid article:first-child{
+    animation:swipeHintCard 3.8s cubic-bezier(.22,.61,.36,1) 1.2s infinite;
+    will-change:transform;
+  }
   .technology-grid article{
     background:linear-gradient(160deg,rgba(14,18,22,.72),rgba(7,10,13,.62))!important;
   }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .case-grid article:first-child{animation:none!important}
 }
