@@ -1,0 +1,57 @@
+/* Section background imagery requested for service-at-home and technology areas */
+.mobile-service,
+.technology-section{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+
+.mobile-service::before,
+.technology-section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+
+.mobile-service::after,
+.technology-section::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+}
+
+.mobile-service::before{
+  background-image:url("https://res.cloudinary.com/dgp7uhps3/image/upload/v1788825939/714b58fe-e299-4ee7-aee3-fa98dc8cb98b_yteonm.jpg");
+  background-position:center 42%;
+}
+.mobile-service::after{
+  background:linear-gradient(90deg,rgba(5,7,9,.95) 0%,rgba(5,7,9,.86) 42%,rgba(5,7,9,.68) 72%,rgba(5,7,9,.78) 100%),linear-gradient(180deg,rgba(6,8,10,.18),rgba(6,8,10,.72));
+}
+
+.technology-section::before{
+  background-image:url("https://res.cloudinary.com/dgp7uhps3/image/upload/v1788825949/a5f8ef09-7147-45a9-80e2-e73408d3455c_nmqifc.jpg");
+  background-position:center 48%;
+}
+.technology-section::after{
+  background:linear-gradient(180deg,rgba(5,7,9,.9) 0%,rgba(5,7,9,.74) 46%,rgba(5,7,9,.92) 100%),radial-gradient(circle at 78% 28%,rgba(237,28,36,.18),transparent 38%);
+}
+
+.mobile-service-shell,
+.technology-section .section-heading,
+.technology-grid{
+  position:relative;
+  z-index:1;
+}
+
+@media(max-width:600px){
+  .mobile-service::before{background-position:center center}
+  .mobile-service::after{background:linear-gradient(180deg,rgba(5,7,9,.86) 0%,rgba(5,7,9,.82) 54%,rgba(5,7,9,.94) 100%)}
+  .technology-section::before{background-position:center center}
+  .technology-section::after{background:linear-gradient(180deg,rgba(5,7,9,.88) 0%,rgba(5,7,9,.8) 52%,rgba(5,7,9,.94) 100%)}
+}
