@@ -1,0 +1,158 @@
+/* Global readability pass + stronger orientation CTA */
+
+/* Make the orientation CTA feel interactive without becoming distracting. */
+.quiz-trigger{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  font-size:13px!important;
+  letter-spacing:0!important;
+  animation:quiz-cta-float 2.8s cubic-bezier(.16,1,.3,1) infinite;
+  box-shadow:0 12px 34px rgba(237,28,36,.18);
+}
+.quiz-trigger::after{
+  content:"";
+  position:absolute;
+  top:-40%;
+  bottom:-40%;
+  left:-28%;
+  width:18%;
+  transform:skewX(-18deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.32),transparent);
+  animation:quiz-cta-shine 3.1s ease-in-out infinite;
+  pointer-events:none;
+  z-index:-1;
+}
+.quiz-trigger .quiz-trigger-icon{animation:quiz-cta-icon 2.8s ease-in-out infinite}
+.quiz-trigger svg:last-child{animation:quiz-cta-arrow 1.8s ease-in-out infinite}
+
+@keyframes quiz-cta-float{
+  0%,100%{transform:translateY(0) scale(1)}
+  48%{transform:translateY(-3px) scale(1.012)}
+  58%{transform:translateY(-3px) scale(1.012)}
+}
+@keyframes quiz-cta-shine{
+  0%,36%{left:-28%;opacity:0}
+  48%{opacity:1}
+  64%{left:115%;opacity:0}
+  100%{left:115%;opacity:0}
+}
+@keyframes quiz-cta-icon{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.1)}
+}
+@keyframes quiz-cta-arrow{
+  0%,100%{transform:translateX(0)}
+  50%{transform:translateX(4px)}
+}
+
+/* Readability floor: preserve the visual hierarchy but remove 7–10px text that disappears on real screens. */
+.nav nav,
+.text-link,
+.primary-btn,
+.nav-cta,
+.send-btn,
+.quiz-trigger,
+.service-grid a,
+.phone,
+.seo-page-actions,
+.service-detail-more,
+.service-visual-open,
+.services-more-btn{
+  font-size:max(12px, .75rem)!important;
+}
+
+.eyebrow,
+.kicker,
+.seo-card-label,
+.service-detail-tag,
+.service-visual-top b,
+.service-visual-top span,
+.brand-marquee-label,
+.arrival-eyebrow{
+  font-size:max(11px, .6875rem)!important;
+  line-height:1.45!important;
+}
+
+.hero-copy>p,
+.section-heading>p,
+.method-copy>p,
+.expert-card p,
+.seo-page-hero p,
+.seo-copy-card p,
+.seo-local-card p,
+.services-showcase-heading p,
+.service-detail-body,
+.service-detail-lead,
+.modal-lead{
+  font-size:max(14px, .875rem)!important;
+  line-height:1.68!important;
+}
+
+.service-grid p,
+.technology-grid p,
+.work-proof span,
+.mobile-service-panel span,
+.mobile-benefits span,
+.certs span,
+.seo-copy-card li,
+.seo-local-data span,
+.services-chip-grid span,
+.service-detail-includes span,
+.quiz-summary,
+.quiz-option,
+.quiz-back,
+.form-grid label span,
+footer>p,
+footer>div{
+  font-size:max(11px, .6875rem)!important;
+  line-height:1.5!important;
+}
+
+.proof-row span,
+.metrics small,
+.service-top,
+.work-overlay span,
+.reviews-ready-card p,
+.reviews-status small{
+  font-size:max(10.5px, .65625rem)!important;
+  line-height:1.45!important;
+}
+
+.proof-row b,
+.metrics b,
+.service-grid h3,
+.technology-grid h3,
+.work-overlay h3,
+.mobile-service-panel strong{
+  text-rendering:optimizeLegibility;
+}
+
+@media(max-width:600px){
+  .quiz-trigger{
+    font-size:12.5px!important;
+    line-height:1.35!important;
+    min-height:56px!important;
+    padding:13px 15px!important;
+  }
+  .eyebrow,.kicker,.seo-card-label,.service-detail-tag,.brand-marquee-label{
+    font-size:10.5px!important;
+  }
+  .service-grid p,.technology-grid p,.mobile-service-panel span,.mobile-benefits span,.certs span,.services-chip-grid span{
+    font-size:10.5px!important;
+  }
+  .service-grid a,.service-visual-open,.services-more-btn,.seo-secondary-link{
+    font-size:11px!important;
+  }
+  .work-overlay span{font-size:9.5px!important}
+  footer>p,footer>div{font-size:10.5px!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .quiz-trigger,
+  .quiz-trigger::after,
+  .quiz-trigger .quiz-trigger-icon,
+  .quiz-trigger svg:last-child{
+    animation:none!important;
+  }
+}
