@@ -40,15 +40,19 @@
 
   /* Orientation block: shorter, cleaner and more proportional */
   .quiz-band{
-    padding:20px 14px 24px!important;
+    padding:20px 14px 18px!important;
+    margin:0!important;
     background:#090b0e!important;
+    position:relative!important;
   }
   .quiz-band-inner{
     min-height:0!important;
     padding:20px 18px!important;
     gap:15px!important;
     border-radius:10px!important;
-    background:radial-gradient(circle at 100% 0,rgba(237,28,36,.16),transparent 38%),linear-gradient(145deg,#11151a,#0b0e12)!important;
+    background:
+      linear-gradient(105deg,rgba(5,7,9,.93) 0%,rgba(5,7,9,.74) 56%,rgba(42,8,10,.64) 100%),
+      url("https://res.cloudinary.com/dgp7uhps3/image/upload/v1788825949/a5f8ef09-7147-45a9-80e2-e73408d3455c_nmqifc.jpg") center/cover no-repeat!important;
     box-shadow:0 18px 42px #0005!important;
   }
   .quiz-band-copy .kicker{
@@ -69,8 +73,15 @@
     border-radius:7px!important;
   }
 
-  /* Give the floating assistant breathing room around this section */
-  .quiz-band{position:relative!important}
+  /* Remove dead space between orientation and main services */
+  .quiz-band + .services{
+    padding-top:26px!important;
+    margin-top:0!important;
+  }
+  .quiz-band + .services > .section-heading{
+    margin-top:0!important;
+    padding-top:0!important;
+  }
 }
 
 @media(max-width:390px){
@@ -78,7 +89,8 @@
   .stats-band .stat-item{min-height:68px!important;padding:11px 12px!important;column-gap:8px!important}
   .stats-band .stat-item b{font-size:18px!important}
   .stats-band .stat-item span{font-size:6.9px!important;letter-spacing:.6px!important}
-  .quiz-band{padding-inline:10px!important}
-  .quiz-band-inner{padding:18px 16px!important}
+  .quiz-band{padding:16px 10px 14px!important}
+  .quiz-band-inner{padding:18px 16px!important;background-position:58% center!important}
   .quiz-band-copy h3{font-size:22px!important;max-width:92%!important}
+  .quiz-band + .services{padding-top:22px!important}
 }
