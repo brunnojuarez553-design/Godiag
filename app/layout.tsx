@@ -12,7 +12,7 @@ import "./mobile-masonry.css";
 import "./case-lightbox.css";
 import "./seo-pages.css";
 import "./mobile-fixes.css";
-import "./orientation-bg.css";
+import "./quiz-background.css";
 import "./section-order.css";
 import "./section-backgrounds.css";
 
