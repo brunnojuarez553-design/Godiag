@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 type EventParams = Record<string, string | number | boolean | undefined>;
-
 type GtagWindow = Window & { gtag?: (...args: unknown[]) => void };
 
 function track(name: string, params: EventParams = {}, attempt = 0) {
@@ -43,7 +42,7 @@ function replaceText(selector: string, from: string, to: string) {
 }
 
 function applyBusinessContent() {
-  if (window.location.pathname !== "/") return;
+  if (typeof window === "undefined" || window.location.pathname !== "/") return;
 
   const heroCopy = document.querySelector<HTMLElement>(".hero-copy");
   if (heroCopy && !heroCopy.querySelector(".brand-slogan")) {
@@ -72,7 +71,6 @@ function applyBusinessContent() {
   if (quoteModal) {
     replaceText(".quote-modal .modal-lead", "elegí si preferís atención en el taller o a domicilio.", "indicá el servicio que necesitás. La atención es en taller; programación y EGR OFF también pueden coordinarse a domicilio con turno previo.");
     replaceText(".quote-modal small", "Todos los servicios pueden coordinarse a domicilio. Zona y disponibilidad se confirman por WhatsApp.", "El servicio a domicilio aplica únicamente a programación y EGR OFF, con validación y turno previo por WhatsApp.");
-
     quoteModal.querySelectorAll<HTMLElement>("[role='option']").forEach((option) => {
       if (option.textContent?.trim() === "A domicilio") option.textContent = "A domicilio · solo programación / EGR OFF";
     });
@@ -106,8 +104,6 @@ export default function AnalyticsEvents() {
 
   useEffect(() => {
     applyBusinessContent();
-    const observer = new MutationObserver(() => applyBusinessContent());
-    observer.observe(document.body, { childList: true, subtree: true });
 
     const onOpenAssistant = (event: Event) => {
       const detail = (event as CustomEvent<{ service?: string }>).detail;
@@ -149,6 +145,9 @@ export default function AnalyticsEvents() {
           if (button.closest(".quiz-modal")) track("quiz_submit", { location: "orientation_quiz", channel: "whatsapp" });
           else if (button.closest(".quote-modal")) track("quote_submit", { location, channel: "whatsapp" });
         }
+
+        // Radix dialogs mount after the click. Apply copy once after they render instead of observing the whole DOM.
+        window.setTimeout(applyBusinessContent, 80);
       }
     };
 
@@ -156,7 +155,6 @@ export default function AnalyticsEvents() {
     document.addEventListener("click", onClick, true);
 
     return () => {
-      observer.disconnect();
       window.removeEventListener("open-assistant", onOpenAssistant as EventListener);
       document.removeEventListener("click", onClick, true);
     };
