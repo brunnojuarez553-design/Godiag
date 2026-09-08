@@ -17,6 +17,7 @@ import "./section-order.css";
 import "./section-backgrounds.css";
 import "./expert-premium.css";
 import "./location-access.css";
+import "./readability.css";
 
 const logo = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg";
 const specialistImage = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788231287/IMG_1017_rx0uzq.jpg";
