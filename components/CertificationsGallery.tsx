@@ -32,7 +32,14 @@ export default function CertificationsGallery() {
 
   useEffect(() => {
     const section = document.querySelector<HTMLElement>("#especialista");
-    setTarget(section);
+    const oldCertificate = section?.querySelector<HTMLElement>(".certificate-block") || null;
+    const previousDisplay = oldCertificate?.style.display || "";
+    if (oldCertificate) oldCertificate.style.display = "none";
+    setTarget(section || null);
+
+    return () => {
+      if (oldCertificate) oldCertificate.style.display = previousDisplay;
+    };
   }, []);
 
   useEffect(() => {
