@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ServicesVisualGrid from "@/components/ServicesVisualGrid";
 import {
   ADDRESS,
   BUSINESS_NAME,
@@ -8,6 +9,9 @@ import {
   WHATSAPP,
   seoServices,
 } from "@/lib/seo-services";
+
+const LOGO = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg";
+const HERO_IMAGE = "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1040_ioaslw.jpg";
 
 export const metadata: Metadata = {
   title: "Servicios de Electrónica Automotriz en Caracas | Autotrónica Go Diagnosis",
@@ -22,19 +26,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_VE",
     siteName: BUSINESS_NAME,
+    images: [{ url: HERO_IMAGE, alt: "Diagnóstico electrónico automotriz en Autotrónica Go Diagnosis" }],
   },
 };
-
-const extraServices = [
-  "Mantenimiento y diagnóstico general",
-  "Diagnóstico con osciloscopio y trazador de curvas",
-  "Reparación de cableado automotriz",
-  "Reparación de tablero / cluster",
-  "Descarbonización de válvulas y admisión",
-  "EGR OFF Toyota en aplicaciones compatibles, sujeto a normativa",
-  "Reprogramación con HP Tuners, BitEdit y VFTuner",
-  "Diagnóstico en vehículos gasolina, diésel y eléctricos compatibles",
-];
 
 export default function ServicesPage() {
   const whatsappText = encodeURIComponent(
@@ -64,24 +58,22 @@ export default function ServicesPage() {
   };
 
   return (
-    <main className="seo-service-page">
+    <main className="seo-service-page services-page-premium">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
 
-      <header className="seo-page-nav">
-        <Link href="/" className="seo-page-brand">AUTOTRÓNICA GO DIAGNOSIS</Link>
-        <a
-          href={`https://wa.me/${WHATSAPP}?text=${whatsappText}`}
-          target="_blank"
-          rel="noreferrer"
-          className="seo-page-nav-cta"
-        >
-          Consultar
-        </a>
+      <header className="seo-page-nav services-page-nav">
+        <Link href="/" className="services-page-logo" aria-label="Volver al inicio de Autotrónica Go Diagnosis">
+          <img src={LOGO} alt="Autotrónica Go Diagnosis" />
+        </Link>
+        <Link href="/" className="seo-page-nav-cta services-back-btn">Volver</Link>
       </header>
 
-      <section className="seo-page-hero">
-        <div className="seo-page-inner">
+      <section
+        className="seo-page-hero services-page-hero"
+        style={{ backgroundImage: `linear-gradient(90deg,rgba(6,8,10,.98) 0%,rgba(6,8,10,.86) 52%,rgba(13,5,7,.6) 100%),url("${HERO_IMAGE}")` }}
+      >
+        <div className="seo-page-inner services-hero-inner">
           <nav className="seo-breadcrumb" aria-label="Breadcrumb">
             <Link href="/">Inicio</Link><span>/</span><b>Servicios</b>
           </nav>
@@ -104,52 +96,45 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="seo-page-content seo-page-inner">
-        <article className="seo-copy-card seo-copy-card-wide">
+      <section className="services-showcase seo-page-inner">
+        <div className="services-showcase-heading">
           <div>
             <span className="seo-card-label">SERVICIOS ESPECIALIZADOS</span>
-            <h2>Encontrá el servicio que necesitás.</h2>
+            <h2>Elegí el área que necesitás.</h2>
           </div>
           <p>
-            Cada caso se evalúa según vehículo, síntomas y sistema afectado. Estas páginas explican las principales especialidades de Autotrónica Go Diagnosis y permiten consultar directamente por el trabajo correspondiente.
+            Tocá cualquier servicio para ver qué se evalúa, cómo se trabaja y consultar directamente con el especialista.
           </p>
-        </article>
+        </div>
+        <ServicesVisualGrid />
+      </section>
 
-        <section className="seo-related-services" style={{ paddingTop: 46 }}>
-          <div className="seo-related-grid">
-            {seoServices.map((service) => (
-              <Link href={`/servicios/${service.slug}`} key={service.slug}>
-                <span style={{ color: "inherit" }}>{service.shortName}</span><span>→</span>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <div className="seo-content-grid" style={{ marginTop: 48 }}>
-          <article className="seo-copy-card">
-            <span className="seo-card-label">OTRAS CAPACIDADES</span>
-            <h2>Más servicios del taller.</h2>
-            <ul>
-              {extraServices.map((service) => <li key={service}>{service}</li>)}
-            </ul>
-          </article>
-
-          <article className="seo-copy-card">
+      <section className="seo-page-content seo-page-inner services-support-content">
+        <div className="seo-content-grid">
+          <article className="seo-copy-card services-compact-card">
             <span className="seo-card-label">MARCAS Y APLICACIONES</span>
             <h2>Atención multimarca.</h2>
             <p>
               Experiencia destacada en Toyota, Ford, Chevrolet, Mitsubishi, Jeep, Dodge y Chrysler, además de otras aplicaciones compatibles según sistema y herramienta disponible.
             </p>
-            <ul>
-              <li>Gasolina</li>
-              <li>Diésel 12V / 24V</li>
-              <li>Vehículos eléctricos compatibles</li>
-              <li>ECU, ABS, BCM, TIPM y cluster</li>
-            </ul>
+            <div className="services-chip-grid">
+              <span>Gasolina</span><span>Diésel 12V / 24V</span><span>Eléctricos compatibles</span><span>ECU · ABS · BCM · TIPM</span>
+            </div>
+          </article>
+
+          <article className="seo-copy-card services-compact-card">
+            <span className="seo-card-label">FORMA DE TRABAJO</span>
+            <h2>Medir antes de intervenir.</h2>
+            <p>
+              El objetivo es encontrar la causa de la falla con lectura, comprobación y medición antes de decidir qué reparar, programar o reemplazar.
+            </p>
+            <div className="services-chip-grid">
+              <span>Diagnóstico previo</span><span>Instrumentación</span><span>Software especializado</span><span>Atención directa</span>
+            </div>
           </article>
         </div>
 
-        <article className="seo-local-card">
+        <article className="seo-local-card services-local-premium">
           <div>
             <span className="seo-card-label">ATENCIÓN EN CARACAS</span>
             <h2>Taller y servicio a domicilio.</h2>
