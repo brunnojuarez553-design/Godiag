@@ -1,0 +1,84 @@
+@media(max-width:600px){
+  /* Compact trust metrics: no oversized empty boxes */
+  .stats-band{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+    padding:14px 14px 18px!important;
+    background:#090b0e!important;
+    border:0!important;
+  }
+  .stats-band .stat-item{
+    min-height:74px!important;
+    height:auto!important;
+    padding:13px 14px!important;
+    display:grid!important;
+    grid-template-columns:auto 1fr!important;
+    align-items:center!important;
+    justify-content:initial!important;
+    column-gap:10px!important;
+    background:linear-gradient(145deg,#11151a,#0b0e12)!important;
+    border:1px solid #ffffff14!important;
+    border-radius:10px!important;
+  }
+  .stats-band .stat-item b{
+    font-size:20px!important;
+    line-height:1!important;
+    color:#fff!important;
+    min-width:28px!important;
+    margin:0!important;
+  }
+  .stats-band .stat-item span{
+    margin:0!important;
+    font-size:7.5px!important;
+    line-height:1.28!important;
+    letter-spacing:.75px!important;
+    text-transform:uppercase!important;
+    color:#969da5!important;
+    text-align:left!important;
+  }
+
+  /* Orientation block: shorter, cleaner and more proportional */
+  .quiz-band{
+    padding:20px 14px 24px!important;
+    background:#090b0e!important;
+  }
+  .quiz-band-inner{
+    min-height:0!important;
+    padding:20px 18px!important;
+    gap:15px!important;
+    border-radius:10px!important;
+    background:radial-gradient(circle at 100% 0,rgba(237,28,36,.16),transparent 38%),linear-gradient(145deg,#11151a,#0b0e12)!important;
+    box-shadow:0 18px 42px #0005!important;
+  }
+  .quiz-band-copy .kicker{
+    font-size:7.5px!important;
+    letter-spacing:2px!important;
+  }
+  .quiz-band-copy h3{
+    font-size:25px!important;
+    line-height:1.02!important;
+    letter-spacing:-1.15px!important;
+    margin:10px 0 0!important;
+    max-width:94%!important;
+  }
+  .quiz-trigger{
+    min-height:46px!important;
+    padding:10px 14px!important;
+    font-size:10px!important;
+    border-radius:7px!important;
+  }
+
+  /* Give the floating assistant breathing room around this section */
+  .quiz-band{position:relative!important}
+}
+
+@media(max-width:390px){
+  .stats-band{gap:6px!important;padding-inline:10px!important}
+  .stats-band .stat-item{min-height:68px!important;padding:11px 12px!important;column-gap:8px!important}
+  .stats-band .stat-item b{font-size:18px!important}
+  .stats-band .stat-item span{font-size:6.9px!important;letter-spacing:.6px!important}
+  .quiz-band{padding-inline:10px!important}
+  .quiz-band-inner{padding:18px 16px!important}
+  .quiz-band-copy h3{font-size:22px!important;max-width:92%!important}
+}
