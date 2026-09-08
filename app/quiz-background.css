@@ -1,0 +1,25 @@
+.quiz-band-inner{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    linear-gradient(120deg,rgba(5,7,9,.92) 0%,rgba(5,7,9,.78) 52%,rgba(52,8,13,.72) 100%),
+    url("https://res.cloudinary.com/dgp7uhps3/image/upload/v1788825949/a5f8ef09-7147-45a9-80e2-e73408d3455c_nmqifc.jpg") center/cover no-repeat!important;
+}
+.quiz-band-inner:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:radial-gradient(circle at 82% 22%,rgba(237,28,36,.18),transparent 32%);
+  pointer-events:none;
+}
+.quiz-band-inner>*{position:relative;z-index:1}
+
+@media(max-width:600px){
+  .quiz-band-inner{
+    background:
+      linear-gradient(180deg,rgba(5,7,9,.82) 0%,rgba(5,7,9,.88) 62%,rgba(32,7,10,.9) 100%),
+      url("https://res.cloudinary.com/dgp7uhps3/image/upload/v1788825949/a5f8ef09-7147-45a9-80e2-e73408d3455c_nmqifc.jpg") center 42%/cover no-repeat!important;
+  }
+}
