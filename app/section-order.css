@@ -1,0 +1,25 @@
+/* Conversion-first section order for the homepage */
+main{display:flex;flex-direction:column}
+
+main>.nav{order:0}
+main>.hero{order:10}
+main>.brand-strip{order:20}
+main>.work-section{order:30}
+main>.services{order:40}
+main>.services-more-wrap{order:41}
+main>.quiz-band{order:50}
+main>.mobile-service{order:60}
+main>.cases-section{order:70}
+main>.method{order:80}
+main>.technology-section{order:90}
+main>.expert{order:100}
+main>.reviews-ready{order:110}
+main>.faq-section{order:120}
+main>.location-section{order:130}
+main>.cta-section{order:140}
+main>footer{order:150}
+
+/* Fixed/overlay UI stays independent from document flow */
+main>.ai-fab-wrap,
+main>.ai-panel,
+main>[role="dialog"]{order:999}
