@@ -18,7 +18,8 @@ import "./section-backgrounds.css";
 import "./expert-premium.css";
 
 const logo = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg";
-const ogImage = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788231287/IMG_1017_rx0uzq.jpg";
+const specialistImage = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788231287/IMG_1017_rx0uzq.jpg";
+const ogImage = logo;
 const siteUrl = "https://www.autotronicagodiag.com";
 const title = "Autotrónica Go Diagnosis | Diagnóstico Electrónico en Caracas";
 const description =
@@ -72,7 +73,7 @@ export const metadata: Metadata = {
     siteName: "Autotrónica Go Diagnosis",
     locale: "es_VE",
     type: "website",
-    images: [{ url: ogImage, width: 1200, height: 1600, alt: "Autotrónica Go Diagnosis - electrónica automotriz en Caracas" }],
+    images: [{ url: ogImage, width: 1200, height: 1200, alt: "Logo de Autotrónica Go Diagnosis" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -160,7 +161,7 @@ const specialistSchema = {
   "@type": "Person",
   "@id": `${siteUrl}/#elian-gonzalez`,
   name: "Elian José González Cruz",
-  image: ogImage,
+  image: specialistImage,
   worksFor: { "@id": `${siteUrl}/#business` },
   jobTitle: "Especialista en diagnóstico y electrónica automotriz",
   knowsAbout: [
