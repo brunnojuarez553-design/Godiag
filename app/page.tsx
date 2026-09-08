@@ -29,7 +29,6 @@ import Assistant from "@/components/Assistant";
 import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/Magnetic";
 import HeroVideo from "@/components/HeroVideo";
-import Stats from "@/components/Stats";
 import CarQuiz from "@/components/CarQuiz";
 import Faq from "@/components/Faq";
 import LocationMap from "@/components/LocationMap";
@@ -154,7 +153,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-      <Stats />
 
       <section className="quiz-band"><Reveal as="div" className="quiz-band-inner"><div className="quiz-band-copy"><span className="kicker">ORIENTACIÓN INICIAL</span><h3>¿No sabés qué tiene tu auto? Contanos en 3 pasos y llevamos la consulta directo al especialista.</h3></div><CarQuiz /></Reveal></section>
 
