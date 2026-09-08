@@ -44,7 +44,10 @@
   background-position:center 46%;
 }
 .cases-section::after{
-  background:linear-gradient(180deg,rgba(5,7,9,.58) 0%,rgba(5,7,9,.46) 44%,rgba(5,7,9,.72) 100%),radial-gradient(circle at 80% 24%,rgba(237,28,36,.14),transparent 38%);
+  background:
+    linear-gradient(180deg,rgba(4,6,8,.82) 0%,rgba(4,6,8,.68) 38%,rgba(4,6,8,.84) 100%),
+    linear-gradient(90deg,rgba(4,6,8,.72) 0%,rgba(4,6,8,.28) 78%,rgba(4,6,8,.5) 100%),
+    radial-gradient(circle at 80% 24%,rgba(237,28,36,.12),transparent 38%);
 }
 
 .technology-section::before{
@@ -64,15 +67,35 @@
   z-index:2;
 }
 
-/* Let the photography read through the UI instead of covering it with opaque panels. */
+/* Strong contrast in the cases section so the image never competes with copy. */
+.cases-section{color:#f7f8f9!important}
+.cases-section .kicker{color:#b9c0c7!important}
+.cases-section .section-heading{
+  padding:22px 24px 24px!important;
+  background:linear-gradient(90deg,rgba(5,7,9,.88),rgba(5,7,9,.66) 72%,rgba(5,7,9,.18));
+  backdrop-filter:blur(3px);
+}
+.cases-section .section-heading h2{color:#fff!important;text-shadow:0 2px 22px rgba(0,0,0,.5)}
+.cases-section .section-heading h2 em{color:var(--r)!important}
+.cases-section .section-heading>p{color:#d2d7dc!important;text-shadow:0 1px 14px rgba(0,0,0,.6)}
+
+/* Let the photography read through the UI without sacrificing readability. */
 .mobile-service-shell{
   background:rgba(9,12,15,.74)!important;
   backdrop-filter:blur(2px);
 }
 .case-grid article{
-  background:linear-gradient(160deg,rgba(16,20,25,.76),rgba(8,11,14,.64))!important;
-  backdrop-filter:blur(2px);
+  color:#fff!important;
+  background:linear-gradient(160deg,rgba(10,13,17,.94),rgba(5,8,11,.9))!important;
+  border-color:rgba(255,255,255,.32)!important;
+  backdrop-filter:blur(7px);
+  box-shadow:0 20px 52px rgba(0,0,0,.34);
 }
+.case-grid h3{color:#fff!important;text-shadow:0 1px 14px rgba(0,0,0,.35)}
+.case-line{border-top-color:rgba(255,255,255,.24)!important}
+.case-line b{color:#c5cbd1!important}
+.case-line p{color:#d5d9dd!important}
+.case-grid a{color:#fff!important}
 .technology-grid article{
   background:linear-gradient(160deg,rgba(16,20,25,.78),rgba(8,11,14,.68))!important;
   backdrop-filter:blur(2px);
@@ -97,7 +120,33 @@
     transform:scale(1.035);
   }
   .cases-section::after{
-    background:linear-gradient(180deg,rgba(5,7,9,.5) 0%,rgba(5,7,9,.42) 48%,rgba(5,7,9,.7) 100%);
+    background:
+      linear-gradient(180deg,rgba(3,5,7,.78) 0%,rgba(3,5,7,.7) 42%,rgba(3,5,7,.9) 100%),
+      linear-gradient(90deg,rgba(3,5,7,.7),rgba(3,5,7,.28));
+  }
+  .cases-section .section-heading{
+    padding:16px 18px 22px!important;
+    background:linear-gradient(180deg,rgba(5,7,9,.88),rgba(5,7,9,.7));
+    backdrop-filter:blur(4px);
+  }
+  .cases-section .section-heading h2{
+    color:#fff!important;
+    text-shadow:0 2px 18px rgba(0,0,0,.72);
+  }
+  .cases-section .section-heading>p{
+    color:#e0e4e7!important;
+    text-shadow:0 1px 12px rgba(0,0,0,.75);
+  }
+  .mobile-service-shell{
+    background:rgba(8,11,14,.68)!important;
+  }
+  .case-grid article{
+    background:linear-gradient(160deg,rgba(8,11,14,.96),rgba(4,7,10,.93))!important;
+    backdrop-filter:blur(8px);
+  }
+  .case-grid article:first-child{
+    animation:swipeHintCard 3.8s cubic-bezier(.22,.61,.36,1) 1.2s infinite;
+    will-change:transform;
   }
   .technology-section::before{
     background-position:center center;
@@ -105,16 +154,6 @@
   }
   .technology-section::after{
     background:linear-gradient(180deg,rgba(5,7,9,.58) 0%,rgba(5,7,9,.5) 50%,rgba(5,7,9,.7) 100%);
-  }
-  .mobile-service-shell{
-    background:rgba(8,11,14,.68)!important;
-  }
-  .case-grid article{
-    background:linear-gradient(160deg,rgba(14,18,22,.7),rgba(7,10,13,.6))!important;
-  }
-  .case-grid article:first-child{
-    animation:swipeHintCard 3.8s cubic-bezier(.22,.61,.36,1) 1.2s infinite;
-    will-change:transform;
   }
   .technology-grid article{
     background:linear-gradient(160deg,rgba(14,18,22,.72),rgba(7,10,13,.62))!important;
