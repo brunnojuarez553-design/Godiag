@@ -2,6 +2,7 @@
 
 import { ArrowRight, CircuitBoard, Gauge, MapPin, Microscope, ScanLine, Settings2, ShieldCheck, Truck, Wrench } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import CertificationsGallery from "@/components/CertificationsGallery";
 
 const whatsapp = "584222872237";
 
@@ -128,6 +129,8 @@ export default function ProfessionalSections() {
           </div>
         </Reveal>
       </section>
+
+      <CertificationsGallery />
     </>
   );
 }
