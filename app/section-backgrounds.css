@@ -1,9 +1,10 @@
-/* Section background imagery requested for service-at-home and technology areas */
+/* Visible section background imagery for service-at-home and technology areas */
 .mobile-service,
 .technology-section{
   position:relative;
   isolation:isolate;
   overflow:hidden;
+  background:#07090b;
 }
 
 .mobile-service::before,
@@ -11,10 +12,11 @@
   content:"";
   position:absolute;
   inset:0;
-  z-index:-2;
-  background-position:center;
+  z-index:0;
   background-size:cover;
   background-repeat:no-repeat;
+  pointer-events:none;
+  transform:scale(1.015);
 }
 
 .mobile-service::after,
@@ -22,7 +24,7 @@
   content:"";
   position:absolute;
   inset:0;
-  z-index:-1;
+  z-index:1;
   pointer-events:none;
 }
 
@@ -31,7 +33,7 @@
   background-position:center 42%;
 }
 .mobile-service::after{
-  background:linear-gradient(90deg,rgba(5,7,9,.95) 0%,rgba(5,7,9,.86) 42%,rgba(5,7,9,.68) 72%,rgba(5,7,9,.78) 100%),linear-gradient(180deg,rgba(6,8,10,.18),rgba(6,8,10,.72));
+  background:linear-gradient(90deg,rgba(5,7,9,.72) 0%,rgba(5,7,9,.58) 46%,rgba(5,7,9,.36) 78%,rgba(5,7,9,.5) 100%),linear-gradient(180deg,rgba(6,8,10,.12),rgba(6,8,10,.48));
 }
 
 .technology-section::before{
@@ -39,19 +41,45 @@
   background-position:center 48%;
 }
 .technology-section::after{
-  background:linear-gradient(180deg,rgba(5,7,9,.9) 0%,rgba(5,7,9,.74) 46%,rgba(5,7,9,.92) 100%),radial-gradient(circle at 78% 28%,rgba(237,28,36,.18),transparent 38%);
+  background:linear-gradient(180deg,rgba(5,7,9,.62) 0%,rgba(5,7,9,.48) 45%,rgba(5,7,9,.7) 100%),radial-gradient(circle at 78% 28%,rgba(237,28,36,.14),transparent 40%);
 }
 
 .mobile-service-shell,
 .technology-section .section-heading,
 .technology-grid{
   position:relative;
-  z-index:1;
+  z-index:2;
+}
+
+/* Let the photography read through the UI instead of covering it with opaque panels. */
+.mobile-service-shell{
+  background:rgba(9,12,15,.74)!important;
+  backdrop-filter:blur(2px);
+}
+.technology-grid article{
+  background:linear-gradient(160deg,rgba(16,20,25,.78),rgba(8,11,14,.68))!important;
+  backdrop-filter:blur(2px);
 }
 
 @media(max-width:600px){
-  .mobile-service::before{background-position:center center}
-  .mobile-service::after{background:linear-gradient(180deg,rgba(5,7,9,.86) 0%,rgba(5,7,9,.82) 54%,rgba(5,7,9,.94) 100%)}
-  .technology-section::before{background-position:center center}
-  .technology-section::after{background:linear-gradient(180deg,rgba(5,7,9,.88) 0%,rgba(5,7,9,.8) 52%,rgba(5,7,9,.94) 100%)}
+  .mobile-service::before{
+    background-position:center center;
+    transform:scale(1.03);
+  }
+  .mobile-service::after{
+    background:linear-gradient(180deg,rgba(5,7,9,.55) 0%,rgba(5,7,9,.48) 48%,rgba(5,7,9,.68) 100%);
+  }
+  .technology-section::before{
+    background-position:center center;
+    transform:scale(1.03);
+  }
+  .technology-section::after{
+    background:linear-gradient(180deg,rgba(5,7,9,.58) 0%,rgba(5,7,9,.5) 50%,rgba(5,7,9,.7) 100%);
+  }
+  .mobile-service-shell{
+    background:rgba(8,11,14,.68)!important;
+  }
+  .technology-grid article{
+    background:linear-gradient(160deg,rgba(14,18,22,.72),rgba(7,10,13,.62))!important;
+  }
 }
