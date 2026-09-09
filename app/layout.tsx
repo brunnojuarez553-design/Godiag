@@ -160,19 +160,6 @@ const themeInitScript = `
 })();
 `;
 
-const navScrollScript = `
-(() => {
-  const updateNav = () => {
-    const header = document.querySelector('.nav');
-    if (!header) return;
-    header.style.transform = 'translateY(0)';
-    header.classList.remove('nav-hidden');
-    header.classList.add('nav-visible');
-  };
-  updateNav();
-})();
-`;
-
 const premiumScrollScript = `
 (() => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
@@ -212,7 +199,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <GoogleAnalytics />
         <AnalyticsEvents />
-        <script dangerouslySetInnerHTML={{ __html: navScrollScript }} />
         <script dangerouslySetInnerHTML={{ __html: premiumScrollScript }} />
       </body>
     </html>
