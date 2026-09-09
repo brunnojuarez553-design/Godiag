@@ -13,25 +13,61 @@ export default function HeroVideo() {
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "true");
+    video.setAttribute("autoplay", "");
+
+    let retryTimer: number | null = null;
 
     const playNow = () => {
+      if (document.visibilityState === "hidden") return;
+      video.muted = true;
       const promise = video.play();
-      if (promise) promise.catch(() => {});
+      if (promise) {
+        promise.catch(() => {
+          if (retryTimer) window.clearTimeout(retryTimer);
+          retryTimer = window.setTimeout(() => {
+            video.muted = true;
+            video.play().catch(() => {});
+          }, 250);
+        });
+      }
     };
 
-    playNow();
+    const onPause = () => {
+      if (!video.ended && document.visibilityState === "visible") {
+        if (retryTimer) window.clearTimeout(retryTimer);
+        retryTimer = window.setTimeout(playNow, 120);
+      }
+    };
 
-    const onCanPlay = () => playNow();
     const onVisibility = () => {
       if (document.visibilityState === "visible") playNow();
     };
 
-    video.addEventListener("canplay", onCanPlay);
+    const onPageShow = () => playNow();
+
+    playNow();
+    requestAnimationFrame(playNow);
+
+    video.addEventListener("loadedmetadata", playNow);
+    video.addEventListener("loadeddata", playNow);
+    video.addEventListener("canplay", playNow);
+    video.addEventListener("canplaythrough", playNow);
+    video.addEventListener("pause", onPause);
     document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("pageshow", onPageShow);
 
     return () => {
-      video.removeEventListener("canplay", onCanPlay);
+      if (retryTimer) window.clearTimeout(retryTimer);
+      video.removeEventListener("loadedmetadata", playNow);
+      video.removeEventListener("loadeddata", playNow);
+      video.removeEventListener("canplay", playNow);
+      video.removeEventListener("canplaythrough", playNow);
+      video.removeEventListener("pause", onPause);
       document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("pageshow", onPageShow);
     };
   }, []);
 
@@ -46,6 +82,7 @@ export default function HeroVideo() {
       playsInline
       preload="auto"
       disablePictureInPicture
+      controls={false}
       aria-hidden="true"
     />
   );
