@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { ArrowLeft, ArrowRight, Maximize2, X } from "lucide-react";
+import Reveal from "@/components/Reveal";
 import styles from "./CertificationsGallery.module.css";
 
 const certifications = [
@@ -58,7 +59,7 @@ export default function CertificationsGallery() {
 
   return createPortal(
     <>
-      <div className={`${styles.showcase} certifications-showcase`}>
+      <Reveal as="div" className={`${styles.showcase} certifications-showcase`}>
         <div className={styles.document}>
           <img src={certifications[0].src} alt="Título de Ingeniero Mecánico de Elian José González Cruz" loading="lazy" />
           <div className={styles.documentShade} />
@@ -76,7 +77,7 @@ export default function CertificationsGallery() {
           </button>
           <small>{certifications.length} documentos · Formación académica y técnica</small>
         </div>
-      </div>
+      </Reveal>
 
       {open && (
         <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Certificaciones y diplomas">
