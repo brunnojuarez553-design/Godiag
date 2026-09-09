@@ -79,7 +79,6 @@ html[data-theme="light"] .arrival-head p{color:#606973!important}
 
 html[data-theme="light"] .service-grid{border-color:#d7dce1}
 html[data-theme="light"] .service-grid article{border-color:#d7dce1!important;box-shadow:0 12px 34px rgba(24,32,40,.08),inset 0 1px rgba(255,255,255,.7)}
-/* Photo service cards remain dark overlays so photos/text keep contrast in day mode. */
 html[data-theme="light"] .service-grid article{color:#fff}
 html[data-theme="light"] .service-grid article p{color:#d5d9dd!important}
 html[data-theme="light"] .service-grid article .service-top{color:#c2c8ce}
@@ -107,12 +106,10 @@ html[data-theme="light"] .work-proof{background:#fff;border-color:#d9dee3;color:
 html[data-theme="light"] .work-proof span{color:#66707a}
 html[data-theme="light"] .services-more-wrap>span{color:#66707a}
 
-/* Method already has a light editorial composition; normalize it in night mode instead of flipping photo treatment. */
 html[data-theme="dark"] .method{background:#eef0f2;color:#101216}
 html[data-theme="light"] .method{background:#e8ebee;color:#101216}
 html[data-theme="light"] .method-copy{background:rgba(250,251,252,.88)!important}
 
-/* Contact section changes with theme while retaining red brand focus. */
 html[data-theme="light"] .cta-section{background:radial-gradient(circle at 50% 20%,rgba(237,28,36,.11),transparent 34%),#fff;color:#14181d}
 html[data-theme="light"] .cta-section p,
 html[data-theme="light"] .phone{color:#606973}
@@ -123,7 +120,6 @@ html[data-theme="light"] footer{background:#eef1f4!important;color:#5e6770;borde
 html[data-theme="light"] footer a{color:#30363d}
 html[data-theme="light"] .footer-social{color:#20262c;border-color:#d1d7dd;background:#fff}
 
-/* Modals / overlays */
 html[data-theme="light"] .quote-modal{background:#fff!important;color:#14181d!important;border-color:#d6dbe0!important;box-shadow:0 28px 80px rgba(20,26,32,.18)}
 html[data-theme="light"] .quote-modal .modal-lead,
 html[data-theme="light"] .quote-modal small{color:#66707a!important}
@@ -133,24 +129,113 @@ html[data-theme="light"] .quote-modal textarea,
 html[data-theme="light"] .quote-modal button[role="combobox"]{background:#f5f7f9!important;color:#14181d!important;border-color:#d4dae0!important}
 html[data-theme="light"] .service-detail-overlay{background:rgba(20,25,30,.62)}
 
-/* Assistant keeps contrast but becomes a lighter floating surface in day mode. */
 html[data-theme="light"] .assistant-panel,
 html[data-theme="light"] .assistant-window,
 html[data-theme="light"] .assistant-card{background:#fff!important;color:#14181d!important;border-color:#d7dce1!important}
 
-/* Maps/media/photo-heavy components intentionally keep dark frames for media contrast. */
 html[data-theme="light"] .arrival-video-shell,
 html[data-theme="light"] .map-wrap{background:#e9edf0!important;border-color:#d5dbe0!important}
 
-/* Mobile navigation */
+/* Mobile navigation: fixed, scrollable and theme-safe. */
 @media(max-width:900px){
-  .theme-toggle{margin-left:auto;margin-right:8px;padding:6px}
-  .theme-toggle-label{display:none}
-  html[data-theme="light"] .nav nav{background:rgba(250,251,252,.98)!important;color:#1c2228!important;border-bottom:1px solid #d7dce1}
-  html[data-theme="light"] .menu-btn{color:#fff}
+  .nav{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    right:0!important;
+    width:100%!important;
+    height:84px!important;
+    padding:0 16px!important;
+    z-index:100!important;
+    overflow:visible!important;
+  }
+  .nav .brand-logo{order:1}
+  .nav .nav-cta{display:none!important}
+  .nav .theme-toggle{
+    order:2;
+    display:inline-flex!important;
+    visibility:visible!important;
+    opacity:1!important;
+    margin-left:auto!important;
+    margin-right:6px!important;
+    padding:6px!important;
+    position:relative!important;
+    z-index:103!important;
+  }
+  .nav .menu-btn{
+    order:3;
+    display:grid!important;
+    place-items:center!important;
+    width:44px!important;
+    height:44px!important;
+    flex:0 0 44px!important;
+    margin-left:0!important;
+    position:relative!important;
+    z-index:103!important;
+    cursor:pointer!important;
+  }
+  .theme-toggle-label{display:none!important}
+  .nav nav{
+    display:none!important;
+    position:fixed!important;
+    top:84px!important;
+    left:0!important;
+    right:0!important;
+    bottom:0!important;
+    width:100%!important;
+    height:calc(100dvh - 84px)!important;
+    max-height:calc(100dvh - 84px)!important;
+    margin:0!important;
+    padding:22px 18px calc(34px + env(safe-area-inset-bottom))!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    justify-content:flex-start!important;
+    gap:0!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    overscroll-behavior:contain!important;
+    -webkit-overflow-scrolling:touch!important;
+    background:rgba(7,9,11,.985)!important;
+    border-top:1px solid rgba(255,255,255,.08)!important;
+    z-index:101!important;
+  }
+  .nav nav.open{display:flex!important}
+  .nav nav a{
+    width:100%!important;
+    min-height:58px!important;
+    display:flex!important;
+    align-items:center!important;
+    padding:0 4px!important;
+    font-size:15px!important;
+    font-weight:650!important;
+    color:#f5f6f7!important;
+    border-bottom:1px solid rgba(255,255,255,.08)!important;
+  }
+  .nav nav a:after{display:none!important}
+  body.mobile-menu-open{overflow:hidden!important;touch-action:none}
+  body.mobile-menu-open .nav nav{touch-action:pan-y}
+
+  html[data-theme="light"] .nav{
+    background:rgba(250,251,252,.94)!important;
+    border-bottom-color:#d7dce1!important;
+  }
+  html[data-theme="light"] .nav nav{
+    background:rgba(250,251,252,.995)!important;
+    color:#1c2228!important;
+    border-top-color:#d7dce1!important;
+  }
+  html[data-theme="light"] .nav nav a{
+    color:#1c2228!important;
+    border-bottom-color:#e0e4e8!important;
+  }
+  html[data-theme="light"] .menu-btn{color:#14181d!important}
+  html[data-theme="light"] .theme-toggle{color:#14181d!important}
+  html[data-theme="light"] .theme-toggle-track{border-color:#cdd3d9;background:#e9edf1;box-shadow:inset 0 1px rgba(255,255,255,.8)}
 }
 
 @media(max-width:600px){
+  .nav{height:78px!important;padding:0 12px!important}
+  .nav nav{top:78px!important;height:calc(100dvh - 78px)!important;max-height:calc(100dvh - 78px)!important}
   .theme-toggle-track{width:42px;height:23px}
   .theme-toggle-knob{width:17px;height:17px}
   .theme-toggle.is-light .theme-toggle-knob{transform:translateX(19px)}
