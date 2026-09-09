@@ -1,16 +1,38 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Moon, Sun } from "lucide-react";
 
 type Theme = "dark" | "light";
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>("dark");
+  const [navTarget, setNavTarget] = useState<Element | null>(null);
 
   useEffect(() => {
     const current = document.documentElement.dataset.theme === "light" ? "light" : "dark";
     setTheme(current);
+    setNavTarget(document.querySelector(".nav"));
+  }, []);
+
+  useEffect(() => {
+    const syncMenuLock = () => {
+      window.requestAnimationFrame(() => {
+        const menuOpen = document.querySelector(".nav nav")?.classList.contains("open");
+        document.body.classList.toggle("mobile-menu-open", Boolean(menuOpen));
+      });
+    };
+
+    document.addEventListener("click", syncMenuLock, true);
+    window.addEventListener("resize", syncMenuLock, { passive: true });
+    syncMenuLock();
+
+    return () => {
+      document.removeEventListener("click", syncMenuLock, true);
+      window.removeEventListener("resize", syncMenuLock);
+      document.body.classList.remove("mobile-menu-open");
+    };
   }, []);
 
   const toggleTheme = () => {
@@ -25,7 +47,7 @@ export default function ThemeToggle() {
 
   const isLight = theme === "light";
 
-  return (
+  const control = (
     <button
       type="button"
       className={`theme-toggle${isLight ? " is-light" : ""}`}
@@ -42,4 +64,6 @@ export default function ThemeToggle() {
       <span className="theme-toggle-label">{isLight ? "Día" : "Noche"}</span>
     </button>
   );
+
+  return navTarget ? createPortal(control, navTarget) : null;
 }
