@@ -20,6 +20,7 @@ import "./location-access.css";
 import "./readability.css";
 import "./premium-finish.css";
 import "./final-audit.css";
+import "./theme.css";
 
 const logo = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg";
 const specialistImage = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788231287/IMG_1017_rx0uzq.jpg";
@@ -31,10 +32,7 @@ const description =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: {
-    default: title,
-    template: "%s",
-  },
+  title: { default: title, template: "%s" },
   description,
   applicationName: "Autotrónica Go Diagnosis",
   category: "Automotive",
@@ -58,17 +56,9 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
   },
-  verification: process.env.GOOGLE_SITE_VERIFICATION
-    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
-    : undefined,
+  verification: process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : undefined,
   openGraph: {
     title,
     description,
@@ -78,17 +68,8 @@ export const metadata: Metadata = {
     type: "website",
     images: [{ url: ogImage, width: 1200, height: 1200, alt: "Logo de Autotrónica Go Diagnosis" }],
   },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-    images: [ogImage],
-  },
-  other: {
-    "geo.region": "VE-A",
-    "geo.placename": "Caracas, Venezuela",
-    "content-language": "es-VE",
-  },
+  twitter: { card: "summary_large_image", title, description, images: [ogImage] },
+  other: { "geo.region": "VE-A", "geo.placename": "Caracas, Venezuela", "content-language": "es-VE" },
 };
 
 const localBusinessSchema = {
@@ -103,32 +84,12 @@ const localBusinessSchema = {
   telephone: "+58 422 287 2237",
   description,
   employee: { "@id": `${siteUrl}/#elian-gonzalez` },
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "F338+3R",
-    addressLocality: "Caracas",
-    postalCode: "1090",
-    addressRegion: "Distrito Capital",
-    addressCountry: "VE",
-  },
+  address: { "@type": "PostalAddress", streetAddress: "F338+3R", addressLocality: "Caracas", postalCode: "1090", addressRegion: "Distrito Capital", addressCountry: "VE" },
   openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "08:00",
-      closes: "18:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Saturday",
-      opens: "09:00",
-      closes: "15:00",
-    },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "08:00", closes: "18:00" },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "09:00", closes: "15:00" },
   ],
-  areaServed: {
-    "@type": "City",
-    name: "Caracas",
-  },
+  areaServed: { "@type": "City", name: "Caracas" },
   sameAs: [
     "https://www.instagram.com/godiag.ve",
     "https://www.tiktok.com/@godiag.ve",
@@ -150,11 +111,7 @@ const localBusinessSchema = {
     name: "Servicios de Autotrónica Go Diagnosis",
     itemListElement: seoServices.map((service) => ({
       "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: service.name,
-        url: `${siteUrl}/servicios/${service.slug}`,
-      },
+      itemOffered: { "@type": "Service", name: service.name, url: `${siteUrl}/servicios/${service.slug}` },
     })),
   },
 };
@@ -187,26 +144,35 @@ const webSiteSchema = {
   publisher: { "@id": `${siteUrl}/#business` },
 };
 
+const themeInitScript = `
+(() => {
+  try {
+    const stored = localStorage.getItem('godiag-theme');
+    const theme = stored === 'light' || stored === 'dark'
+      ? stored
+      : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+  } catch {
+    document.documentElement.dataset.theme = 'dark';
+    document.documentElement.style.colorScheme = 'dark';
+  }
+})();
+`;
+
 const navScrollScript = `
 (() => {
   let lastY = window.scrollY;
   let ticking = false;
-
   const updateNav = () => {
     const header = document.querySelector('.nav');
-    if (!header) {
-      ticking = false;
-      return;
-    }
-
+    if (!header) { ticking = false; return; }
     header.style.willChange = 'transform';
     header.style.transition = 'transform .34s cubic-bezier(.16,1,.3,1), background-color .35s ease, border-color .35s ease, backdrop-filter .35s ease';
-
     const y = window.scrollY;
     const menuOpen = header.querySelector('nav')?.classList.contains('open');
     const goingUp = y < lastY - 4;
     const goingDown = y > lastY + 8;
-
     if (y < 90 || menuOpen || goingUp) {
       header.style.transform = 'translateY(0)';
       header.classList.remove('nav-hidden');
@@ -216,18 +182,12 @@ const navScrollScript = `
       header.classList.add('nav-hidden');
       header.classList.remove('nav-visible');
     }
-
     lastY = y;
     ticking = false;
   };
-
   const requestUpdate = () => {
-    if (!ticking) {
-      window.requestAnimationFrame(updateNav);
-      ticking = true;
-    }
+    if (!ticking) { window.requestAnimationFrame(updateNav); ticking = true; }
   };
-
   window.addEventListener('scroll', requestUpdate, { passive: true });
   window.addEventListener('resize', requestUpdate, { passive: true });
   document.addEventListener('click', () => window.requestAnimationFrame(updateNav), true);
@@ -238,28 +198,16 @@ const navScrollScript = `
 const premiumScrollScript = `
 (() => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
-
   const init = () => {
-    const selectors = [
-      '.services-more-wrap',
-      '.work-proof',
-      '.method-visual',
-      '.method-copy',
-      '.mobile-service-panel > div',
-      '.cta-section > *',
-      'footer > *'
-    ];
-
+    const selectors = ['.services-more-wrap','.work-proof','.method-visual','.method-copy','.mobile-service-panel > div','.cta-section > *','footer > *'];
     const items = Array.from(document.querySelectorAll(selectors.join(','))).filter((el) => !el.classList.contains('premium-scroll-item'));
     if (!items.length) return;
-
     items.forEach((el, index) => {
       el.classList.add('premium-scroll-item');
       const dir = index % 3 === 0 ? 'left' : index % 3 === 1 ? 'right' : 'up';
       el.setAttribute('data-premium-dir', dir);
       el.style.setProperty('--premium-delay', String((index % 4) * 70) + 'ms');
     });
-
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
@@ -267,17 +215,18 @@ const premiumScrollScript = `
         io.unobserve(entry.target);
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
-
     requestAnimationFrame(() => items.forEach((el) => io.observe(el)));
   };
-
   requestAnimationFrame(init);
 })();
 `;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-VE">
+    <html lang="es-VE" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(specialistSchema) }} />
