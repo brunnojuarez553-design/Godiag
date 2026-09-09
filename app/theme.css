@@ -156,12 +156,15 @@ html[data-theme="light"] .map-wrap{background:#e9edf0!important;border-color:#d5
     display:inline-flex!important;
     visibility:visible!important;
     opacity:1!important;
-    margin-left:auto!important;
-    margin-right:6px!important;
+    margin:0!important;
     padding:6px!important;
-    position:relative!important;
+    position:absolute!important;
+    left:50%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
     z-index:103!important;
   }
+  .nav .theme-toggle:hover{transform:translate(-50%,-50%)!important}
   .nav .menu-btn{
     order:3;
     display:grid!important;
@@ -169,7 +172,8 @@ html[data-theme="light"] .map-wrap{background:#e9edf0!important;border-color:#d5
     width:44px!important;
     height:44px!important;
     flex:0 0 44px!important;
-    margin-left:0!important;
+    margin-left:auto!important;
+    margin-right:0!important;
     position:relative!important;
     z-index:103!important;
     cursor:pointer!important;
