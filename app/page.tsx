@@ -75,24 +75,31 @@ function Quote({ label = "Solicitar diagnóstico", className = "" }: { label?: s
   const [service, setService] = useState("");
   const [mode, setMode] = useState("");
   const [details, setDetails] = useState("");
+  const homeEligible = service.includes("Reprogramación") || service.includes("EGR OFF");
+
+  useEffect(() => {
+    if (!homeEligible && mode.startsWith("A domicilio")) setMode("");
+  }, [homeEligible, mode]);
+
   const send = () => {
     const msg = `Hola Autotrónica Go Diagnosis. Quiero solicitar una evaluación.\n\nVehículo: ${vehicle || "A confirmar"}\nServicio: ${service || "A confirmar"}\nModalidad: ${mode || "A confirmar"}\nDetalle / síntomas: ${details || "Sin detalle"}`;
     window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
   };
+
   return (
     <Dialog>
       <DialogTrigger className={className}>{label}<ArrowRight size={17} /></DialogTrigger>
       <DialogContent className="quote-modal">
         <DialogHeader><DialogTitle>Prepará tu diagnóstico</DialogTitle></DialogHeader>
-        <p className="modal-lead">Completá la información básica de tu vehículo y elegí si preferís atención en el taller o a domicilio.</p>
+        <p className="modal-lead">Completá la información básica del vehículo. La atención principal se realiza en el taller; programación y EGR OFF pueden coordinarse a domicilio con turno y validación previa.</p>
         <div className="form-grid">
           <label><span>Marca, modelo y año</span><Input value={vehicle} onChange={(e) => setVehicle(e.target.value)} placeholder="Ej. Toyota Corolla 2022" /></label>
           <label><span>¿Qué necesitás?</span><Select value={service} onValueChange={setService}><SelectTrigger><SelectValue placeholder="Seleccionar servicio" /></SelectTrigger><SelectContent>{services.map((s) => <SelectItem key={s.title} value={s.title}>{s.title}</SelectItem>)}</SelectContent></Select></label>
-          <label><span>Modalidad</span><Select value={mode} onValueChange={setMode}><SelectTrigger><SelectValue placeholder="Seleccionar modalidad" /></SelectTrigger><SelectContent><SelectItem value="En el taller">En el taller</SelectItem><SelectItem value="A domicilio">A domicilio</SelectItem></SelectContent></Select></label>
+          <label><span>Modalidad</span><Select value={mode} onValueChange={setMode}><SelectTrigger><SelectValue placeholder="Seleccionar modalidad" /></SelectTrigger><SelectContent><SelectItem value="En el taller">En el taller</SelectItem>{homeEligible && <SelectItem value="A domicilio · con coordinación previa">A domicilio · con coordinación previa</SelectItem>}</SelectContent></Select></label>
           <label className="full"><span>Contanos qué sucede</span><Textarea value={details} onChange={(e) => setDetails(e.target.value)} placeholder="Testigos encendidos, pérdida de potencia, falla intermitente..." /></label>
         </div>
         <button className="send-btn" onClick={send}>Enviar evaluación por WhatsApp <ArrowRight size={18} /></button>
-        <small>Todos los servicios pueden coordinarse a domicilio. Zona y disponibilidad se confirman por WhatsApp.</small>
+        <small>Servicio a domicilio disponible únicamente para programación y EGR OFF, sujeto a compatibilidad, zona y coordinación previa.</small>
       </DialogContent>
     </Dialog>
   );
@@ -123,7 +130,7 @@ export default function Home() {
           <a href="#especialista" onClick={closeMenu}>Especialista</a>
           <a href="#contacto" onClick={closeMenu}>Contacto</a>
         </nav>
-        <Magnetic><Quote label="Cotizar diagnóstico" className="nav-cta" /></Magnetic>
+        <Quote label="Cotizar diagnóstico" className="nav-cta" />
         <button className="menu-btn" onClick={() => setMenu(!menu)} aria-label={menu ? "Cerrar menú" : "Abrir menú"} aria-expanded={menu}>{menu ? <X /> : <Menu />}</button>
       </header>
 
@@ -132,12 +139,13 @@ export default function Home() {
         <div className="hero-shade" />
         <div className="hero-copy">
           <div className="eyebrow"><span />Diagnóstico, programación y electrónica automotriz · Caracas</div>
+          <div className="brand-slogan">Diagnóstico preciso, solución efectiva</div>
           <h1>No cambiamos piezas.<br /><em>Encontramos la causa.</em></h1>
-          <p>Autotrónica Go Diagnosis combina diagnóstico avanzado, medición y formación técnica continua para resolver fallas electrónicas con criterio, no por descarte. Atención en taller y a domicilio.</p>
+          <p>Autotrónica Go Diagnosis combina diagnóstico avanzado, medición y formación técnica continua para resolver fallas electrónicas con criterio, no por descarte. Atención principal en taller; programación y EGR OFF a domicilio con coordinación previa.</p>
           <div className="hero-actions"><Magnetic><Quote className="primary-btn" /></Magnetic><a href="#especialidades" className="text-link">Explorar servicios</a></div>
           <div className="proof-row">
             <div><b>8 años</b><span>de experiencia en el rubro</span></div>
-            <div><b>A domicilio</b><span>todos los servicios</span></div>
+            <div><b>A domicilio</b><span>programación + EGR OFF</span></div>
             <div><b>Multimarca</b><span>gasolina, diésel y eléctricos</span></div>
           </div>
         </div>
@@ -157,7 +165,7 @@ export default function Home() {
       <section className="quiz-band"><Reveal as="div" className="quiz-band-inner"><div className="quiz-band-copy"><span className="kicker">ORIENTACIÓN INICIAL</span><h3>¿No sabés qué tiene tu auto? Contanos en 3 pasos y llevamos la consulta directo al especialista.</h3></div><CarQuiz /></Reveal></section>
 
       <section className="services section" id="especialidades">
-        <Reveal as="div" className="section-heading"><div><span className="kicker">CAPACIDAD TÉCNICA</span><h2>Electrónica automotriz<br />con método y preparación.</h2></div><p>Diagnóstico, reparación y programación para sistemas electrónicos que requieren medición, conocimiento y actualización constante. Todos los servicios pueden coordinarse a domicilio.</p></Reveal>
+        <Reveal as="div" className="section-heading"><div><span className="kicker">CAPACIDAD TÉCNICA</span><h2>Electrónica automotriz<br />con método y preparación.</h2></div><p>Diagnóstico, reparación y programación para sistemas electrónicos que requieren medición, conocimiento y actualización constante. La atención principal se realiza en el taller.</p></Reveal>
         <div className="service-grid">{services.map(({ n, title, text, icon: Icon, image }, i) => <Reveal as="article" key={n} delay={(i % 3) * 70} style={{ backgroundImage: `linear-gradient(105deg,rgba(5,7,9,.97) 0%,rgba(5,7,9,.86) 47%,rgba(5,7,9,.5) 100%),url("${image}")` }}><div className="service-top"><span>{n}</span><Icon /></div><h3>{title}</h3><p>{text}</p><a href="#" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent("open-assistant", { detail: { service: title } })); }}>Consultar <ArrowRight size={15} /></a></Reveal>)}</div>
       </section>
 
@@ -178,22 +186,21 @@ export default function Home() {
 
       <section className="expert section" id="especialista">
         <Reveal as="div" className="expert-card"><figure className="engineer-photo"><Image src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1788231287/IMG_1017_rx0uzq.jpg" alt="Elian José González Cruz, especialista de Autotrónica Go Diagnosis" fill sizes="(max-width: 900px) 100vw, 38vw" style={{ objectFit: "cover", objectPosition: "center top" }} /><figcaption>ELIAN JOSÉ GONZÁLEZ CRUZ</figcaption></figure><div className="expert-copy"><span className="kicker">8 AÑOS · FORMACIÓN · PRECISIÓN</span><h2>El conocimiento detrás de cada diagnóstico.</h2><p>Autotrónica Go Diagnosis es atendida directamente por Elian José González Cruz. Su diferencial es claro: capacitarse y estudiar de forma continua para usar el conocimiento como principal herramienta de diagnóstico.</p><div className="certs"><span><ShieldCheck /> Diagnóstico profesional</span><span><Microscope /> Medición e instrumentación</span><span><Sparkles /> Capacitación continua</span></div></div></Reveal>
-        <Reveal as="figure" delay={100} className="certificate-block"><Image src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1788231283/IMG_1021_xsay5l.jpg" alt="Formación técnica de Autotrónica Go Diagnosis" fill sizes="(max-width: 900px) 100vw, 620px" style={{ objectFit: "contain" }} /><figcaption>FORMACIÓN TÉCNICA</figcaption></Reveal>
       </section>
 
       <Faq />
       <LocationMap />
 
       <section className="cta-section" id="contacto">
-        <span className="kicker">TALLER + SERVICIO A DOMICILIO</span><h2>Contanos qué falla.<br /><em>Empecemos por diagnosticar.</em></h2><p>Atención en Caracas para clientes que valoran un trabajo técnico y bien realizado. Podés acercarte al taller o coordinar cualquiera de nuestros servicios a domicilio.</p><Magnetic><Quote label="Preparar mi evaluación" className="primary-btn" /></Magnetic>
+        <span className="kicker">TALLER EN CARACAS</span><h2>Contanos qué falla.<br /><em>Empecemos por diagnosticar.</em></h2><p>Atención principal en el taller para diagnóstico y reparación. Programación y EGR OFF pueden coordinarse a domicilio con turno y validación previa.</p><Magnetic><Quote label="Preparar mi evaluación" className="primary-btn" /></Magnetic>
         <a className="phone" href={`https://wa.me/${whatsapp}`} target="_blank" rel="noreferrer"><Phone size={16} /> +58 422 287 2237</a>
         <a className="phone" href={`mailto:${email}`}><Mail size={16} /> {email}</a>
-        <div className="work-proof"><div><b>Lunes a viernes</b><span>8:00 a 18:00</span></div><div><b>Sábados</b><span>9:00 a 15:00</span></div><div><b>Modalidades</b><span>Taller o atención a domicilio</span></div><div><b>Dirección</b><span>{address}</span></div></div>
+        <div className="work-proof"><div><b>Lunes a viernes</b><span>8:00 a 18:00</span></div><div><b>Sábados</b><span>9:00 a 15:00</span></div><div><b>Modalidades</b><span>Taller · Programación/EGR a domicilio</span></div><div><b>Dirección</b><span>{address}</span></div></div>
       </section>
 
       <footer>
         <a className="brand brand-logo footer-logo" href="#top"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg" alt="Autotrónica Go Diagnosis" /></a>
-        <p>Diagnóstico, programación y electrónica automotriz en Caracas. Atención en taller y a domicilio.</p>
+        <p>Diagnóstico, programación y electrónica automotriz en Caracas. Atención principal en taller; programación y EGR OFF a domicilio con coordinación previa.</p>
         <div>
           <a href="https://www.instagram.com/godiag.ve" target="_blank" rel="noreferrer">Instagram</a>
           <a href="https://www.tiktok.com/@godiag.ve" target="_blank" rel="noreferrer">TikTok</a>
