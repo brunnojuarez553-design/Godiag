@@ -106,6 +106,9 @@ p{letter-spacing:-.01em}
 .tech-icon,.expert-credential-icon{filter:drop-shadow(0 8px 18px rgba(237,28,36,.18))}
 .work-grid article,.service-visual-card,.arrival-video-frame video{box-shadow:0 22px 60px rgba(0,0,0,.16)}
 
+/* Keep the new laser service visible in the homepage shortlist. */
+.services .service-grid article:nth-child(14){display:flex!important;flex-direction:column!important}
+
 @media(min-width:901px){
   .premium-scroll-item[data-premium-dir="left"]{--premium-x:-76px;--premium-y:18px}
   .premium-scroll-item[data-premium-dir="right"]{--premium-x:76px;--premium-y:18px}
