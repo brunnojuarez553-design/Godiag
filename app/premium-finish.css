@@ -1,0 +1,126 @@
+/* Final premium finish: typography, micro-details and desktop scroll choreography */
+
+:root{
+  --premium-ease:cubic-bezier(.16,1,.3,1);
+  --premium-border:rgba(255,255,255,.11);
+  --premium-border-strong:rgba(255,255,255,.19);
+  --premium-text:#f5f6f7;
+  --premium-muted:#a8afb6;
+}
+
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{font-family:Inter,"Helvetica Neue",Arial,sans-serif;font-feature-settings:"kern" 1,"liga" 1;color:var(--premium-text)}
+
+/* Cleaner editorial hierarchy */
+h1,h2,h3{font-weight:500;text-wrap:balance}
+p{letter-spacing:-.01em}
+.hero-copy>p,.section-heading>p,.mobile-service-copy>p,.technology-grid p,.case-line p,.expert-card p,.reviews-ready-card p,.location-access-copy p{color:var(--premium-muted)}
+
+.eyebrow,.kicker,.seo-card-label,.case-tag,.service-detail-tag,.location-access-eyebrow{
+  font-weight:750;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+
+.section-heading h2,.method h2,.expert h2,.cta-section h2,
+.mobile-service h2,.technology-section h2,.cases-section h2,.reviews-ready h2,.location-section h2{
+  letter-spacing:-.045em;
+}
+
+/* Navigation and primary actions */
+.nav{
+  background:linear-gradient(180deg,rgba(5,7,9,.91),rgba(5,7,9,.72));
+  backdrop-filter:blur(18px) saturate(125%);
+  -webkit-backdrop-filter:blur(18px) saturate(125%);
+}
+.nav nav a{position:relative;transition:color .25s ease,opacity .25s ease}
+.nav nav a:after{content:"";position:absolute;left:0;right:100%;bottom:-8px;height:1px;background:var(--r);transition:right .35s var(--premium-ease)}
+.nav nav a:hover:after{right:0}
+.nav nav a:hover{color:#fff}
+
+.primary-btn,.nav-cta,.services-more-btn,.quiz-trigger,.location-access-btn{
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 12px 32px rgba(237,28,36,.12),inset 0 1px rgba(255,255,255,.18);
+  transition:transform .32s var(--premium-ease),box-shadow .32s ease,filter .32s ease;
+}
+.primary-btn:hover,.nav-cta:hover,.services-more-btn:hover,.quiz-trigger:hover,.location-access-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 42px rgba(237,28,36,.22),inset 0 1px rgba(255,255,255,.22);
+  filter:brightness(1.04);
+}
+.primary-btn:before,.nav-cta:before,.services-more-btn:before,.location-access-btn:before{
+  content:"";position:absolute;top:-60%;bottom:-60%;left:-35%;width:24%;transform:rotate(18deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);transition:left .65s var(--premium-ease);pointer-events:none
+}
+.primary-btn:hover:before,.nav-cta:hover:before,.services-more-btn:hover:before,.location-access-btn:hover:before{left:118%}
+
+/* Premium card treatment */
+.service-grid article,.technology-grid article,.case-grid article,.seo-copy-card,.reviews-ready-card,.mobile-service-shell,.location-access-card,.location-video-card{
+  border-color:var(--premium-border);
+  box-shadow:inset 0 1px rgba(255,255,255,.025);
+}
+.service-grid article,.technology-grid article,.case-grid article{
+  transition:transform .45s var(--premium-ease),border-color .35s ease,background-color .35s ease,box-shadow .45s ease;
+}
+.service-grid article:hover,.technology-grid article:hover,.case-grid article:hover{
+  transform:translateY(-5px);
+  border-color:var(--premium-border-strong);
+  box-shadow:0 22px 55px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.045);
+}
+
+.service-grid h3,.technology-grid h3,.case-grid h3{font-weight:560;letter-spacing:-.025em}
+.service-grid p,.technology-grid p,.case-grid p{line-height:1.72}
+
+/* More refined separators */
+.section,.brand-strip,.work-section,.location-section,.cta-section,footer{border-color:rgba(255,255,255,.085)}
+.section-heading{position:relative}
+.section-heading:after{content:"";position:absolute;left:0;bottom:-30px;width:42px;height:1px;background:linear-gradient(90deg,var(--r),transparent)}
+
+/* Existing Reveal component gets a richer entrance */
+.reveal{
+  opacity:0;
+  transform:translate3d(0,28px,0) scale(.992);
+  filter:blur(5px);
+  transition:opacity .78s var(--premium-ease),transform .9s var(--premium-ease),filter .72s ease;
+  will-change:opacity,transform,filter;
+}
+.reveal.reveal-in{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}
+
+/* Extra one-shot reveal for elements that are not wrapped by Reveal */
+@media(min-width:901px){
+  .premium-scroll-item{
+    opacity:0;
+    transform:translate3d(0,34px,0) scale(.99);
+    filter:blur(6px);
+    transition:opacity .8s var(--premium-ease),transform .95s var(--premium-ease),filter .75s ease;
+    transition-delay:var(--premium-delay,0ms);
+    will-change:opacity,transform,filter;
+  }
+  .premium-scroll-item.premium-scroll-visible{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}
+
+  .work-grid>article.premium-scroll-item:nth-child(2n),
+  .technology-grid>article.premium-scroll-item:nth-child(2n),
+  .case-grid>article.premium-scroll-item:nth-child(2n){transform:translate3d(20px,30px,0) scale(.99)}
+  .work-grid>article.premium-scroll-item.premium-scroll-visible:nth-child(2n),
+  .technology-grid>article.premium-scroll-item.premium-scroll-visible:nth-child(2n),
+  .case-grid>article.premium-scroll-item.premium-scroll-visible:nth-child(2n){transform:translate3d(0,0,0) scale(1)}
+
+  .hero-copy{animation:premiumHeroIn 1s var(--premium-ease) both .08s}
+  @keyframes premiumHeroIn{from{opacity:0;transform:translate3d(0,22px,0);filter:blur(5px)}to{opacity:1;transform:none;filter:blur(0)}}
+}
+
+/* Detail polish */
+.proof-row{border-top:1px solid rgba(255,255,255,.07);padding-top:22px}
+.proof-row b{letter-spacing:-.015em}.proof-row span{color:#929aa2}
+.tech-icon,.expert-credential-icon{filter:drop-shadow(0 8px 18px rgba(237,28,36,.18))}
+.work-grid article,.service-visual-card,.arrival-video-frame video{box-shadow:0 22px 60px rgba(0,0,0,.16)}
+
+@media(max-width:900px){
+  .reveal{filter:none;transform:translate3d(0,18px,0);transition-duration:.58s,.66s,.45s}
+  .section-heading:after{bottom:-20px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal,.premium-scroll-item,.hero-copy{opacity:1!important;transform:none!important;filter:none!important;transition:none!important;animation:none!important}
+  .primary-btn,.nav-cta,.services-more-btn,.quiz-trigger,.location-access-btn{transition:none!important}
+}
