@@ -10,11 +10,6 @@ type RevealProps = {
   [key: string]: unknown;
 };
 
-/**
- * Envuelve cualquier elemento y le agrega fade+translateY al entrar en viewport.
- * No crea un wrapper extra: renderiza el tag pedido (article, div, etc.) para
- * no romper layouts de grid donde el hijo directo importa.
- */
 export default function Reveal({
   children,
   className = "",
@@ -30,24 +25,38 @@ export default function Reveal({
     const el = ref.current;
     if (!el) return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
       setVisible(true);
       return;
     }
 
+    const parent = el.parentElement;
+    if (parent) {
+      const siblings = Array.from(parent.children).filter((node) => node.classList.contains("reveal"));
+      const index = Math.max(0, siblings.indexOf(el));
+      const isGrid = parent.matches(".service-grid,.technology-grid,.case-grid,.work-grid,.location-experience");
+      if (isGrid) el.dataset.revealDir = index % 2 === 0 ? "left" : "right";
+      else if (el.matches(".section-heading,.expert-card,.mobile-service-shell")) el.dataset.revealDir = "left";
+      else if (el.matches(".arrival-card,.reviews-ready-card")) el.dataset.revealDir = "right";
+      else el.dataset.revealDir = "up";
+    }
+
     const io = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisible(true);
-            io.unobserve(entry.target);
-          }
-        });
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          setVisible(true);
+          io.unobserve(entry.target);
+        }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -8% 0px" }
     );
-    io.observe(el);
-    return () => io.disconnect();
+
+    const frame = window.requestAnimationFrame(() => io.observe(el));
+    return () => {
+      window.cancelAnimationFrame(frame);
+      io.disconnect();
+    };
   }, []);
 
   const Comp = Tag as ElementType;
