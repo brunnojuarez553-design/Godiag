@@ -32,14 +32,7 @@ export default function CertificationsGallery() {
 
   useEffect(() => {
     const section = document.querySelector<HTMLElement>("#especialista");
-    const oldCertificate = section?.querySelector<HTMLElement>(".certificate-block") || null;
-    const previousDisplay = oldCertificate?.style.display || "";
-    if (oldCertificate) oldCertificate.style.display = "none";
     setTarget(section || null);
-
-    return () => {
-      if (oldCertificate) oldCertificate.style.display = previousDisplay;
-    };
   }, []);
 
   useEffect(() => {
@@ -65,7 +58,7 @@ export default function CertificationsGallery() {
 
   return createPortal(
     <>
-      <div className={styles.showcase}>
+      <div className={`${styles.showcase} certifications-showcase`}>
         <div className={styles.document}>
           <img src={certifications[0].src} alt="Título de Ingeniero Mecánico de Elian José González Cruz" loading="lazy" />
           <div className={styles.documentShade} />
