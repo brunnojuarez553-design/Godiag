@@ -160,88 +160,15 @@ const themeInitScript = `
 })();
 `;
 
-const themeControlScript = `
-(() => {
-  const syncMenuLock = () => {
-    requestAnimationFrame(() => {
-      const menuOpen = document.querySelector('.nav nav')?.classList.contains('open');
-      document.body.classList.toggle('mobile-menu-open', Boolean(menuOpen));
-    });
-  };
-
-  const mount = () => {
-    const nav = document.querySelector('.nav');
-    if (!nav || nav.querySelector('.theme-toggle')) return;
-
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'theme-toggle';
-    button.setAttribute('aria-label', 'Cambiar modo de visualización');
-    button.innerHTML = '<span class="theme-toggle-track" aria-hidden="true"><svg class="theme-toggle-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg><svg class="theme-toggle-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path></svg><span class="theme-toggle-knob"></span></span><span class="theme-toggle-label"></span>';
-
-    const sync = () => {
-      const isLight = document.documentElement.dataset.theme === 'light';
-      button.classList.toggle('is-light', isLight);
-      button.setAttribute('aria-pressed', String(isLight));
-      button.setAttribute('title', isLight ? 'Modo día' : 'Modo noche');
-      const label = button.querySelector('.theme-toggle-label');
-      if (label) label.textContent = isLight ? 'Día' : 'Noche';
-    };
-
-    button.addEventListener('click', () => {
-      const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-      document.documentElement.dataset.theme = next;
-      document.documentElement.style.colorScheme = next;
-      try { localStorage.setItem('godiag-theme', next); } catch {}
-      sync();
-    });
-
-    const menu = nav.querySelector('.menu-btn');
-    if (menu) nav.insertBefore(button, menu);
-    else nav.appendChild(button);
-    sync();
-
-    document.addEventListener('click', syncMenuLock, true);
-    window.addEventListener('resize', syncMenuLock, { passive: true });
-    syncMenuLock();
-  };
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, { once: true });
-  else mount();
-})();
-`;
-
 const navScrollScript = `
 (() => {
-  let lastY = window.scrollY;
-  let ticking = false;
   const updateNav = () => {
     const header = document.querySelector('.nav');
-    if (!header) { ticking = false; return; }
-    header.style.willChange = 'transform';
-    header.style.transition = 'transform .34s cubic-bezier(.16,1,.3,1), background-color .35s ease, border-color .35s ease, backdrop-filter .35s ease';
-    const y = window.scrollY;
-    const menuOpen = header.querySelector('nav')?.classList.contains('open');
-    const goingUp = y < lastY - 4;
-    const goingDown = y > lastY + 8;
-    if (y < 90 || menuOpen || goingUp) {
-      header.style.transform = 'translateY(0)';
-      header.classList.remove('nav-hidden');
-      header.classList.add('nav-visible');
-    } else if (goingDown && y > 140) {
-      header.style.transform = 'translateY(calc(-100% - 10px))';
-      header.classList.add('nav-hidden');
-      header.classList.remove('nav-visible');
-    }
-    lastY = y;
-    ticking = false;
+    if (!header) return;
+    header.style.transform = 'translateY(0)';
+    header.classList.remove('nav-hidden');
+    header.classList.add('nav-visible');
   };
-  const requestUpdate = () => {
-    if (!ticking) { window.requestAnimationFrame(updateNav); ticking = true; }
-  };
-  window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', requestUpdate, { passive: true });
-  document.addEventListener('click', () => window.requestAnimationFrame(updateNav), true);
   updateNav();
 })();
 `;
@@ -285,7 +212,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <GoogleAnalytics />
         <AnalyticsEvents />
-        <script dangerouslySetInnerHTML={{ __html: themeControlScript }} />
         <script dangerouslySetInnerHTML={{ __html: navScrollScript }} />
         <script dangerouslySetInnerHTML={{ __html: premiumScrollScript }} />
       </body>
