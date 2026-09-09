@@ -492,3 +492,17 @@ html[data-theme="light"] .nav nav .nav-socials a{
   }
   .nav nav .nav-socials b{display:none}
 }
+
+
+/* ABS gallery card: never remains trapped in the reveal's hidden state. */
+.work-grid article.work-card-stable,
+.work-grid article.work-card-stable.reveal{
+  opacity:1!important;
+  visibility:visible!important;
+  transform:translate3d(0,0,0)!important;
+  filter:none!important;
+}
+.work-grid article.work-card-stable img{
+  opacity:1!important;
+  visibility:visible!important;
+}
