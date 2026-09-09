@@ -106,6 +106,15 @@ p{letter-spacing:-.01em}
 .tech-icon,.expert-credential-icon{filter:drop-shadow(0 8px 18px rgba(237,28,36,.18))}
 .work-grid article,.service-visual-card,.arrival-video-frame video{box-shadow:0 22px 60px rgba(0,0,0,.16)}
 
+/* Social contact layer */
+.contact-socials{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 28px}
+.contact-socials a,.footer-social{display:inline-flex;align-items:center;gap:9px;color:#f5f6f7;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);text-decoration:none;transition:transform .3s var(--premium-ease),border-color .3s ease,background .3s ease,color .3s ease}
+.contact-socials a{min-height:44px;padding:0 15px;font-size:11px;font-weight:700;letter-spacing:.02em}
+.contact-socials a svg,.footer-social svg{flex:0 0 auto}
+.contact-socials a:hover,.footer-social:hover{transform:translateY(-2px);border-color:rgba(237,28,36,.48);background:rgba(237,28,36,.08);color:#fff}
+.footer-links{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.footer-social{min-height:36px;padding:0 10px;font-size:10px}
+
 /* Keep the new laser service visible in the homepage shortlist. */
 .services .service-grid article:nth-child(14){display:flex!important;flex-direction:column!important}
 
@@ -169,6 +178,14 @@ p{letter-spacing:-.01em}
   .premium-scroll-item[data-premium-dir="left"]{--premium-x:-34px;--premium-y:12px}
   .premium-scroll-item[data-premium-dir="right"]{--premium-x:34px;--premium-y:12px}
   .premium-scroll-item[data-premium-dir="up"]{--premium-x:0px;--premium-y:36px}
+}
+
+@media(max-width:600px){
+  .contact-socials{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;width:100%;margin:16px 0 24px}
+  .contact-socials a{min-width:0;min-height:48px;padding:0 8px;justify-content:center;font-size:9px;gap:6px}
+  .contact-socials a svg{width:17px;height:17px}
+  .footer-links{gap:8px}
+  .footer-social{min-height:34px;padding:0 9px}
 }
 
 @media(prefers-reduced-motion:reduce){
