@@ -1,0 +1,81 @@
+/* Final audited overrides: visibility, typography and reliable premium motion. */
+html,body{overflow-x:clip}
+
+.brand-slogan{
+  width:max-content;
+  max-width:100%;
+  margin:14px 0 18px;
+  padding:8px 11px;
+  border-left:2px solid var(--r);
+  background:linear-gradient(90deg,rgba(237,28,36,.1),transparent);
+  color:#f4f5f6;
+  font-size:12px;
+  font-weight:650;
+  line-height:1.2;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+/* ABS is a core homepage service. Keep the curated catalog but never hide it. */
+.services .service-grid article:nth-child(8){
+  display:flex!important;
+  flex-direction:column!important;
+}
+
+/* The card hover transition previously overrode reveal opacity/filter transitions. */
+.service-grid article.reveal,
+.technology-grid article.reveal,
+.case-grid article.reveal,
+.work-grid article.reveal{
+  transition:
+    opacity .78s var(--premium-ease),
+    transform 1s var(--premium-ease),
+    filter .76s ease,
+    border-color .35s ease,
+    background-color .35s ease,
+    box-shadow .45s ease!important;
+  transition-delay:var(--reveal-delay,0ms)!important;
+}
+
+.reveal[data-reveal-dir="left"]{--reveal-x:-76px;--reveal-y:16px}
+.reveal[data-reveal-dir="right"]{--reveal-x:76px;--reveal-y:16px}
+.reveal[data-reveal-dir="up"]{--reveal-x:0px;--reveal-y:50px}
+
+.certifications-showcase.reveal{--reveal-x:70px;--reveal-y:12px}
+.location-experience>.reveal:first-child{--reveal-x:-66px;--reveal-y:14px}
+.location-experience>.reveal:last-child{--reveal-x:66px;--reveal-y:14px}
+.faq-wrap.reveal{--reveal-x:-52px;--reveal-y:18px}
+
+/* Keep cards polished after they have entered. */
+.service-grid article.reveal-in:hover,
+.technology-grid article.reveal-in:hover,
+.case-grid article.reveal-in:hover{
+  transform:translateY(-5px)!important;
+}
+
+@media(max-width:900px){
+  .brand-slogan{
+    margin:10px 0 15px;
+    padding:7px 9px;
+    font-size:10px;
+    letter-spacing:.06em;
+  }
+  .reveal[data-reveal-dir="left"]{--reveal-x:-34px;--reveal-y:10px}
+  .reveal[data-reveal-dir="right"]{--reveal-x:34px;--reveal-y:10px}
+  .reveal[data-reveal-dir="up"]{--reveal-x:0px;--reveal-y:34px}
+  .certifications-showcase.reveal{--reveal-x:30px;--reveal-y:10px}
+  .location-experience>.reveal:first-child{--reveal-x:-30px;--reveal-y:10px}
+  .location-experience>.reveal:last-child{--reveal-x:30px;--reveal-y:10px}
+  .faq-wrap.reveal{--reveal-x:-28px;--reveal-y:10px}
+}
+
+@media(max-width:600px){
+  /* Seven curated cards now show on mobile; let the final EGR card close the grid cleanly. */
+  .services .service-grid article:nth-child(12){grid-column:1/-1!important;min-height:205px!important}
+  .services .service-grid article:nth-child(12) h3{max-width:72%!important;margin-top:42px!important}
+  .services .service-grid article:nth-child(12) p{max-width:78%!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal[data-reveal-dir]{--reveal-x:0px!important;--reveal-y:0px!important}
+}
