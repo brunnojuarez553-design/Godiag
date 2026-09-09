@@ -240,9 +240,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(specialistSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }} />
-        <div className="preloader" aria-hidden="true">
-          <img src={logo} alt="" />
-        </div>
         {children}
         <GoogleAnalytics />
         <AnalyticsEvents />
