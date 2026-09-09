@@ -34,6 +34,7 @@ import Faq from "@/components/Faq";
 import LocationMap from "@/components/LocationMap";
 import Lightbox from "@/components/Lightbox";
 import ProfessionalSections from "@/components/ProfessionalSections";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const whatsapp = "584222872237";
 const email = "godiag2023@gmail.com";
@@ -172,6 +173,7 @@ export default function Home() {
           <a href="#contacto" onClick={closeMenu}>Contacto</a>
         </nav>
         <Quote label="Cotizar diagnóstico" className="nav-cta" />
+        <ThemeToggle />
         <button className="menu-btn" onClick={() => setMenu(!menu)} aria-label={menu ? "Cerrar menú" : "Abrir menú"} aria-expanded={menu}>{menu ? <X /> : <Menu />}</button>
       </header>
 
