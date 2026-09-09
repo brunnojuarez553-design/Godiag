@@ -149,7 +149,15 @@ html[data-theme="light"] .map-wrap{background:#e9edf0!important;border-color:#d5
     z-index:100!important;
     overflow:visible!important;
   }
-  .nav .brand-logo{order:1}
+  .nav .brand-logo{
+    order:1;
+    position:absolute!important;
+    left:16px!important;
+    top:50%!important;
+    transform:translateY(-50%)!important;
+    margin:0!important;
+    z-index:103!important;
+  }
   .nav .nav-cta{display:none!important}
   .nav .theme-toggle{
     order:2;
@@ -172,9 +180,11 @@ html[data-theme="light"] .map-wrap{background:#e9edf0!important;border-color:#d5
     width:44px!important;
     height:44px!important;
     flex:0 0 44px!important;
-    margin-left:auto!important;
-    margin-right:0!important;
-    position:relative!important;
+    margin:0!important;
+    position:absolute!important;
+    right:16px!important;
+    top:50%!important;
+    transform:translateY(-50%)!important;
     z-index:103!important;
     cursor:pointer!important;
   }
@@ -239,6 +249,8 @@ html[data-theme="light"] .map-wrap{background:#e9edf0!important;border-color:#d5
 
 @media(max-width:600px){
   .nav{height:78px!important;padding:0 12px!important}
+  .nav .brand-logo{left:12px!important}
+  .nav .menu-btn{right:12px!important}
   .nav nav{top:78px!important;height:calc(100dvh - 78px)!important;max-height:calc(100dvh - 78px)!important}
   .theme-toggle-track{width:42px;height:23px}
   .theme-toggle-knob{width:17px;height:17px}
