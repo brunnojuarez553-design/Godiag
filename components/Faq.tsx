@@ -8,7 +8,7 @@ const faqs = [
   },
   {
     q: "¿Realizan servicios a domicilio?",
-    a: "Sí. Autotrónica Go Diagnosis ofrece todos sus servicios a domicilio, coordinando previamente la zona, el vehículo y el trabajo necesario por WhatsApp.",
+    a: "Sí, pero únicamente para trabajos de programación y EGR OFF. Se coordinan previamente el turno, la zona, el vehículo, la compatibilidad y el alcance del trabajo.",
   },
   {
     q: "¿Con qué marcas trabajan?",
@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: "¿Dónde está ubicado el taller?",
-    a: "Estamos en F338+3R, Caracas 1090, Distrito Capital, Venezuela. También ofrecemos atención a domicilio.",
+    a: "Estamos en F338+3R, Caracas 1090, Distrito Capital, Venezuela. La atención principal se realiza en el taller.",
   },
   {
     q: "¿Cuál es el horario de atención?",
@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     q: "¿Cómo solicito una evaluación?",
-    a: "Podés escribirnos por WhatsApp y contarnos la marca, modelo, año, síntomas del vehículo y si preferís atención en el taller o a domicilio. Con esa información coordinamos el siguiente paso.",
+    a: "Podés iniciar la consulta desde la web y contarnos marca, modelo, año y síntomas del vehículo. Con esa información se define el siguiente paso y, cuando corresponde, se deriva la consulta por WhatsApp.",
   },
 ];
 
