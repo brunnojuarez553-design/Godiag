@@ -5,7 +5,9 @@ import {
   Activity,
   ArrowRight,
   CircuitBoard,
+  Facebook,
   Gauge,
+  Instagram,
   Mail,
   MapPin,
   Menu,
@@ -18,6 +20,7 @@ import {
   Truck,
   Wrench,
   X,
+  Youtube,
   ZoomIn,
   Zap,
 } from "lucide-react";
@@ -38,6 +41,18 @@ import ProfessionalSections from "@/components/ProfessionalSections";
 const whatsapp = "584222872237";
 const email = "godiag2023@gmail.com";
 const address = "F338+3R, Caracas 1090, Distrito Capital, Venezuela";
+const instagram = "https://www.instagram.com/godiag.ve";
+const tiktok = "https://www.tiktok.com/@godiag.ve";
+const facebook = "https://www.facebook.com/share/1BvVCyMgEn/";
+const youtube = "https://youtube.com/@autotronicagodiag";
+
+function TikTokIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M14.35 3c.28 1.62 1.24 2.93 2.62 3.76a6.38 6.38 0 0 0 3.03.84v3.2a9.48 9.48 0 0 1-5.65-1.93v6.06a6.08 6.08 0 1 1-5.27-6.02v3.27a2.86 2.86 0 1 0 2.07 2.75V3h3.2Z" />
+    </svg>
+  );
+}
 
 const services = [
   { n: "01", title: "Mantenimiento y diagnóstico general", text: "Evaluación técnica del vehículo para localizar fallas y definir el camino de reparación con criterio y medición.", icon: Wrench, image: "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1040_ioaslw.jpg" },
@@ -175,7 +190,7 @@ export default function Home() {
       <section className="work-section section" id="trabajos">
         <Reveal as="div" className="section-heading work-heading"><div><span className="kicker">TRABAJO REAL</span><h2>La precisión se<br />demuestra trabajando.</h2></div><p>Intervenciones en diagnóstico, programación, inyección y reparación electrónica. Tocá una foto para verla en detalle.</p></Reveal>
         <div className="work-grid">{works.map((work, i) => <Reveal as="article" key={work.image} delay={(i % 4) * 60} className={i === 0 ? "work-wide" : ""} onClick={() => setLightboxIndex(i)} role="button" tabIndex={0} onKeyDown={(e: KeyboardEvent) => { if (e.key === "Enter") setLightboxIndex(i); }}><Image src={work.image} alt={work.title} fill sizes="(max-width: 600px) 50vw, (max-width: 900px) 50vw, 25vw" style={{ objectFit: "cover" }} /><div className="work-overlay"><span>{work.tag}</span><h3>{work.title}</h3><i>0{i + 1}</i></div><div className="work-zoom" aria-hidden="true"><ZoomIn size={18} /></div></Reveal>)}</div>
-        <div className="work-proof"><div><b>Diagnóstico antes de intervenir</b><span>Medición y análisis antes de definir la solución.</span></div><div><b>Preparación como herramienta</b><span>Capacitación y estudio continuo aplicados al diagnóstico.</span></div><a href="https://www.instagram.com/godiag.ve" target="_blank" rel="noreferrer">Ver más trabajos <ArrowRight size={16} /></a></div>
+        <div className="work-proof"><div><b>Diagnóstico antes de intervenir</b><span>Medición y análisis antes de definir la solución.</span></div><div><b>Preparación como herramienta</b><span>Capacitación y estudio continuo aplicados al diagnóstico.</span></div><a href={instagram} target="_blank" rel="noreferrer">Ver más trabajos <ArrowRight size={16} /></a></div>
       </section>
 
       {lightboxIndex !== null && <Lightbox items={works} index={lightboxIndex} onClose={() => setLightboxIndex(null)} onNav={setLightboxIndex} />}
@@ -196,17 +211,22 @@ export default function Home() {
         <span className="kicker">TALLER EN CARACAS</span><h2>Contanos qué falla.<br /><em>Empecemos por diagnosticar.</em></h2><p>Atención principal en el taller para diagnóstico y reparación. Programación y EGR OFF pueden coordinarse a domicilio con turno y validación previa.</p><Magnetic><Quote label="Preparar mi evaluación" className="primary-btn" /></Magnetic>
         <a className="phone" href={`https://wa.me/${whatsapp}`} target="_blank" rel="noreferrer"><Phone size={16} /> +58 422 287 2237</a>
         <a className="phone" href={`mailto:${email}`}><Mail size={16} /> {email}</a>
+        <div className="contact-socials" aria-label="Redes sociales de Autotrónica Go Diagnosis">
+          <a href={instagram} target="_blank" rel="noreferrer" aria-label="Instagram de Autotrónica Go Diagnosis"><Instagram size={19} /><span>Instagram</span></a>
+          <a href={facebook} target="_blank" rel="noreferrer" aria-label="Facebook de Autotrónica Go Diagnosis"><Facebook size={19} /><span>Facebook</span></a>
+          <a href={tiktok} target="_blank" rel="noreferrer" aria-label="TikTok de Autotrónica Go Diagnosis"><TikTokIcon size={18} /><span>TikTok</span></a>
+        </div>
         <div className="work-proof"><div><b>Lunes a viernes</b><span>8:00 a 18:00</span></div><div><b>Sábados</b><span>9:00 a 15:00</span></div><div><b>Modalidades</b><span>Taller · Programación/EGR a domicilio</span></div><div><b>Dirección</b><span>{address}</span></div></div>
       </section>
 
       <footer>
         <a className="brand brand-logo footer-logo" href="#top"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg" alt="Autotrónica Go Diagnosis" /></a>
         <p>Diagnóstico, programación y electrónica automotriz en Caracas. Atención principal en taller; programación y EGR OFF a domicilio con coordinación previa.</p>
-        <div>
-          <a href="https://www.instagram.com/godiag.ve" target="_blank" rel="noreferrer">Instagram</a>
-          <a href="https://www.tiktok.com/@godiag.ve" target="_blank" rel="noreferrer">TikTok</a>
-          <a href="https://www.facebook.com/share/1BvVCyMgEn/" target="_blank" rel="noreferrer">Facebook</a>
-          <a href="https://youtube.com/@autotronicagodiag" target="_blank" rel="noreferrer">YouTube</a>
+        <div className="footer-links">
+          <a className="footer-social" href={instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={17} /><span>Instagram</span></a>
+          <a className="footer-social" href={facebook} target="_blank" rel="noreferrer" aria-label="Facebook"><Facebook size={17} /><span>Facebook</span></a>
+          <a className="footer-social" href={tiktok} target="_blank" rel="noreferrer" aria-label="TikTok"><TikTokIcon size={16} /><span>TikTok</span></a>
+          <a className="footer-social" href={youtube} target="_blank" rel="noreferrer" aria-label="YouTube"><Youtube size={17} /><span>YouTube</span></a>
           <a href={`mailto:${email}`}>Email</a>
           <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noreferrer">WhatsApp</a>
           <span><MapPin size={14} /> Caracas, Venezuela</span>
