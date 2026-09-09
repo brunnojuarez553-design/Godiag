@@ -1,4 +1,4 @@
-/* Final premium finish: typography, micro-details and desktop scroll choreography */
+/* Final premium finish: typography, micro-details and scroll choreography */
 
 :root{
   --premium-ease:cubic-bezier(.16,1,.3,1);
@@ -11,7 +11,6 @@
 html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
 body{font-family:Inter,"Helvetica Neue",Arial,sans-serif;font-feature-settings:"kern" 1,"liga" 1;color:var(--premium-text)}
 
-/* Cleaner editorial hierarchy */
 h1,h2,h3{font-weight:500;text-wrap:balance}
 p{letter-spacing:-.01em}
 .hero-copy>p,.section-heading>p,.mobile-service-copy>p,.technology-grid p,.case-line p,.expert-card p,.reviews-ready-card p,.location-access-copy p{color:var(--premium-muted)}
@@ -27,7 +26,6 @@ p{letter-spacing:-.01em}
   letter-spacing:-.045em;
 }
 
-/* Navigation and primary actions */
 .nav{
   background:linear-gradient(180deg,rgba(5,7,9,.91),rgba(5,7,9,.72));
   backdrop-filter:blur(18px) saturate(125%);
@@ -54,7 +52,6 @@ p{letter-spacing:-.01em}
 }
 .primary-btn:hover:before,.nav-cta:hover:before,.services-more-btn:hover:before,.location-access-btn:hover:before{left:118%}
 
-/* Premium card treatment */
 .service-grid article,.technology-grid article,.case-grid article,.seo-copy-card,.reviews-ready-card,.mobile-service-shell,.location-access-card,.location-video-card{
   border-color:var(--premium-border);
   box-shadow:inset 0 1px rgba(255,255,255,.025);
@@ -71,73 +68,86 @@ p{letter-spacing:-.01em}
 .service-grid h3,.technology-grid h3,.case-grid h3{font-weight:560;letter-spacing:-.025em}
 .service-grid p,.technology-grid p,.case-grid p{line-height:1.72}
 
-/* More refined separators */
 .section,.brand-strip,.work-section,.location-section,.cta-section,footer{border-color:rgba(255,255,255,.085)}
 .section-heading{position:relative}
 .section-heading:after{content:"";position:absolute;left:0;bottom:-30px;width:42px;height:1px;background:linear-gradient(90deg,var(--r),transparent)}
 
-/* Existing Reveal component gets a richer entrance */
+/* Existing Reveal component */
 .reveal{
   opacity:0;
-  transform:translate3d(0,28px,0) scale(.992);
+  transform:translate3d(var(--reveal-x,0),30px,0) scale(.992);
   filter:blur(5px);
-  transition:opacity .78s var(--premium-ease),transform .9s var(--premium-ease),filter .72s ease;
+  transition:opacity .76s var(--premium-ease),transform .9s var(--premium-ease),filter .68s ease;
   will-change:opacity,transform,filter;
 }
 .reveal.reveal-in{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}
 
-/* Desktop choreography for elements not explicitly wrapped by Reveal. Uses native scroll timelines when available. */
-@media(min-width:901px){
-  .hero-copy{animation:premiumHeroIn 1s var(--premium-ease) both .08s}
-  @keyframes premiumHeroIn{from{opacity:0;transform:translate3d(0,22px,0);filter:blur(5px)}to{opacity:1;transform:none;filter:blur(0)}}
-
-  @supports (animation-timeline:view()){
-    .services-more-wrap,
-    .work-grid>article,
-    .work-proof,
-    .method-visual,
-    .method-copy,
-    .mobile-service-panel>div,
-    .location-access-grid>* ,
-    .cta-section>*{
-      animation-name:premiumViewIn;
-      animation-duration:1ms;
-      animation-timing-function:linear;
-      animation-fill-mode:both;
-      animation-timeline:view();
-      animation-range:entry 8% cover 28%;
-    }
-
-    .work-grid>article:nth-child(2n),.mobile-service-panel>div:nth-child(2n){animation-name:premiumViewInRight}
-    .work-grid>article:nth-child(3n),.mobile-service-panel>div:nth-child(3n){animation-name:premiumViewInLeft}
-
-    @keyframes premiumViewIn{
-      from{opacity:.05;transform:translate3d(0,34px,0) scale(.985);filter:blur(7px)}
-      to{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}
-    }
-    @keyframes premiumViewInRight{
-      from{opacity:.05;transform:translate3d(22px,30px,0) scale(.985);filter:blur(7px)}
-      to{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}
-    }
-    @keyframes premiumViewInLeft{
-      from{opacity:.05;transform:translate3d(-22px,30px,0) scale(.985);filter:blur(7px)}
-      to{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}
-    }
-  }
+/* One-shot reveal injected by the layout script for pieces not wrapped with Reveal. */
+.premium-scroll-item{
+  --premium-x:0px;
+  opacity:0;
+  transform:translate3d(var(--premium-x),34px,0) scale(.988);
+  filter:blur(6px);
+  transition:
+    opacity .78s var(--premium-ease),
+    transform .92s var(--premium-ease),
+    filter .7s ease;
+  transition-delay:var(--premium-delay,0ms);
+  will-change:opacity,transform,filter;
+}
+.premium-scroll-item.premium-scroll-visible{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+  filter:blur(0);
 }
 
-/* Detail polish */
+.hero-copy{animation:premiumHeroIn .9s var(--premium-ease) both .04s}
+@keyframes premiumHeroIn{from{opacity:0;transform:translate3d(0,20px,0);filter:blur(4px)}to{opacity:1;transform:none;filter:blur(0)}}
+
 .proof-row{border-top:1px solid rgba(255,255,255,.07);padding-top:22px}
 .proof-row b{letter-spacing:-.015em}.proof-row span{color:#929aa2}
 .tech-icon,.expert-credential-icon{filter:drop-shadow(0 8px 18px rgba(237,28,36,.18))}
 .work-grid article,.service-visual-card,.arrival-video-frame video{box-shadow:0 22px 60px rgba(0,0,0,.16)}
 
+@media(min-width:901px){
+  .premium-scroll-item[data-premium-dir="left"]{--premium-x:-46px}
+  .premium-scroll-item[data-premium-dir="right"]{--premium-x:46px}
+  .premium-scroll-item[data-premium-dir="up"]{--premium-x:0px}
+
+  .service-grid .reveal:nth-child(odd),
+  .technology-grid .reveal:nth-child(odd),
+  .case-grid .reveal:nth-child(odd),
+  .work-grid .reveal:nth-child(odd){--reveal-x:-24px}
+  .service-grid .reveal:nth-child(even),
+  .technology-grid .reveal:nth-child(even),
+  .case-grid .reveal:nth-child(even),
+  .work-grid .reveal:nth-child(even){--reveal-x:24px}
+}
+
 @media(max-width:900px){
-  .reveal{filter:none;transform:translate3d(0,18px,0);transition-duration:.58s,.66s,.45s}
   .section-heading:after{bottom:-20px}
+  .reveal{
+    --reveal-x:0px;
+    transform:translate3d(var(--reveal-x),22px,0) scale(.994);
+    filter:blur(3px);
+    transition-duration:.62s,.72s,.55s;
+  }
+  .service-grid .reveal:nth-child(odd),
+  .technology-grid .reveal:nth-child(odd),
+  .case-grid .reveal:nth-child(odd),
+  .work-grid .reveal:nth-child(odd){--reveal-x:-18px}
+  .service-grid .reveal:nth-child(even),
+  .technology-grid .reveal:nth-child(even),
+  .case-grid .reveal:nth-child(even),
+  .work-grid .reveal:nth-child(even){--reveal-x:18px}
+
+  .premium-scroll-item{transform:translate3d(var(--premium-x),22px,0) scale(.994);filter:blur(3px);transition-duration:.62s,.72s,.55s}
+  .premium-scroll-item[data-premium-dir="left"]{--premium-x:-22px}
+  .premium-scroll-item[data-premium-dir="right"]{--premium-x:22px}
+  .premium-scroll-item[data-premium-dir="up"]{--premium-x:0px}
 }
 
 @media(prefers-reduced-motion:reduce){
-  .reveal,.hero-copy,.services-more-wrap,.work-grid>article,.work-proof,.method-visual,.method-copy,.mobile-service-panel>div,.location-access-grid>*,.cta-section>*{opacity:1!important;transform:none!important;filter:none!important;transition:none!important;animation:none!important}
+  .reveal,.premium-scroll-item,.hero-copy{opacity:1!important;transform:none!important;filter:none!important;transition:none!important;animation:none!important}
   .primary-btn,.nav-cta,.services-more-btn,.quiz-trigger,.location-access-btn{transition:none!important}
 }
