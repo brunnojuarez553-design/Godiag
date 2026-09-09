@@ -1,19 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import { Moon, Sun } from "lucide-react";
 
 type Theme = "dark" | "light";
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>("dark");
-  const [navTarget, setNavTarget] = useState<Element | null>(null);
 
   useEffect(() => {
     const current = document.documentElement.dataset.theme === "light" ? "light" : "dark";
     setTheme(current);
-    setNavTarget(document.querySelector(".nav"));
   }, []);
 
   useEffect(() => {
@@ -47,7 +44,7 @@ export default function ThemeToggle() {
 
   const isLight = theme === "light";
 
-  const control = (
+  return (
     <button
       type="button"
       className={`theme-toggle${isLight ? " is-light" : ""}`}
@@ -65,5 +62,4 @@ export default function ThemeToggle() {
     </button>
   );
 
-  return navTarget ? createPortal(control, navTarget) : null;
 }
