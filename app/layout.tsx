@@ -162,6 +162,13 @@ const themeInitScript = `
 
 const themeControlScript = `
 (() => {
+  const syncMenuLock = () => {
+    requestAnimationFrame(() => {
+      const menuOpen = document.querySelector('.nav nav')?.classList.contains('open');
+      document.body.classList.toggle('mobile-menu-open', Boolean(menuOpen));
+    });
+  };
+
   const mount = () => {
     const nav = document.querySelector('.nav');
     if (!nav || nav.querySelector('.theme-toggle')) return;
@@ -189,14 +196,14 @@ const themeControlScript = `
       sync();
     });
 
-    const quote = nav.querySelector('.nav-cta');
-    if (quote) nav.insertBefore(button, quote);
-    else {
-      const menu = nav.querySelector('.menu-btn');
-      if (menu) nav.insertBefore(button, menu);
-      else nav.appendChild(button);
-    }
+    const menu = nav.querySelector('.menu-btn');
+    if (menu) nav.insertBefore(button, menu);
+    else nav.appendChild(button);
     sync();
+
+    document.addEventListener('click', syncMenuLock, true);
+    window.addEventListener('resize', syncMenuLock, { passive: true });
+    syncMenuLock();
   };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, { once: true });
