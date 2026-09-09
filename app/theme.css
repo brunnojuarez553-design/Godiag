@@ -506,3 +506,174 @@ html[data-theme="light"] .nav nav .nav-socials a{
   opacity:1!important;
   visibility:visible!important;
 }
+
+
+/* ============================================================
+   UI/UX stability layer — gallery, overlays, dialogs and chat.
+   Loaded last so one coherent contract wins over legacy styles.
+   ============================================================ */
+
+/* Gallery must never reserve an invisible card. */
+.work-grid article.reveal,
+.work-grid article.reveal.reveal-in,
+.work-grid article.work-card-stable{
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+  filter:none!important;
+}
+.work-grid article{
+  isolation:isolate;
+  min-width:0;
+  background:#11151a;
+}
+.work-grid .work-image{
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  min-width:100%!important;
+  min-height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+.work-grid article:after{z-index:1}
+.work-grid .work-overlay{z-index:2}
+.work-grid .work-zoom{z-index:3}
+
+/* Every modal lives above the fixed navbar and owns its viewport. */
+[data-slot="dialog-overlay"]{
+  position:fixed!important;
+  inset:0!important;
+  z-index:3000!important;
+  background:rgba(2,3,5,.78)!important;
+  backdrop-filter:blur(12px)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+}
+[data-slot="dialog-content"]{
+  z-index:3001!important;
+  max-height:calc(100dvh - 32px)!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+.service-detail-overlay,
+.lightbox{
+  z-index:3000!important;
+  overscroll-behavior:contain!important;
+}
+.service-detail-close,
+.lightbox-close{
+  z-index:3002!important;
+}
+.lightbox{
+  background:rgba(2,3,4,.96)!important;
+  padding-top:max(20px,env(safe-area-inset-top))!important;
+  padding-bottom:max(20px,env(safe-area-inset-bottom))!important;
+}
+.lightbox-stage{
+  max-height:calc(100dvh - 40px)!important;
+  overflow:auto!important;
+  overscroll-behavior:contain!important;
+}
+
+/* Assistant: explicit contrast in dark and light themes. */
+.ai-panel{
+  z-index:2500!important;
+  background:#0d1014!important;
+  color:#f4f6f8!important;
+  border-color:#30363d!important;
+}
+.ai-header{
+  background:#11151a!important;
+  color:#f4f6f8!important;
+  border-color:#2b3138!important;
+}
+.ai-header-id b{color:#fff!important}
+.ai-header-id span{color:#aeb5bc!important}
+.ai-close{color:#e8ebee!important}
+.ai-messages{background:#0b0e12!important}
+.ai-msg{color:#f4f6f8!important}
+.ai-msg.assistant{
+  background:#181d23!important;
+  color:#f4f6f8!important;
+  border-color:#313841!important;
+}
+.ai-msg.user{background:var(--r)!important;color:#fff!important}
+.ai-premium-wrap{
+  background:linear-gradient(160deg,#101a14,#0d1114)!important;
+  border-color:rgba(63,177,96,.38)!important;
+}
+.ai-premium-wrap p{color:#e3e8e4!important}
+.ai-input-row{
+  background:#0d1115!important;
+  border-color:#2d333a!important;
+}
+.ai-input-row textarea{
+  background:#080b0e!important;
+  color:#f7f8f9!important;
+  border-color:#353c44!important;
+  caret-color:#fff;
+}
+.ai-input-row textarea::placeholder{color:#8f98a2!important;opacity:1}
+.ai-input-row button{color:#fff!important}
+html[data-theme="light"] .ai-panel{
+  background:#fff!important;
+  color:#14181d!important;
+  border-color:#d7dce1!important;
+}
+html[data-theme="light"] .ai-header,
+html[data-theme="light"] .ai-input-row{
+  background:#f5f7f9!important;
+  color:#14181d!important;
+  border-color:#d7dce1!important;
+}
+html[data-theme="light"] .ai-header-id b{color:#14181d!important}
+html[data-theme="light"] .ai-header-id span{color:#626b74!important}
+html[data-theme="light"] .ai-close{color:#303840!important}
+html[data-theme="light"] .ai-messages{background:#fff!important}
+html[data-theme="light"] .ai-msg.assistant{
+  background:#eef1f4!important;
+  color:#1d2329!important;
+  border-color:#d9dee3!important;
+}
+html[data-theme="light"] .ai-input-row textarea{
+  background:#fff!important;
+  color:#14181d!important;
+  border-color:#cfd5db!important;
+}
+html[data-theme="light"] .ai-input-row textarea::placeholder{color:#707982!important}
+html[data-theme="light"] .ai-premium-wrap{
+  background:#f2f8f4!important;
+  border-color:#b9dcc4!important;
+}
+html[data-theme="light"] .ai-premium-wrap p{color:#263d2d!important}
+
+@media(max-width:700px){
+  [data-slot="dialog-content"]{
+    width:calc(100% - 20px)!important;
+    max-width:none!important;
+    max-height:calc(100dvh - 20px)!important;
+    padding:22px 18px!important;
+  }
+  .lightbox{
+    inset:0!important;
+    padding:12px!important;
+  }
+  .lightbox-stage{
+    width:100%!important;
+    height:calc(100dvh - 24px)!important;
+    max-height:calc(100dvh - 24px)!important;
+  }
+  .ai-panel{
+    inset:calc(78px + env(safe-area-inset-top)) 8px calc(8px + env(safe-area-inset-bottom)) 8px!important;
+    width:auto!important;
+    height:auto!important;
+    max-width:none!important;
+    max-height:none!important;
+  }
+}
