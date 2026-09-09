@@ -36,7 +36,7 @@ const services: ServiceItem[] = [
   {
     title: "Reparación de ABS",
     tag: "ABS",
-    image: "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1042_jaz2yl.jpg",
+    image: "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305083/IMG_1041_i447vu.jpg",
     summary: "Evaluación y reparación de módulos ABS y fallas electrónicas asociadas al sistema.",
     detail: "El diagnóstico diferencia problemas de sensor, cableado, alimentación, comunicación o electrónica interna antes de intervenir el módulo.",
     includes: ["Lectura de fallas ABS", "Comprobación eléctrica", "Evaluación del módulo"],
@@ -45,7 +45,7 @@ const services: ServiceItem[] = [
   {
     title: "BCM / TIPM",
     tag: "CARROCERÍA",
-    image: "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305083/IMG_1041_i447vu.jpg",
+    image: "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1042_jaz2yl.jpg",
     summary: "Diagnóstico e intervención de módulos BCM y TIPM para problemas de control, alimentación y comunicación.",
     detail: "Se trabaja especialmente sobre anomalías eléctricas y electrónicas que pueden afectar múltiples funciones del vehículo al mismo tiempo.",
     includes: ["BCM", "TIPM", "Jeep · Dodge · Chrysler y compatibles"],
@@ -90,7 +90,7 @@ const services: ServiceItem[] = [
   {
     title: "Osciloscopio y trazador de curvas",
     tag: "MEDICIÓN",
-    image: "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305084/IMG_1044_of37oy.jpg",
+    image: "https://res.cloudinary.com/dpiavcukm/image/upload/v1788992679/f2b7bbb3-4ad6-430f-8b5b-889b9bab9d3f_ijo3ma.jpg",
     summary: "Análisis de señales eléctricas para diagnosticar sensores, actuadores, cableado y módulos.",
     detail: "La instrumentación permite observar comportamientos que no siempre aparecen en una lectura convencional y tomar decisiones basadas en evidencia.",
     includes: ["Osciloscopio automotriz", "Trazador de curvas", "Análisis de señales"],
@@ -126,6 +126,14 @@ const services: ServiceItem[] = [
     summary: "Trabajo de software EGR OFF para Toyota Corolla y otras aplicaciones compatibles.",
     detail: "La compatibilidad se evalúa previamente y cualquier modificación se realiza únicamente cuando corresponde a la aplicación y normativa aplicable.",
     includes: ["Toyota", "Evaluación de compatibilidad", "Sujeto a normativa correspondiente"],
+  },
+  {
+    title: "Reparación de módulos con tecnología Láser",
+    tag: "TECNOLOGÍA LÁSER",
+    image: "https://res.cloudinary.com/dpiavcukm/image/upload/v1788992746/753ea015-d8d3-442d-8c88-c5ff723971f4_q6ck2g.jpg",
+    summary: "Reparación de módulos automotrices con tecnología Láser para trabajar con mayor precisión y reducir el margen de error.",
+    detail: "Autotrónica Go Diagnosis incorpora tecnología Láser aplicada a la reparación de módulos automotrices y se posiciona como pionera en Venezuela en este tipo de intervención especializada.",
+    includes: ["Tecnología Láser", "Mayor precisión de intervención", "Reparación especializada de módulos"],
   },
 ];
 
