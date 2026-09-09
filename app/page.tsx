@@ -171,6 +171,15 @@ export default function Home() {
           <a href="#trabajos" onClick={closeMenu}>Trabajos</a>
           <a href="#especialista" onClick={closeMenu}>Especialista</a>
           <a href="#contacto" onClick={closeMenu}>Contacto</a>
+          <div className="nav-socials" aria-label="Redes sociales">
+            <span>Seguinos</span>
+            <div>
+              <a href={instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><InstagramIcon size={18} /><b>Instagram</b></a>
+              <a href={tiktok} target="_blank" rel="noreferrer" aria-label="TikTok"><TikTokIcon size={18} /><b>TikTok</b></a>
+              <a href={facebook} target="_blank" rel="noreferrer" aria-label="Facebook"><FacebookIcon size={18} /><b>Facebook</b></a>
+              <a href={youtube} target="_blank" rel="noreferrer" aria-label="YouTube"><YoutubeIcon size={18} /><b>YouTube</b></a>
+            </div>
+          </div>
         </nav>
         <Quote label="Cotizar diagnóstico" className="nav-cta" />
         <ThemeToggle />
