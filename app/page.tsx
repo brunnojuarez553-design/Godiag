@@ -53,6 +53,7 @@ const services = [
   { n: "11", title: "Reprogramación HP Tuners / BitEdit / VFTuner", text: "Reprogramación y ajustes de software de ECU con herramientas especializadas según vehículo y aplicación.", icon: Settings2, image: "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1039_pnpd8p.jpg" },
   { n: "12", title: "EGR OFF Toyota", text: "Trabajo de software EGR OFF para Toyota Corolla y otros modelos, sujeto a la aplicación y normativa correspondiente.", icon: Wrench, image: "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305085/IMG_1038_ggdubh.jpg" },
   { n: "13", title: "Diagnóstico diésel 12V / 24V", text: "Diagnóstico especializado en sistemas diésel de 12V y 24V para vehículos y equipos compatibles.", icon: Truck, image: "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1045_i97gv3.jpg" },
+  { n: "14", title: "Reparación de módulos con tecnología Láser", text: "Pioneros en Venezuela en reparación de módulos automotrices con tecnología Láser, orientada a lograr mayor precisión, mejores resultados y menor margen de error.", icon: CircuitBoard, image: "https://res.cloudinary.com/dpiavcukm/image/upload/v1788992746/753ea015-d8d3-442d-8c88-c5ff723971f4_q6ck2g.jpg" },
 ];
 
 const brands = ["TOYOTA", "FORD", "CHEVROLET", "MITSUBISHI", "JEEP", "DODGE", "CHRYSLER"];
