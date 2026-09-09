@@ -427,3 +427,68 @@ html[data-theme="light"] .map-wrap{background:#e9edf0!important;border-color:#d5
   }
   .nav>nav{z-index:1000!important}
 }
+
+
+/* Social links anchored to the bottom of the hamburger menu. */
+.nav nav .nav-socials{
+  width:100%;
+  margin-top:auto;
+  padding-top:24px;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+.nav nav .nav-socials>span{
+  display:block;
+  margin-bottom:12px;
+  color:#7f8790;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+.nav nav .nav-socials>div{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+}
+.nav nav .nav-socials a{
+  width:auto!important;
+  min-height:48px!important;
+  padding:0 12px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  background:rgba(255,255,255,.04)!important;
+  color:#f5f6f7!important;
+  font-size:10px!important;
+  transition:border-color .2s ease,background .2s ease,transform .2s ease!important;
+}
+.nav nav .nav-socials a:hover{
+  transform:translateY(-2px);
+  border-color:rgba(237,28,36,.58)!important;
+  background:rgba(237,28,36,.1)!important;
+}
+.nav nav .nav-socials a:after{display:none!important}
+.nav nav .nav-socials svg{flex:0 0 auto;color:var(--r)}
+.nav nav .nav-socials b{font-size:10px}
+html[data-theme="light"] .nav nav .nav-socials{border-top-color:#dfe3e7}
+html[data-theme="light"] .nav nav .nav-socials>span{color:#717982}
+html[data-theme="light"] .nav nav .nav-socials a{
+  border-color:#d9dee3!important;
+  background:#f2f4f6!important;
+  color:#1c2228!important;
+}
+@media(min-width:901px){
+  .nav nav .nav-socials{max-width:520px}
+}
+@media(max-width:600px){
+  .nav nav .nav-socials{padding-top:18px}
+  .nav nav .nav-socials>div{grid-template-columns:repeat(4,1fr);gap:6px}
+  .nav nav .nav-socials a{
+    min-height:48px!important;
+    padding:0!important;
+    border-radius:8px;
+  }
+  .nav nav .nav-socials b{display:none}
+}
