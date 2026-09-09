@@ -19,6 +19,7 @@ import "./expert-premium.css";
 import "./location-access.css";
 import "./readability.css";
 import "./premium-finish.css";
+import "./final-audit.css";
 
 const logo = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg";
 const specialistImage = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788231287/IMG_1017_rx0uzq.jpg";
@@ -165,7 +166,7 @@ const specialistSchema = {
   name: "Elian José González Cruz",
   image: specialistImage,
   worksFor: { "@id": `${siteUrl}/#business` },
-  jobTitle: "Especialista en diagnóstico y electrónica automotriz",
+  jobTitle: "Ingeniero Mecánico y especialista en diagnóstico y electrónica automotriz",
   knowsAbout: [
     "Diagnóstico electrónico automotriz",
     "Programación ECU",
@@ -236,40 +237,41 @@ const navScrollScript = `
 
 const premiumScrollScript = `
 (() => {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
 
-  const selectors = [
-    '.services-more-wrap',
-    '.work-proof',
-    '.method-visual',
-    '.method-copy',
-    '.mobile-service-panel > div',
-    '.reviews-ready-card',
-    '.location-access-grid > *',
-    '.cta-section > *',
-    '.certifications-showcase',
-    '.faq-section .faq-item'
-  ];
+  const init = () => {
+    const selectors = [
+      '.services-more-wrap',
+      '.work-proof',
+      '.method-visual',
+      '.method-copy',
+      '.mobile-service-panel > div',
+      '.cta-section > *',
+      'footer > *'
+    ];
 
-  const items = Array.from(document.querySelectorAll(selectors.join(',')));
-  if (!items.length) return;
+    const items = Array.from(document.querySelectorAll(selectors.join(','))).filter((el) => !el.classList.contains('premium-scroll-item'));
+    if (!items.length) return;
 
-  items.forEach((el, index) => {
-    el.classList.add('premium-scroll-item');
-    const dir = index % 3 === 0 ? 'left' : index % 3 === 1 ? 'right' : 'up';
-    el.setAttribute('data-premium-dir', dir);
-    el.style.setProperty('--premium-delay', String((index % 4) * 55) + 'ms');
-  });
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('premium-scroll-visible');
-      io.unobserve(entry.target);
+    items.forEach((el, index) => {
+      el.classList.add('premium-scroll-item');
+      const dir = index % 3 === 0 ? 'left' : index % 3 === 1 ? 'right' : 'up';
+      el.setAttribute('data-premium-dir', dir);
+      el.style.setProperty('--premium-delay', String((index % 4) * 70) + 'ms');
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
 
-  items.forEach((el) => io.observe(el));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('premium-scroll-visible');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+
+    requestAnimationFrame(() => items.forEach((el) => io.observe(el)));
+  };
+
+  requestAnimationFrame(init);
 })();
 `;
 
