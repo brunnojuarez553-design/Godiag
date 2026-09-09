@@ -5,9 +5,7 @@ import {
   Activity,
   ArrowRight,
   CircuitBoard,
-  Facebook,
   Gauge,
-  Instagram,
   Mail,
   MapPin,
   Menu,
@@ -20,7 +18,6 @@ import {
   Truck,
   Wrench,
   X,
-  Youtube,
   ZoomIn,
   Zap,
 } from "lucide-react";
@@ -46,10 +43,38 @@ const tiktok = "https://www.tiktok.com/@godiag.ve";
 const facebook = "https://www.facebook.com/share/1BvVCyMgEn/";
 const youtube = "https://youtube.com/@autotronicagodiag";
 
-function TikTokIcon({ size = 18 }: { size?: number }) {
+type BrandIconProps = { size?: number };
+
+function InstagramIcon({ size = 18 }: BrandIconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ size = 18 }: BrandIconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M13.6 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5H17V3.9c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1V10H8v3h2.6v8h3Z" />
+    </svg>
+  );
+}
+
+function TikTokIcon({ size = 18 }: BrandIconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M14.35 3c.28 1.62 1.24 2.93 2.62 3.76a6.38 6.38 0 0 0 3.03.84v3.2a9.48 9.48 0 0 1-5.65-1.93v6.06a6.08 6.08 0 1 1-5.27-6.02v3.27a2.86 2.86 0 1 0 2.07 2.75V3h3.2Z" />
+    </svg>
+  );
+}
+
+function YoutubeIcon({ size = 18 }: BrandIconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M21.6 7.1a2.8 2.8 0 0 0-2-2C17.8 4.6 12 4.6 12 4.6s-5.8 0-7.6.5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2 12a29 29 0 0 0 .4 4.9 2.8 2.8 0 0 0 2 2c1.8.5 7.6.5 7.6.5s5.8 0 7.6-.5a2.8 2.8 0 0 0 2-2A29 29 0 0 0 22 12a29 29 0 0 0-.4-4.9ZM10 15.5v-7l6 3.5-6 3.5Z" />
     </svg>
   );
 }
@@ -212,8 +237,8 @@ export default function Home() {
         <a className="phone" href={`https://wa.me/${whatsapp}`} target="_blank" rel="noreferrer"><Phone size={16} /> +58 422 287 2237</a>
         <a className="phone" href={`mailto:${email}`}><Mail size={16} /> {email}</a>
         <div className="contact-socials" aria-label="Redes sociales de Autotrónica Go Diagnosis">
-          <a href={instagram} target="_blank" rel="noreferrer" aria-label="Instagram de Autotrónica Go Diagnosis"><Instagram size={19} /><span>Instagram</span></a>
-          <a href={facebook} target="_blank" rel="noreferrer" aria-label="Facebook de Autotrónica Go Diagnosis"><Facebook size={19} /><span>Facebook</span></a>
+          <a href={instagram} target="_blank" rel="noreferrer" aria-label="Instagram de Autotrónica Go Diagnosis"><InstagramIcon size={19} /><span>Instagram</span></a>
+          <a href={facebook} target="_blank" rel="noreferrer" aria-label="Facebook de Autotrónica Go Diagnosis"><FacebookIcon size={19} /><span>Facebook</span></a>
           <a href={tiktok} target="_blank" rel="noreferrer" aria-label="TikTok de Autotrónica Go Diagnosis"><TikTokIcon size={18} /><span>TikTok</span></a>
         </div>
         <div className="work-proof"><div><b>Lunes a viernes</b><span>8:00 a 18:00</span></div><div><b>Sábados</b><span>9:00 a 15:00</span></div><div><b>Modalidades</b><span>Taller · Programación/EGR a domicilio</span></div><div><b>Dirección</b><span>{address}</span></div></div>
@@ -223,10 +248,10 @@ export default function Home() {
         <a className="brand brand-logo footer-logo" href="#top"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg" alt="Autotrónica Go Diagnosis" /></a>
         <p>Diagnóstico, programación y electrónica automotriz en Caracas. Atención principal en taller; programación y EGR OFF a domicilio con coordinación previa.</p>
         <div className="footer-links">
-          <a className="footer-social" href={instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={17} /><span>Instagram</span></a>
-          <a className="footer-social" href={facebook} target="_blank" rel="noreferrer" aria-label="Facebook"><Facebook size={17} /><span>Facebook</span></a>
+          <a className="footer-social" href={instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><InstagramIcon size={17} /><span>Instagram</span></a>
+          <a className="footer-social" href={facebook} target="_blank" rel="noreferrer" aria-label="Facebook"><FacebookIcon size={17} /><span>Facebook</span></a>
           <a className="footer-social" href={tiktok} target="_blank" rel="noreferrer" aria-label="TikTok"><TikTokIcon size={16} /><span>TikTok</span></a>
-          <a className="footer-social" href={youtube} target="_blank" rel="noreferrer" aria-label="YouTube"><Youtube size={17} /><span>YouTube</span></a>
+          <a className="footer-social" href={youtube} target="_blank" rel="noreferrer" aria-label="YouTube"><YoutubeIcon size={17} /><span>YouTube</span></a>
           <a href={`mailto:${email}`}>Email</a>
           <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noreferrer">WhatsApp</a>
           <span><MapPin size={14} /> Caracas, Venezuela</span>
