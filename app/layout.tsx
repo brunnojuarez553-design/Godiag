@@ -18,6 +18,7 @@ import "./section-backgrounds.css";
 import "./expert-premium.css";
 import "./location-access.css";
 import "./readability.css";
+import "./premium-finish.css";
 
 const logo = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg";
 const specialistImage = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788231287/IMG_1017_rx0uzq.jpg";
@@ -233,6 +234,45 @@ const navScrollScript = `
 })();
 `;
 
+const premiumScrollScript = `
+(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const selectors = [
+    '.services-more-wrap',
+    '.work-proof',
+    '.method-visual',
+    '.method-copy',
+    '.mobile-service-panel > div',
+    '.reviews-ready-card',
+    '.location-access-grid > *',
+    '.cta-section > *',
+    '.certifications-showcase',
+    '.faq-section .faq-item'
+  ];
+
+  const items = Array.from(document.querySelectorAll(selectors.join(',')));
+  if (!items.length) return;
+
+  items.forEach((el, index) => {
+    el.classList.add('premium-scroll-item');
+    const dir = index % 3 === 0 ? 'left' : index % 3 === 1 ? 'right' : 'up';
+    el.setAttribute('data-premium-dir', dir);
+    el.style.setProperty('--premium-delay', String((index % 4) * 55) + 'ms');
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('premium-scroll-visible');
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+
+  items.forEach((el) => io.observe(el));
+})();
+`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es-VE">
@@ -244,6 +284,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <GoogleAnalytics />
         <AnalyticsEvents />
         <script dangerouslySetInnerHTML={{ __html: navScrollScript }} />
+        <script dangerouslySetInnerHTML={{ __html: premiumScrollScript }} />
       </body>
     </html>
   );
