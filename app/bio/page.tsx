@@ -29,7 +29,7 @@ const background = "https://res.cloudinary.com/dpiavcukm/image/upload/v178831010
 const phone = "+58 422 287 2237";
 const whatsapp = "584222872237";
 const email = "godiag2023@gmail.com";
-const address = "F338+3R, Caracas 1090, Distrito Capital, Venezuela";
+const address = "Ubicación oficial de GODIAG en Caracas, Venezuela";
 const maps = "https://maps.app.goo.gl/zRVeuJy12vhZv3WL6";
 const googleReview = "https://g.page/r/CWrMOeqj4z8aEBI/review";
 
