@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 
 const logo = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg";
-const background = "https://res.cloudinary.com/dpiavcukm/image/upload/v1788305082/IMG_1040_ioaslw.jpg";
+const background = "https://res.cloudinary.com/dpiavcukm/image/upload/v1788310102/IMG_1048_okxu4o.jpg";
 const phone = "+58 422 287 2237";
 const whatsapp = "584222872237";
 const email = "godiag2023@gmail.com";
