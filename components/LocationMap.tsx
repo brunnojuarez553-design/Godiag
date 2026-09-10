@@ -1,9 +1,9 @@
 import Reveal from "@/components/Reveal";
 
 const ADDRESS = "Ubicación oficial de GODIAG en Caracas, Venezuela";
-const MAP_EMBED_QUERY = "Autotrónica Go Diagnosis, Caracas, Venezuela";
+const MAP_EMBED_QUERY = "10.452695,-66.932602";
 const ARRIVAL_VIDEO = "https://res.cloudinary.com/dpiavcukm/video/upload/v1788908637/405e1d9e-63ad-4a4f-b5c6-205eb2ad9658_wwfjql.mp4";
-const MAP_URL = "https://maps.app.goo.gl/zRVeuJy12vhZv3WL6";
+const MAP_URL = "https://maps.app.goo.gl/obQw9QpryJgFVdJo7";
 
 export default function LocationMap() {
   return (
