@@ -84,4 +84,51 @@
 @keyframes bio-fade { from { opacity:0 } to { opacity:1 } }
 @keyframes bio-sheet { from { opacity:0; transform:translateY(30px) scale(.98) } to { opacity:1; transform:none } }
 @media (min-width:700px) { .bio-shell{padding-top:45px}.bio-modal-backdrop{align-items:center}.bio-modal{border-radius:27px}.bio-card{min-height:82px}.bio-card-primary{min-height:96px} }
+@media (max-width:699px) {
+  .bio-page { min-height:100svh; height:100svh; overflow:hidden; }
+  .bio-shell { height:100svh; min-height:0; display:flex; flex-direction:column; padding:10px 13px 8px; overflow:hidden; }
+  .bio-logo-ring { width:58px; height:58px; padding:2px; }
+  .bio-online { right:-2px; bottom:2px; width:19px; height:19px; border-width:2px; }
+  .bio-online svg { width:9px; height:9px; }
+  .bio-eyebrow { margin-top:7px; font-size:8px; }
+  .bio-profile h1 { margin-top:3px; font-size:24px; }
+  .bio-profile p { margin-top:5px; font-size:10px; line-height:1.3; }
+  .bio-trust-row { display:none; }
+  .bio-actions { gap:6px; margin-top:10px; }
+  .bio-card,.bio-card-primary { min-height:50px; height:50px; padding:6px 9px; border-radius:13px; gap:9px; }
+  .bio-card-icon { width:34px; height:34px; flex-basis:34px; border-radius:10px; }
+  .bio-card-icon svg { width:18px; height:18px; }
+  .bio-card-copy { gap:1px; }
+  .bio-card-copy b { font-size:11px; }
+  .bio-card-copy small { font-size:8px; line-height:1.2; }
+  .bio-card-label { font-size:6px; letter-spacing:.13em; }
+  .bio-card-arrow { width:26px; height:26px; flex-basis:26px; }
+  .bio-card-arrow svg { width:15px; height:15px; }
+  .bio-section-title { gap:8px; margin:9px 2px 5px; font-size:7px; }
+  .bio-contact-grid { grid-template-columns:repeat(4,1fr); gap:5px; }
+  .bio-contact-grid a { min-height:47px; flex-direction:column; justify-content:center; gap:3px; padding:5px 2px; border-radius:11px; text-align:center; }
+  .bio-contact-grid a>svg { width:16px; height:16px; }
+  .bio-contact-grid b { font-size:8px; }
+  .bio-contact-grid small { display:none; }
+  .bio-address { display:none; }
+  .bio-socials { gap:5px; }
+  .bio-socials a { gap:3px; padding:5px 2px 4px; border-radius:11px; }
+  .bio-socials a>span { width:25px; height:25px; border-radius:8px; font-size:7px; }
+  .bio-socials small { font-size:7px; }
+  .bio-footer { margin-top:auto; padding:7px 0 0; font-size:6px; }
+}
+@media (max-width:699px) and (max-height:620px) {
+  .bio-shell { padding-top:6px; }
+  .bio-logo-ring { width:46px; height:46px; }
+  .bio-profile p { display:none; }
+  .bio-eyebrow { margin-top:4px; }
+  .bio-profile h1 { font-size:20px; }
+  .bio-actions { margin-top:6px; gap:4px; }
+  .bio-card,.bio-card-primary { height:45px; min-height:45px; }
+  .bio-card-copy small { display:none; }
+  .bio-section-title { margin-top:6px; }
+  .bio-contact-grid a { min-height:41px; }
+  .bio-socials a { padding-block:3px; }
+  .bio-footer { display:none; }
+}
 @media (prefers-reduced-motion:reduce) { .bio-profile,.bio-card,.bio-modal-backdrop,.bio-modal{animation:none}.bio-card{transition:none} }
