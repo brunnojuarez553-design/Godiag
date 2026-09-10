@@ -31,7 +31,7 @@ function buildWhatsappMessage(lead: Lead) {
   return lines.join("\n");
 }
 
-export default function Assistant() {
+export default function Assistant({ hideLauncher = false }: { hideLauncher?: boolean }) {
   const [open, setOpen] = useState(false);
   const [showBubble, setShowBubble] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -163,7 +163,7 @@ export default function Assistant() {
 
   return (
     <>
-      <div className="ai-fab-wrap">
+      {!hideLauncher && <div className="ai-fab-wrap">
         {showBubble && !open && (
           <div className="ai-callout">
             <button className="ai-callout-close" aria-label="Cerrar aviso" onClick={() => setShowBubble(false)}>
@@ -175,7 +175,7 @@ export default function Assistant() {
         <button className="ai-fab" onClick={handleOpen} aria-label="Abrir asistente virtual">
           <img src={logo} alt="Asistente Go Diagnosis" />
         </button>
-      </div>
+      </div>}
 
       {open && (
         <div className="ai-panel" role="dialog" aria-modal="true" aria-label="Asistente Go Diagnosis">
