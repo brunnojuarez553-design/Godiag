@@ -31,11 +31,27 @@ const email = "godiag2023@gmail.com";
 const address = "F338+3R, Caracas 1090, Distrito Capital, Venezuela";
 const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Autotrónica Go Diagnosis, " + address)}`;
 
+function InstagramIcon() {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>;
+}
+
+function TikTokIcon() {
+  return <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.35 3c.28 1.62 1.24 2.93 2.62 3.76a6.38 6.38 0 0 0 3.03.84v3.2a9.48 9.48 0 0 1-5.65-1.93v6.06a6.08 6.08 0 1 1-5.27-6.02v3.27a2.86 2.86 0 1 0 2.07 2.75V3h3.2Z"/></svg>;
+}
+
+function FacebookIcon() {
+  return <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.6 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5H17V3.9c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1V10H8v3h2.6v8h3Z"/></svg>;
+}
+
+function YoutubeIcon() {
+  return <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.1a2.8 2.8 0 0 0-2-2C17.8 4.6 12 4.6 12 4.6s-5.8 0-7.6.5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2 12a29 29 0 0 0 .4 4.9 2.8 2.8 0 0 0 2 2c1.8.5 7.6.5 7.6.5s5.8 0 7.6-.5a2.8 2.8 0 0 0 2-2A29 29 0 0 0 22 12a29 29 0 0 0-.4-4.9ZM10 15.5v-7l6 3.5-6 3.5Z"/></svg>;
+}
+
 const socials = [
-  { label: "Instagram", handle: "@godiag.ve", href: "https://www.instagram.com/godiag.ve", mark: "IG" },
-  { label: "TikTok", handle: "@godiag.ve", href: "https://www.tiktok.com/@godiag.ve", mark: "TK" },
-  { label: "Facebook", handle: "Go Diagnosis", href: "https://www.facebook.com/share/1BvVCyMgEn/", mark: "FB" },
-  { label: "YouTube", handle: "@autotronicagodiag", href: "https://youtube.com/@autotronicagodiag", mark: "YT" },
+  { label: "Instagram", handle: "@godiag.ve", href: "https://www.instagram.com/godiag.ve", icon: InstagramIcon },
+  { label: "TikTok", handle: "@godiag.ve", href: "https://www.tiktok.com/@godiag.ve", icon: TikTokIcon },
+  { label: "Facebook", handle: "Go Diagnosis", href: "https://www.facebook.com/share/1BvVCyMgEn/", icon: FacebookIcon },
+  { label: "YouTube", handle: "@autotronicagodiag", href: "https://youtube.com/@autotronicagodiag", icon: YoutubeIcon },
 ];
 
 const symptoms = [
@@ -144,7 +160,7 @@ export default function BioPage() {
           <div className="bio-socials">
             {socials.map((social) => (
               <a key={social.label} href={social.href} target="_blank" rel="noreferrer" aria-label={`${social.label}: ${social.handle}`}>
-                <span>{social.mark}</span><small>{social.label}</small>
+                <span><social.icon /></span><small>{social.label}</small>
               </a>
             ))}
           </div>
