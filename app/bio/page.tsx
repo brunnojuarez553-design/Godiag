@@ -29,7 +29,7 @@ const phone = "+58 422 287 2237";
 const whatsapp = "584222872237";
 const email = "godiag2023@gmail.com";
 const address = "F338+3R, Caracas 1090, Distrito Capital, Venezuela";
-const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Autotrónica Go Diagnosis, " + address)}`;
+const maps = "https://maps.app.goo.gl/zRVeuJy12vhZv3WL6";
 
 function InstagramIcon() {
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>;
