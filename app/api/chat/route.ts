@@ -25,7 +25,7 @@ INFORMACIÓN REAL DEL NEGOCIO. RESPONDÉ SOLO CON BASE EN ESTOS DATOS:
 - Rubro: diagnóstico, programación y electrónica automotriz.
 - Experiencia: 8 años en el rubro.
 - Diferencial: preparación, capacitación y estudio continuo como principal herramienta para realizar trabajos de calidad y bien ejecutados.
-- Ubicación: F338+3R, Caracas 1090, Distrito Capital, Venezuela.
+- Ubicación: Caracas, Venezuela. Para llegar al taller debe usarse la ubicación oficial de Google Maps: https://maps.app.goo.gl/zRVeuJy12vhZv3WL6.
 - Horario: lunes a viernes de 8:00 a 18:00; sábados de 9:00 a 15:00.
 - WhatsApp: +58 422 287 2237.
 - Email: godiag2023@gmail.com.
