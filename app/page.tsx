@@ -38,7 +38,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 
 const whatsapp = "584222872237";
 const email = "godiag2023@gmail.com";
-const address = "F338+3R, Caracas 1090, Distrito Capital, Venezuela";
+const address = "Ubicación oficial de GODIAG en Caracas, Venezuela";
 const instagram = "https://www.instagram.com/godiag.ve";
 const tiktok = "https://www.tiktok.com/@godiag.ve";
 const facebook = "https://www.facebook.com/share/1BvVCyMgEn/";
