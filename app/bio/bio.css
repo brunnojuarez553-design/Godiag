@@ -1,0 +1,87 @@
+.bio-page { --bio-red:#e52222; --bio-red-2:#ff3b30; --bio-ink:#080909; --bio-line:rgba(255,255,255,.11); min-height:100svh; position:relative; overflow:hidden; background:#080909; color:#f7f7f5; font-family:Arial,Helvetica,sans-serif; isolation:isolate; }
+.bio-page * { box-sizing:border-box; }
+.bio-ambient { position:fixed; inset:0; z-index:-3; background:radial-gradient(circle at 50% -10%,rgba(229,34,34,.28),transparent 37%),radial-gradient(circle at 100% 45%,rgba(229,34,34,.08),transparent 34%),#080909; }
+.bio-photo { position:fixed; inset:0; z-index:-2; opacity:.12; }
+.bio-photo img { object-fit:cover; filter:grayscale(1) contrast(1.2); }
+.bio-photo:after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,9,9,.58),#080909 56%,#080909); }
+.bio-shell { width:min(100%,580px); min-height:100svh; margin:0 auto; padding:36px 18px 28px; }
+.bio-profile { display:flex; align-items:center; flex-direction:column; text-align:center; animation:bio-enter .65s ease both; }
+.bio-logo-ring { width:94px; height:94px; position:relative; border-radius:50%; padding:4px; border:1px solid rgba(255,255,255,.35); box-shadow:0 14px 50px rgba(229,34,34,.2); }
+.bio-logo-ring img { object-fit:cover; border-radius:50%; border:3px solid #111; }
+.bio-online { position:absolute; right:1px; bottom:8px; width:24px; height:24px; border-radius:50%; display:grid; place-items:center; color:#fff; background:var(--bio-red); border:3px solid #080909; }
+.bio-eyebrow { margin-top:18px; color:#ff5a52; letter-spacing:.22em; font-size:10px; font-weight:800; }
+.bio-profile h1 { margin:6px 0 0; color:#fff; font-size:clamp(31px,8vw,42px); line-height:1; letter-spacing:-.045em; text-transform:uppercase; font-weight:900; }
+.bio-profile p { max-width:400px; margin:11px 0 0; color:#b9b9b7; font-size:14px; line-height:1.55; }
+.bio-trust-row { margin-top:14px; display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+.bio-trust-row span { display:flex; align-items:center; gap:6px; padding:7px 10px; border:1px solid var(--bio-line); border-radius:999px; background:rgba(255,255,255,.045); color:#cfcfcd; font-size:10px; font-weight:700; }
+.bio-actions { display:grid; gap:10px; margin-top:26px; }
+.bio-card { width:100%; min-height:76px; position:relative; display:flex; align-items:center; gap:13px; padding:13px 14px; border:1px solid var(--bio-line); border-radius:19px; color:#fff; background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.035)); box-shadow:0 12px 30px rgba(0,0,0,.18); text-align:left; text-decoration:none; cursor:pointer; backdrop-filter:blur(16px); animation:bio-enter .6s ease both; transition:transform .2s ease,border-color .2s ease,background .2s ease; }
+.bio-card:nth-child(2){animation-delay:.07s}.bio-card:nth-child(3){animation-delay:.14s}.bio-card:nth-child(4){animation-delay:.21s}
+.bio-card:active { transform:scale(.98); }
+.bio-card:hover { border-color:rgba(255,255,255,.25); background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.05)); }
+.bio-card-primary { min-height:90px; border-color:rgba(255,74,64,.55); background:linear-gradient(125deg,#a90e13,#ef2927); box-shadow:0 15px 36px rgba(229,34,34,.23); }
+.bio-card-primary:hover { background:linear-gradient(125deg,#bd1115,#ff3b30); }
+.bio-card-ai { border-color:rgba(255,255,255,.18); overflow:hidden; }
+.bio-card-ai:after { content:""; position:absolute; width:130px; height:130px; right:-45px; top:-65px; border-radius:50%; background:rgba(229,34,34,.16); filter:blur(4px); }
+.bio-card-icon { width:45px; height:45px; flex:0 0 45px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.14); border-radius:14px; background:rgba(255,255,255,.075); color:#fff; }
+.bio-star { color:#ffd34d; }
+.bio-card-copy { min-width:0; display:flex; flex:1; flex-direction:column; gap:4px; }
+.bio-card-copy b { font-size:14px; line-height:1.2; }
+.bio-card-copy small { overflow:hidden; color:rgba(255,255,255,.63); font-size:10.5px; line-height:1.35; text-overflow:ellipsis; }
+.bio-card-primary .bio-card-copy small { color:rgba(255,255,255,.78); }
+.bio-card-label { color:#ff514a; font-size:8px; letter-spacing:.17em; font-weight:900; }
+.bio-card-arrow { position:relative; z-index:1; flex:0 0 32px; width:32px; height:32px; display:grid; place-items:center; border-radius:50%; background:rgba(255,255,255,.08); }
+.bio-section-title { display:flex; align-items:center; gap:12px; margin:28px 2px 12px; color:#767775; font-size:9px; letter-spacing:.2em; font-weight:900; }
+.bio-section-title i { height:1px; flex:1; background:var(--bio-line); }
+.bio-contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+.bio-contact-grid a { min-width:0; min-height:66px; display:flex; align-items:center; gap:10px; padding:12px; border:1px solid var(--bio-line); border-radius:16px; background:rgba(255,255,255,.045); color:#fff; text-decoration:none; }
+.bio-contact-grid a>svg { flex:0 0 auto; color:#ef3732; }
+.bio-contact-grid span { min-width:0; display:flex; flex-direction:column; gap:3px; }
+.bio-contact-grid b { font-size:11px; }
+.bio-contact-grid small { overflow:hidden; color:#8f908e; font-size:8.5px; white-space:nowrap; text-overflow:ellipsis; }
+.bio-address { margin:12px 4px 0; display:flex; align-items:flex-start; justify-content:center; gap:7px; color:#777876; font-size:9px; line-height:1.45; text-align:center; }
+.bio-address svg { margin-top:1px; flex:0 0 auto; color:#a5a5a2; }
+.bio-socials { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+.bio-socials a { min-width:0; display:grid; justify-items:center; gap:7px; padding:12px 4px 10px; border:1px solid var(--bio-line); border-radius:15px; color:#d4d4d1; background:rgba(255,255,255,.035); text-decoration:none; }
+.bio-socials a>span { width:32px; height:32px; display:grid; place-items:center; border-radius:10px; background:#171818; color:#fff; font-size:9px; font-weight:900; letter-spacing:.04em; }
+.bio-socials small { font-size:8.5px; }
+.bio-footer { padding:30px 0 6px; color:#4e504e; font-size:8px; letter-spacing:.13em; text-align:center; }
+.bio-modal-backdrop { position:fixed; inset:0; z-index:1000; display:grid; align-items:end; padding:10px; background:rgba(0,0,0,.76); backdrop-filter:blur(9px); animation:bio-fade .2s ease both; }
+.bio-modal { width:min(100%,540px); max-height:calc(100svh - 20px); overflow:auto; position:relative; margin:0 auto; padding:27px 20px 22px; border:1px solid rgba(255,255,255,.14); border-radius:27px; background:linear-gradient(160deg,#151616,#090a0a 55%); box-shadow:0 -20px 70px rgba(0,0,0,.55); color:#fff; animation:bio-sheet .38s cubic-bezier(.2,.8,.2,1) both; }
+.bio-modal-close { position:absolute; right:17px; top:17px; width:36px; height:36px; display:grid; place-items:center; border:1px solid var(--bio-line); border-radius:50%; background:#1d1e1e; color:#fff; cursor:pointer; }
+.bio-modal-kicker { color:#ff4b44; font-size:9px; letter-spacing:.2em; font-weight:900; }
+.bio-modal h2 { margin:6px 0 15px; color:#fff; font-size:29px; letter-spacing:-.035em; }
+.bio-progress { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+.bio-progress i { height:3px; border-radius:99px; background:#2e3030; transition:background .25s ease; }
+.bio-progress i.active { background:var(--bio-red-2); }
+.bio-modal-stage>p { margin:20px 0 13px; color:#b9bab8; font-size:13px; line-height:1.5; }
+.bio-symptom-list { display:grid; gap:8px; }
+.bio-symptom-list button { width:100%; min-height:58px; display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid var(--bio-line); border-radius:15px; background:rgba(255,255,255,.045); color:#fff; cursor:pointer; text-align:left; }
+.bio-symptom-list button:hover { border-color:rgba(255,67,59,.55); }
+.bio-symptom-list button>svg:first-child { color:#f43b35; }
+.bio-symptom-list button span { flex:1; font-size:12px; font-weight:700; }
+.bio-field { display:grid; gap:7px; margin-top:13px; }
+.bio-field span { color:#aaa; font-size:10px; font-weight:700; }
+.bio-field input,.bio-field textarea { width:100%; border:1px solid var(--bio-line); border-radius:14px; outline:none; background:#151616; color:#fff; font:inherit; font-size:16px; }
+.bio-field input { height:51px; padding:0 14px; }
+.bio-field textarea { min-height:96px; padding:13px 14px; resize:vertical; }
+.bio-field input:focus,.bio-field textarea:focus { border-color:#e53631; box-shadow:0 0 0 3px rgba(229,54,49,.1); }
+.bio-modal-nav { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:18px; }
+.bio-back,.bio-next,.bio-send { border:0; border-radius:13px; font-weight:800; cursor:pointer; }
+.bio-back { display:flex; align-items:center; gap:6px; padding:12px 2px; background:transparent; color:#929391; }
+.bio-next { display:flex; align-items:center; gap:7px; padding:13px 17px; background:#ed312c; color:#fff; }
+.bio-next:disabled { cursor:not-allowed; opacity:.38; }
+.bio-result { display:flex; align-items:flex-start; gap:12px; margin:20px 0 14px; padding:15px; border:1px solid rgba(73,201,119,.24); border-radius:16px; background:rgba(73,201,119,.07); }
+.bio-result>span { width:31px; height:31px; flex:0 0 auto; display:grid; place-items:center; border-radius:50%; background:#25a65a; }
+.bio-result b { font-size:13px; }
+.bio-result p { margin:4px 0 0; color:#929490; font-size:10px; line-height:1.4; }
+.bio-summary { margin:0 0 15px; border-top:1px solid var(--bio-line); }
+.bio-summary div { display:grid; grid-template-columns:80px 1fr; gap:10px; padding:11px 2px; border-bottom:1px solid var(--bio-line); font-size:10px; }
+.bio-summary dt { color:#777; }.bio-summary dd { margin:0; color:#ddd; }
+.bio-send { min-height:52px; display:flex; align-items:center; justify-content:center; gap:8px; padding:13px; background:#1ebf63; color:#fff; text-decoration:none; }
+.bio-back-final { margin:8px auto 0; }
+@keyframes bio-enter { from { opacity:0; transform:translateY(12px) } to { opacity:1; transform:none } }
+@keyframes bio-fade { from { opacity:0 } to { opacity:1 } }
+@keyframes bio-sheet { from { opacity:0; transform:translateY(30px) scale(.98) } to { opacity:1; transform:none } }
+@media (min-width:700px) { .bio-shell{padding-top:45px}.bio-modal-backdrop{align-items:center}.bio-modal{border-radius:27px}.bio-card{min-height:82px}.bio-card-primary{min-height:96px} }
+@media (prefers-reduced-motion:reduce) { .bio-profile,.bio-card,.bio-modal-backdrop,.bio-modal{animation:none}.bio-card{transition:none} }
