@@ -84,7 +84,7 @@ const localBusinessSchema = {
   telephone: "+58 422 287 2237",
   description,
   employee: { "@id": `${siteUrl}/#elian-gonzalez` },
-  address: { "@type": "PostalAddress", streetAddress: "F338+3R", addressLocality: "Caracas", postalCode: "1090", addressRegion: "Distrito Capital", addressCountry: "VE" },
+  address: { "@type": "PostalAddress", addressLocality: "Caracas", addressRegion: "Distrito Capital", addressCountry: "VE" },
   openingHoursSpecification: [
     { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "08:00", closes: "18:00" },
     { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "09:00", closes: "15:00" },
