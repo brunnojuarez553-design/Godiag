@@ -111,7 +111,7 @@ export default function BioPage() {
             <span className="bio-online" title="Atención disponible"><Check size={12} strokeWidth={3} /></span>
           </div>
           <span className="bio-eyebrow">AUTOTRÓNICA · CARACAS</span>
-          <h1>Go Diagnosis</h1>
+          <h1>GODIAG</h1>
           <p>Diagnóstico, programación y electrónica automotriz con criterio técnico.</p>
           <div className="bio-trust-row">
             <span><Clock3 size={13} /> Lun–Vie 8:00–18:00</span>
