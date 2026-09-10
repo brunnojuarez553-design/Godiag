@@ -3,7 +3,7 @@ export const BUSINESS_NAME = "Autotrónica Go Diagnosis";
 export const WHATSAPP = "584222872237";
 export const PHONE_DISPLAY = "+58 422 287 2237";
 export const EMAIL = "godiag2023@gmail.com";
-export const ADDRESS = "F338+3R, Caracas 1090, Distrito Capital, Venezuela";
+export const ADDRESS = "Ubicación oficial de GODIAG en Caracas, Venezuela";
 
 export type SeoService = {
   slug: string;
