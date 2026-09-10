@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Assistant from "@/components/Assistant";
 import {
   ArrowLeft,
   ArrowRight,
@@ -126,11 +127,11 @@ export default function BioPage() {
             <span className="bio-card-arrow"><ChevronRight size={20} /></span>
           </button>
 
-          <a className="bio-card bio-card-ai" href={whatsappUrl("Hola Autotrónica Go Diagnosis. Quiero usar la herramienta técnica inteligente para orientar una falla de mi vehículo.")} target="_blank" rel="noreferrer">
+          <button className="bio-card bio-card-ai" type="button" onClick={() => window.dispatchEvent(new CustomEvent("open-assistant"))}>
             <span className="bio-card-icon"><Bot size={23} /></span>
             <span className="bio-card-copy"><span className="bio-card-label">ASISTENCIA INTELIGENTE</span><b>Herramienta técnica</b><small>Orientá tu consulta antes de hablar con el especialista</small></span>
             <span className="bio-card-arrow"><ArrowRight size={20} /></span>
-          </a>
+          </button>
 
           <Link className="bio-card" href="/">
             <span className="bio-card-icon"><Globe2 size={22} /></span>
@@ -186,6 +187,7 @@ export default function BioPage() {
           </section>
         </div>
       )}
+      <Assistant hideLauncher />
     </main>
   );
 }
