@@ -85,9 +85,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       email: EMAIL,
       address: {
         "@type": "PostalAddress",
-        streetAddress: "F338+3R",
         addressLocality: "Caracas",
-        postalCode: "1090",
         addressRegion: "Distrito Capital",
         addressCountry: "VE",
       },
