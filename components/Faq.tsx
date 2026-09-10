@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: "¿Dónde está ubicado el taller?",
-    a: "Estamos en F338+3R, Caracas 1090, Distrito Capital, Venezuela. La atención principal se realiza en el taller.",
+    a: "Estamos en Caracas. Podés abrir nuestra ubicación oficial de Google Maps desde la sección Cómo llegar del sitio.",
   },
   {
     q: "¿Cuál es el horario de atención?",
