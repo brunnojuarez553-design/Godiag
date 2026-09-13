@@ -358,7 +358,7 @@ html{scroll-padding-top:84px}
 /* --- Banda del quiz de diagnóstico rápido --- */
 .quiz-band{padding:0 6vw;margin:70px 0}
 [data-slot="select-trigger"]{background:#090b0e!important;border-color:#30353b!important;color:#fff!important;border-radius:0!important}
-[data-slot="select-content"]{background:#15181c!important;border:1px solid #343940!important;color:#fff!important;box-shadow:0 25px 60px #000c!important;z-index:80!important}
+[data-slot="select-content"]{background:#15181c!important;border:1px solid #343940!important;color:#fff!important;box-shadow:0 25px 60px #000c!important;z-index:4000!important;pointer-events:auto!important}
 [data-slot="select-item"]{color:#fff!important}
 [data-slot="select-item"][data-highlighted]{background:#22262c!important;color:#fff!important}
 [data-slot="select-value"]{color:#fff}
