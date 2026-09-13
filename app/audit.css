@@ -146,7 +146,7 @@ footer>div a,footer>div span{white-space:nowrap}
  h1{font-size:clamp(42px,13vw,56px)!important;line-height:.92!important;letter-spacing:-3px!important;margin-top:24px!important;margin-bottom:22px!important}
  .hero-copy>p{max-width:95%;font-size:13.5px!important;line-height:1.6!important}
  .hero-actions{width:100%}
- .hero-actions .magnetic,.hero-actions .primary-btn{width:100%}
+ .hero-actions .primary-btn{width:100%}
  .proof-row{width:100%;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:32px!important}
  .proof-row div{padding:0 7px!important}
  .proof-row b{font-size:10px!important;line-height:1.2}

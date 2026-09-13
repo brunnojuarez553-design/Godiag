@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import Image from "next/image";
 import {
   Activity,
+  ArrowUpRight,
   ArrowRight,
   CircuitBoard,
   Gauge,
@@ -27,7 +28,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Assistant from "@/components/Assistant";
 import Reveal from "@/components/Reveal";
-import Magnetic from "@/components/Magnetic";
 import HeroVideo from "@/components/HeroVideo";
 import CarQuiz from "@/components/CarQuiz";
 import Faq from "@/components/Faq";
@@ -38,7 +38,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 
 const whatsapp = "584222872237";
 const email = "godiag2023@gmail.com";
-const address = "Ubicación oficial de GODIAG en Caracas, Venezuela";
+const address = "Ubicación oficial de GO DIAG en Caracas, Venezuela";
 const instagram = "https://www.instagram.com/godiag.ve";
 const tiktok = "https://www.tiktok.com/@godiag.ve";
 const facebook = "https://www.facebook.com/share/1BvVCyMgEn/";
@@ -136,8 +136,8 @@ function Quote({ label = "Solicitar diagnóstico", className = "" }: { label?: s
         <p className="modal-lead">Completá la información básica del vehículo. La atención principal se realiza en el taller; programación y EGR OFF pueden coordinarse a domicilio con turno y validación previa.</p>
         <div className="form-grid">
           <label><span>Marca, modelo y año</span><Input value={vehicle} onChange={(e) => setVehicle(e.target.value)} placeholder="Ej. Toyota Corolla 2022" /></label>
-          <label><span>¿Qué necesitás?</span><Select value={service} onValueChange={setService}><SelectTrigger><SelectValue placeholder="Seleccionar servicio" /></SelectTrigger><SelectContent>{services.map((s) => <SelectItem key={s.title} value={s.title}>{s.title}</SelectItem>)}</SelectContent></Select></label>
-          <label><span>Modalidad</span><Select value={mode} onValueChange={setMode}><SelectTrigger><SelectValue placeholder="Seleccionar modalidad" /></SelectTrigger><SelectContent><SelectItem value="En el taller">En el taller</SelectItem>{homeEligible && <SelectItem value="A domicilio · con coordinación previa">A domicilio · con coordinación previa</SelectItem>}</SelectContent></Select></label>
+          <label><span>Servicio</span><Select value={service} onValueChange={setService}><SelectTrigger className="quote-select-trigger" aria-label="Seleccionar servicio"><SelectValue placeholder="Seleccionar servicio" /></SelectTrigger><SelectContent className="quote-select-content" position="popper" align="start" sideOffset={6}>{services.map((s) => <SelectItem key={s.title} value={s.title}>{s.title}</SelectItem>)}</SelectContent></Select></label>
+          <label><span>Modalidad</span><Select value={mode} onValueChange={setMode}><SelectTrigger className="quote-select-trigger" aria-label="Seleccionar modalidad"><SelectValue placeholder="Seleccionar modalidad" /></SelectTrigger><SelectContent className="quote-select-content" position="popper" align="start" sideOffset={6}><SelectItem value="En el taller">En el taller</SelectItem>{homeEligible && <SelectItem value="A domicilio · con coordinación previa">A domicilio · con coordinación previa</SelectItem>}</SelectContent></Select></label>
           <label className="full"><span>Contanos qué sucede</span><Textarea value={details} onChange={(e) => setDetails(e.target.value)} placeholder="Testigos encendidos, pérdida de potencia, falla intermitente..." /></label>
         </div>
         <button className="send-btn" onClick={send}>Enviar evaluación por WhatsApp <ArrowRight size={18} /></button>
@@ -151,6 +151,7 @@ export default function Home() {
   const [menu, setMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const navRef = useRef<HTMLElement>(null);
   const closeMenu = () => setMenu(false);
 
   useEffect(() => {
@@ -160,11 +161,27 @@ export default function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!menu) return;
+    const closeOnEscape = (event: globalThis.KeyboardEvent) => {
+      if (event.key === "Escape") closeMenu();
+    };
+    const closeOutside = (event: PointerEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) closeMenu();
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    document.addEventListener("pointerdown", closeOutside);
+    return () => {
+      document.removeEventListener("keydown", closeOnEscape);
+      document.removeEventListener("pointerdown", closeOutside);
+    };
+  }, [menu]);
+
   return (
     <main>
-      <header className={`nav${scrolled ? " scrolled" : ""}`}>
+      <header ref={navRef} className={`nav${scrolled ? " scrolled" : ""}`}>
         <a className="brand brand-logo" href="#top" onClick={closeMenu}><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg" alt="Autotrónica Go Diagnosis" /></a>
-        <nav className={menu ? "open" : ""}>
+        <nav id="main-navigation" className={menu ? "open" : ""} aria-label="Navegación principal">
           <a href="#especialidades" onClick={closeMenu}>Especialidades</a>
           <a href="#domicilio" onClick={closeMenu}>A domicilio</a>
           <a href="#tecnologia" onClick={closeMenu}>Tecnología</a>
@@ -183,7 +200,7 @@ export default function Home() {
         </nav>
         <Quote label="Cotizar diagnóstico" className="nav-cta" />
         <ThemeToggle />
-        <button className="menu-btn" onClick={() => setMenu(!menu)} aria-label={menu ? "Cerrar menú" : "Abrir menú"} aria-expanded={menu}>{menu ? <X /> : <Menu />}</button>
+        <button className="menu-btn" onClick={() => setMenu(!menu)} aria-label={menu ? "Cerrar menú" : "Abrir menú"} aria-expanded={menu} aria-controls="main-navigation">{menu ? <X /> : <Menu />}</button>
       </header>
 
       <section className="hero video-hero" id="top">
@@ -194,7 +211,7 @@ export default function Home() {
           <div className="brand-slogan">Diagnóstico preciso, solución efectiva</div>
           <h1>No cambiamos piezas.<br /><em>Encontramos la causa.</em></h1>
           <p>Autotrónica Go Diagnosis combina diagnóstico avanzado, medición y formación técnica continua para resolver fallas electrónicas con criterio, no por descarte. Atención principal en taller; programación y EGR OFF a domicilio con coordinación previa.</p>
-          <div className="hero-actions"><Magnetic><Quote className="primary-btn" /></Magnetic><a href="#especialidades" className="text-link">Explorar servicios</a></div>
+          <div className="hero-actions"><Quote className="primary-btn" /><a href="#especialidades" className="text-link">Explorar servicios</a></div>
           <div className="proof-row">
             <div><b>8 años</b><span>de experiencia en el rubro</span></div>
             <div><b>A domicilio</b><span>programación + EGR OFF</span></div>
@@ -244,13 +261,13 @@ export default function Home() {
       <LocationMap />
 
       <section className="cta-section" id="contacto">
-        <span className="kicker">TALLER EN CARACAS</span><h2>Contanos qué falla.<br /><em>Empecemos por diagnosticar.</em></h2><p>Atención principal en el taller para diagnóstico y reparación. Programación y EGR OFF pueden coordinarse a domicilio con turno y validación previa.</p><Magnetic><Quote label="Preparar mi evaluación" className="primary-btn" /></Magnetic>
+        <span className="kicker">TALLER EN CARACAS</span><h2>Contanos qué falla.<br /><em>Empecemos por diagnosticar.</em></h2><p>Atención principal en el taller para diagnóstico y reparación. Programación y EGR OFF pueden coordinarse a domicilio con turno y validación previa.</p><Quote label="Preparar mi evaluación" className="primary-btn" />
         <a className="phone" href={`https://wa.me/${whatsapp}`} target="_blank" rel="noreferrer"><Phone size={16} /> +58 422 287 2237</a>
         <a className="phone" href={`mailto:${email}`}><Mail size={16} /> {email}</a>
         <div className="contact-socials" aria-label="Redes sociales de Autotrónica Go Diagnosis">
-          <a href={instagram} target="_blank" rel="noreferrer" aria-label="Instagram de Autotrónica Go Diagnosis"><InstagramIcon size={19} /><span>Instagram</span></a>
-          <a href={facebook} target="_blank" rel="noreferrer" aria-label="Facebook de Autotrónica Go Diagnosis"><FacebookIcon size={19} /><span>Facebook</span></a>
-          <a href={tiktok} target="_blank" rel="noreferrer" aria-label="TikTok de Autotrónica Go Diagnosis"><TikTokIcon size={18} /><span>TikTok</span></a>
+          <a className="social-premium social-instagram" href={instagram} target="_blank" rel="noreferrer" aria-label="Instagram de Autotrónica Go Diagnosis"><i><InstagramIcon size={20} /></i><span><b>Instagram</b><small>@godiag.ve</small></span><ArrowUpRight size={16} /></a>
+          <a className="social-premium social-facebook" href={facebook} target="_blank" rel="noreferrer" aria-label="Facebook de Autotrónica Go Diagnosis"><i><FacebookIcon size={20} /></i><span><b>Facebook</b><small>Perfil oficial</small></span><ArrowUpRight size={16} /></a>
+          <a className="social-premium social-tiktok" href={tiktok} target="_blank" rel="noreferrer" aria-label="TikTok de Autotrónica Go Diagnosis"><i><TikTokIcon size={19} /></i><span><b>TikTok</b><small>@godiag.ve</small></span><ArrowUpRight size={16} /></a>
         </div>
         <div className="work-proof"><div><b>Lunes a viernes</b><span>8:00 a 18:00</span></div><div><b>Sábados</b><span>9:00 a 15:00</span></div><div><b>Modalidades</b><span>Taller · Programación/EGR a domicilio</span></div><div><b>Dirección</b><span>{address}</span></div></div>
       </section>

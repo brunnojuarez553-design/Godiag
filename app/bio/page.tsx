@@ -29,7 +29,7 @@ const background = "https://res.cloudinary.com/dpiavcukm/image/upload/v178831010
 const phone = "+58 422 287 2237";
 const whatsapp = "584222872237";
 const email = "godiag2023@gmail.com";
-const address = "Ubicación oficial de GODIAG en Caracas, Venezuela";
+const address = "Ubicación oficial de GO DIAG en Caracas, Venezuela";
 const maps = "https://maps.app.goo.gl/zRVeuJy12vhZv3WL6";
 const googleReview = "https://g.page/r/CWrMOeqj4z8aEBI/review";
 
@@ -112,7 +112,7 @@ export default function BioPage() {
             <span className="bio-online" title="Atención disponible"><Check size={12} strokeWidth={3} /></span>
           </div>
           <span className="bio-eyebrow">AUTOTRÓNICA · CARACAS</span>
-          <h1>GODIAG</h1>
+          <h1>GO DIAG</h1>
           <p>Diagnóstico, programación y electrónica automotriz con criterio técnico.</p>
           <div className="bio-trust-row">
             <span><Clock3 size={13} /> Lun–Vie 8:00–18:00</span>

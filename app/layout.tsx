@@ -21,6 +21,7 @@ import "./readability.css";
 import "./premium-finish.css";
 import "./final-audit.css";
 import "./theme.css";
+import "./desktop-menu.css";
 
 const logo = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg";
 const specialistImage = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788231287/IMG_1017_rx0uzq.jpg";
