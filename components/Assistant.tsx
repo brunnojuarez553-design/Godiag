@@ -14,21 +14,27 @@ type Lead = {
   servicio: string | null;
   modalidad: string | null;
   detalle: string | null;
+  fecha_preferida: string | null;
+  horario_preferido: string | null;
+  zona: string | null;
   listo: boolean;
 };
 
 function buildWhatsappMessage(lead: Lead) {
   const lines = [
-    "Hola Autotrónica Go Diagnosis. Vengo del asistente virtual de la página y te dejo mis datos:",
+    "Hola Autotrónica Go Diagnosis. Quiero solicitar un turno. Estos son los datos recopilados por el asistente:",
     "",
+    `Nombre: ${lead.nombre || "A confirmar"}`,
     `Vehículo: ${lead.vehiculo || "A confirmar"}`,
-    `Servicio: ${lead.servicio || "A confirmar"}`,
-    `Modalidad: ${lead.modalidad || "A confirmar"}`,
+    `Servicio: ${lead.servicio || "Evaluación técnica"}`,
     `Detalle / síntomas: ${lead.detalle || "Sin detalle"}`,
+    `Modalidad: ${lead.modalidad || "A confirmar"}`,
+    `Fecha preferida: ${lead.fecha_preferida || "A confirmar"}`,
+    `Horario preferido: ${lead.horario_preferido || "A confirmar"}`,
   ];
-  if (lead.nombre) lines.push(`Nombre: ${lead.nombre}`);
-  lines.push("", "(Consulta pre-cargada por el asistente virtual de la web)");
-  return lines.join("\n");
+  if (lead.zona) lines.push(`Zona para atención a domicilio: ${lead.zona}`);
+  lines.push("", "Quedo atento a la confirmación de disponibilidad del turno.");
+  return lines.join("\\n");
 }
 
 export default function Assistant({ hideLauncher = false }: { hideLauncher?: boolean }) {
@@ -118,7 +124,7 @@ export default function Assistant({ hideLauncher = false }: { hideLauncher?: boo
       setMessages((m) => [...m, { role: "assistant", content: reply }]);
       if (data.lead) setLead(data.lead);
       if (data.fallback || (data.error && !data.lead)) {
-        setLead((prev) => prev ?? { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, listo: true });
+        setLead((prev) => prev ?? { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, fecha_preferida: null, horario_preferido: null, zona: null, listo: true });
       }
     } catch {
       setMessages((m) => [
@@ -129,7 +135,7 @@ export default function Assistant({ hideLauncher = false }: { hideLauncher?: boo
             "Ahora mismo se complicó la conexión. Escribinos directo por WhatsApp y el especialista continúa con tu consulta.",
         },
       ]);
-      setLead((prev) => prev ?? { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, listo: true });
+      setLead((prev) => prev ?? { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, fecha_preferida: null, horario_preferido: null, zona: null, listo: true });
     } finally {
       setLoading(false);
     }
@@ -206,7 +212,7 @@ export default function Assistant({ hideLauncher = false }: { hideLauncher?: boo
 
             {lead?.listo && (
               <div className="ai-premium-wrap">
-                <p>Consulta preparada. Al tocar el botón, WhatsApp se abre con toda la información que recopilamos.</p>
+                <p>Preagendamiento completo. WhatsApp se abrirá con todos los datos para que el taller confirme la disponibilidad del turno.</p>
                 <a
                   className="ai-premium-btn"
                   href={`https://wa.me/${whatsapp}?text=${encodeURIComponent(buildWhatsappMessage(lead))}`}
@@ -214,7 +220,7 @@ export default function Assistant({ hideLauncher = false }: { hideLauncher?: boo
                   rel="noreferrer"
                 >
                   <MessageCircle size={19} />
-                  Enviar consulta por WhatsApp
+                  Solicitar turno por WhatsApp
                 </a>
               </div>
             )}
