@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Send, X, Phone } from "lucide-react";
+import { MessageCircle, Send, X } from "lucide-react";
 
 const whatsapp = "584222872237";
 const logo =
@@ -50,7 +50,7 @@ export default function Assistant({ hideLauncher = false }: { hideLauncher?: boo
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages, loading]);
+  }, [messages, loading, lead]);
 
   useEffect(() => {
     if (!open) return;
@@ -206,15 +206,15 @@ export default function Assistant({ hideLauncher = false }: { hideLauncher?: boo
 
             {lead?.listo && (
               <div className="ai-premium-wrap">
-                <p>Ya tengo la información básica. Podés continuar por WhatsApp sin volver a explicar todo.</p>
+                <p>Consulta preparada. Al tocar el botón, WhatsApp se abre con toda la información que recopilamos.</p>
                 <a
                   className="ai-premium-btn"
                   href={`https://wa.me/${whatsapp}?text=${encodeURIComponent(buildWhatsappMessage(lead))}`}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Phone size={18} />
-                  Continuar por WhatsApp
+                  <MessageCircle size={19} />
+                  Enviar consulta por WhatsApp
                 </a>
               </div>
             )}
