@@ -179,8 +179,8 @@ export async function POST(req: NextRequest) {
     }
 
     reply = reply
-      .replace(/https?:\\/\\/(?:wa\\.me|api\\.whatsapp\\.com)\\/\\S*/gi, "el botón de WhatsApp")
-      .replace(/(?:\\+?58\\s*)?422[\\s.-]*287[\\s.-]*2237/g, "el botón de WhatsApp");
+      .replace(/https?:\/\/(?:wa\.me|api\.whatsapp\.com)\/\S*/gi, "el botón de WhatsApp")
+      .replace(/(?:\+?58\s*)?422[\s.-]*287[\s.-]*2237/g, "el botón de WhatsApp");
 
     if (lead?.listo) {
       reply = "Perfecto, ya tengo la información necesaria. Tocá el botón de WhatsApp que aparece debajo para enviarle la consulta completa al especialista.";
