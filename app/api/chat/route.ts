@@ -17,7 +17,7 @@ TU PERSONALIDAD:
 - Hacés una pregunta a la vez.
 - Primero entendés el problema del cliente y luego pedís, de manera natural, marca, modelo, año y síntomas si todavía faltan.
 - Si el cliente ya dio un dato, no lo volvés a pedir.
-- Cuando haya información suficiente, ofrecé continuar por WhatsApp con la consulta ya preparada.
+- Cuando haya información suficiente, indicá brevemente que la consulta está preparada y que debe tocar el botón de WhatsApp que aparecerá debajo.\n- NUNCA escribas el número de teléfono, enlaces de WhatsApp ni instrucciones para agregar el contacto dentro del chat. La interfaz muestra el botón automáticamente.
 
 INFORMACIÓN REAL DEL NEGOCIO. RESPONDÉ SOLO CON BASE EN ESTOS DATOS:
 - Nombre: Autotrónica Go Diagnosis.
@@ -79,7 +79,7 @@ Reglas:
 - modalidad: usá "En el taller" o "A domicilio" según lo que el cliente indique; si todavía no lo dijo, null.
 - detalle: resumen breve del síntoma o necesidad.
 - nombre: solo si el cliente lo dijo.
-- listo: true solo cuando hay suficiente información sobre vehículo, servicio y detalle para continuar por WhatsApp.
+- listo: true cuando ya hay vehículo y un detalle o síntoma útil. El servicio puede inferirse de la conversación; la modalidad y el nombre son opcionales.
 - No inventes datos.`;
 
 async function callGroq(apiKey: string, body: Record<string, unknown>) {
@@ -144,7 +144,7 @@ export async function POST(req: NextRequest) {
       include_reasoning: false,
     });
 
-    const reply: string = chatCompletion?.choices?.[0]?.message?.content?.trim() || "Disculpá, se me trabó algo. ¿Me contás de nuevo qué necesitás con tu vehículo?";
+    let reply: string = chatCompletion?.choices?.[0]?.message?.content?.trim() || "Disculpá, se me trabó algo. ¿Me contás de nuevo qué necesitás con tu vehículo?";
     let lead = null;
 
     if (!isKickoff) {
@@ -170,12 +170,20 @@ export async function POST(req: NextRequest) {
             servicio: parsed.servicio ?? null,
             modalidad: parsed.modalidad ?? null,
             detalle: parsed.detalle ?? null,
-            listo: Boolean(parsed.listo && parsed.vehiculo && parsed.servicio && parsed.detalle),
+            listo: Boolean(parsed.listo && parsed.vehiculo && parsed.detalle),
           };
         }
       } catch (e) {
         console.error("Extraction error:", e);
       }
+    }
+
+    reply = reply
+      .replace(/https?:\\/\\/(?:wa\\.me|api\\.whatsapp\\.com)\\/\\S*/gi, "el botón de WhatsApp")
+      .replace(/(?:\\+?58\\s*)?422[\\s.-]*287[\\s.-]*2237/g, "el botón de WhatsApp");
+
+    if (lead?.listo) {
+      reply = "Perfecto, ya tengo la información necesaria. Tocá el botón de WhatsApp que aparece debajo para enviarle la consulta completa al especialista.";
     }
 
     return NextResponse.json({ reply, lead });
