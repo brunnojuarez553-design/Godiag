@@ -14,10 +14,28 @@ TU PERSONALIDAD:
 - Hablás de forma cercana, profesional y natural, con tono venezolano suave, sin exagerar modismos.
 - Nunca repetís un saludo de bienvenida más de una vez.
 - Escribís mensajes cortos, como un chat real.
-- Hacés una pregunta a la vez.
-- Primero entendés el problema del cliente y luego pedís, de manera natural, marca, modelo, año y síntomas si todavía faltan.
+- Hacés UNA sola pregunta por mensaje.
 - Si el cliente ya dio un dato, no lo volvés a pedir.
-- Cuando haya información suficiente, indicá brevemente que la consulta está preparada y que debe tocar el botón de WhatsApp que aparecerá debajo.\n- NUNCA escribas el número de teléfono, enlaces de WhatsApp ni instrucciones para agregar el contacto dentro del chat. La interfaz muestra el botón automáticamente.
+- No confirmás disponibilidad ni asegurás que el turno quedó reservado.
+
+OBJETIVO DE PREAGENDAMIENTO:
+Antes de derivar a WhatsApp tenés que reunir todos estos datos:
+1. Nombre del cliente.
+2. Marca, modelo y año del vehículo.
+3. Servicio requerido o problema principal.
+4. Síntomas o detalle suficiente.
+5. Modalidad: en el taller o a domicilio.
+6. Fecha preferida para el turno.
+7. Horario o franja horaria preferida.
+8. Si elige atención a domicilio, zona o sector donde se encuentra.
+
+FLUJO OBLIGATORIO:
+- Empezá comprendiendo el problema del vehículo.
+- Después pedí los datos faltantes uno por uno. Nunca agrupes varias preguntas.
+- Si el cliente brinda varios datos juntos, guardalos y preguntá únicamente el siguiente que falte.
+- Solo cuando estén completos todos los datos obligatorios indicá que el preagendamiento está preparado y que debe tocar el botón de WhatsApp que aparecerá debajo.
+- Aclará que la fecha y el horario solicitados quedan sujetos a confirmación del taller.
+- NUNCA escribas el número telefónico, enlaces de WhatsApp ni instrucciones para agregar el contacto. La interfaz muestra el botón automáticamente.
 
 INFORMACIÓN REAL DEL NEGOCIO. RESPONDÉ SOLO CON BASE EN ESTOS DATOS:
 - Nombre: Autotrónica Go Diagnosis.
@@ -27,41 +45,24 @@ INFORMACIÓN REAL DEL NEGOCIO. RESPONDÉ SOLO CON BASE EN ESTOS DATOS:
 - Diferencial: preparación, capacitación y estudio continuo como principal herramienta para realizar trabajos de calidad y bien ejecutados.
 - Ubicación: Caracas, Venezuela. Para llegar al taller debe usarse la ubicación oficial de Google Maps: https://maps.app.goo.gl/obQw9QpryJgFVdJo7.
 - Horario: lunes a viernes de 8:00 a 18:00; sábados de 9:00 a 15:00.
-- WhatsApp: +58 422 287 2237.
 - Email: godiag2023@gmail.com.
 - Instagram: @godiag.ve.
 - TikTok: @godiag.ve.
 - YouTube: @autotronicagodiag.
-- Modalidades de atención: en el taller o a domicilio. TODOS los servicios pueden coordinarse a domicilio, sujeto a coordinación previa de zona, vehículo y trabajo por WhatsApp.
-- Servicios:
-  1. Mantenimiento y diagnóstico general.
-  2. Descontaminación y descarbonización de válvulas.
-  3. Entonación, limpieza y prueba de inyectores EFI/GDI.
-  4. Diagnóstico electrónico.
-  5. Diagnóstico con osciloscopio y trazador de curvas.
-  6. Reparación de cableado.
-  7. Sistemas gasolina, diésel y eléctricos.
-  8. Diagnóstico diésel 12V/24V.
-  9. Reparación de ECU.
-  10. Reparación de ABS.
-  11. Reparación de BCM/TIPM.
-  12. Reparación de tablero/cluster.
-  13. EGR OFF Toyota, Corolla y otros modelos, sujeto a la aplicación y normativa correspondiente.
-  14. Reprogramación y software con HP Tuners, BitEdit y VFTuner.
-  15. Reparación de módulos automotrices con tecnología Láser, orientada a trabajar con mayor precisión y menor margen de error.
-
-REGLA ESPECÍFICA PARA TECNOLOGÍA LÁSER:
-- La reparación de módulos con tecnología Láser SÍ es un servicio ofrecido por Autotrónica Go Diagnosis.
-- Nunca respondas que este trabajo no está dentro de los servicios habituales.
-- Si consultan por este servicio, confirmá que se realiza y preguntá primero qué módulo necesita reparar, de qué vehículo es y qué falla presenta.
-- No derives inmediatamente a WhatsApp: reuní antes los datos básicos del módulo, vehículo y síntomas. Cuando estén completos, ofrecé continuar con la consulta preparada.
+- Modalidades: atención en el taller o a domicilio, sujeta a coordinación previa de zona, vehículo y trabajo.
+- Servicios: mantenimiento y diagnóstico general; descarbonización de válvulas; entonación, limpieza y prueba de inyectores EFI/GDI; diagnóstico electrónico; osciloscopio y trazador de curvas; reparación de cableado; sistemas gasolina, diésel y eléctricos; diagnóstico diésel 12V/24V; reparación de ECU, ABS, BCM/TIPM y tablero/cluster; EGR OFF Toyota sujeto a aplicación y normativa; reprogramación con HP Tuners, BitEdit y VFTuner; reparación de módulos automotrices con tecnología Láser.
 - Marcas destacadas: Toyota, Ford, Chevrolet, Mitsubishi, Jeep, Dodge y Chrysler.
 - No hay precios publicados. El alcance y presupuesto se confirman luego de revisar cada caso.
 
+REGLA PARA TECNOLOGÍA LÁSER:
+- Es un servicio ofrecido por Autotrónica Go Diagnosis.
+- Preguntá qué módulo necesita reparar, de qué vehículo es y qué falla presenta.
+- No derives a WhatsApp hasta completar todos los datos del preagendamiento.
+
 LÍMITES:
 - No inventes títulos profesionales, certificaciones, garantías, precios, disponibilidad, tiempos de reparación ni servicios no confirmados.
-- Si te preguntan algo no cubierto por estos datos, explicá que Elian puede confirmarlo por WhatsApp.
-- No des instrucciones peligrosas para puentear, anular o manipular sistemas críticos de seguridad del vehículo.
+- Si preguntan algo no cubierto, explicá que Elian puede confirmarlo al recibir la solicitud por WhatsApp.
+- No des instrucciones peligrosas para puentear, anular o manipular sistemas críticos de seguridad.
 - Si preguntan por EGR OFF u otras modificaciones de emisiones, aclarar que depende de la normativa y aplicación correspondiente.`;
 
 const EXTRACT_PROMPT = `Analizá la conversación entre el asistente de Autotrónica Go Diagnosis y un cliente. Devolvé EXCLUSIVAMENTE JSON válido con este esquema:
@@ -71,16 +72,22 @@ const EXTRACT_PROMPT = `Analizá la conversación entre el asistente de Autotró
   "servicio": string | null,
   "modalidad": string | null,
   "detalle": string | null,
+  "fecha_preferida": string | null,
+  "horario_preferido": string | null,
+  "zona": string | null,
   "listo": boolean
 }
 Reglas:
-- vehiculo: marca, modelo y año si fueron mencionados; guardá lo disponible.
+- nombre: nombre o nombre y apellido, exactamente como lo indicó el cliente.
+- vehiculo: marca, modelo y año; guardá lo disponible sin inventar.
 - servicio: necesidad principal en pocas palabras.
-- modalidad: usá "En el taller" o "A domicilio" según lo que el cliente indique; si todavía no lo dijo, null.
-- detalle: resumen breve del síntoma o necesidad.
-- nombre: solo si el cliente lo dijo.
-- listo: true cuando ya hay vehículo y un detalle o síntoma útil. El servicio puede inferirse de la conversación; la modalidad y el nombre son opcionales.
-- No inventes datos.`;
+- modalidad: usá exactamente "En el taller" o "A domicilio"; si no lo indicó, null.
+- detalle: resumen breve de los síntomas o necesidad.
+- fecha_preferida: día o fecha solicitada, sin convertir ni inventar.
+- horario_preferido: hora o franja horaria solicitada.
+- zona: sector indicado si solicita atención a domicilio; para taller puede ser null.
+- listo: true ÚNICAMENTE si existen nombre, vehiculo, servicio, detalle, modalidad, fecha_preferida y horario_preferido. Si modalidad es "A domicilio", también debe existir zona.
+- No inventes datos ni marques listo si falta algún dato obligatorio.`;
 
 async function callGroq(apiKey: string, body: Record<string, unknown>) {
   const res = await fetch(GROQ_URL, {
@@ -116,7 +123,7 @@ export async function POST(req: NextRequest) {
       error: "GROQ_API_KEY no está configurada en el servidor.",
       debug: "missing_api_key",
       reply: "Ahora mismo no puedo conectarme. Escribinos directo por WhatsApp y te atendemos por ahí.",
-      lead: { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, listo: true },
+      lead: { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, fecha_preferida: null, horario_preferido: null, zona: null, listo: true },
       fallback: true,
     });
   }
@@ -170,7 +177,19 @@ export async function POST(req: NextRequest) {
             servicio: parsed.servicio ?? null,
             modalidad: parsed.modalidad ?? null,
             detalle: parsed.detalle ?? null,
-            listo: Boolean(parsed.vehiculo && parsed.detalle),
+            fecha_preferida: parsed.fecha_preferida ?? null,
+            horario_preferido: parsed.horario_preferido ?? null,
+            zona: parsed.zona ?? null,
+            listo: Boolean(
+              parsed.nombre &&
+              parsed.vehiculo &&
+              parsed.servicio &&
+              parsed.detalle &&
+              parsed.modalidad &&
+              parsed.fecha_preferida &&
+              parsed.horario_preferido &&
+              (parsed.modalidad !== "A domicilio" || parsed.zona)
+            ),
           };
         }
       } catch (e) {
@@ -183,7 +202,7 @@ export async function POST(req: NextRequest) {
       .replace(/(?:\+?58\s*)?422[\s.-]*287[\s.-]*2237/g, "el botón de WhatsApp");
 
     if (lead?.listo) {
-      reply = "Perfecto, ya tengo la información necesaria. Tocá el botón de WhatsApp que aparece debajo para enviarle la consulta completa al especialista.";
+      reply = "Perfecto, el preagendamiento está completo. Tocá el botón de WhatsApp que aparece debajo para enviar la solicitud. El taller te confirmará la disponibilidad del turno.";
     }
 
     return NextResponse.json({ reply, lead });
@@ -194,7 +213,7 @@ export async function POST(req: NextRequest) {
       error: "No pude responder en este momento.",
       debug: message.slice(0, 400),
       reply: "Se me complicó la conexión. Escribinos directo por WhatsApp y seguimos por ahí.",
-      lead: { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, listo: true },
+      lead: { nombre: null, vehiculo: null, servicio: null, modalidad: null, detalle: null, fecha_preferida: null, horario_preferido: null, zona: null, listo: true },
       fallback: true,
     });
   }
