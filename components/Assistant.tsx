@@ -34,7 +34,7 @@ function buildWhatsappMessage(lead: Lead) {
   ];
   if (lead.zona) lines.push(`Zona para atención a domicilio: ${lead.zona}`);
   lines.push("", "Quedo atento a la confirmación de disponibilidad del turno.");
-  return lines.join("\\n");
+  return lines.join("\n");
 }
 
 export default function Assistant({ hideLauncher = false }: { hideLauncher?: boolean }) {
