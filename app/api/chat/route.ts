@@ -170,7 +170,7 @@ export async function POST(req: NextRequest) {
             servicio: parsed.servicio ?? null,
             modalidad: parsed.modalidad ?? null,
             detalle: parsed.detalle ?? null,
-            listo: Boolean(parsed.listo && parsed.vehiculo && parsed.detalle),
+            listo: Boolean(parsed.vehiculo && parsed.detalle),
           };
         }
       } catch (e) {
