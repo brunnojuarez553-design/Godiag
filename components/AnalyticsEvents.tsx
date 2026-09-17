@@ -5,6 +5,20 @@ import { usePathname } from "next/navigation";
 
 type EventParams = Record<string, string | number | boolean | undefined>;
 type GtagWindow = Window & { gtag?: (...args: unknown[]) => void };
+type AssistantOpenDetail = { service?: string; trigger?: "service_card" | "programmatic" };
+
+const ANALYTICS_EVENTS = {
+  servicePageView: "service_page_view",
+  assistantOpen: "assistant_open",
+  whatsappClick: "whatsapp_click",
+  homeServiceClick: "home_service_click",
+  assistantLead: "assistant_lead",
+  phoneClick: "phone_click",
+  locationClick: "location_click",
+  quoteOpen: "quote_open",
+  quizSubmit: "quiz_submit",
+  quoteSubmit: "quote_submit",
+} as const;
 
 function track(name: string, params: EventParams = {}, attempt = 0) {
   if (typeof window === "undefined") return;
@@ -32,6 +46,7 @@ function clickLocation(target: Element) {
   if (target.closest("footer")) return "footer";
   if (target.closest(".seo-service-page")) return "seo_service_page";
   if (target.closest(".ai-panel")) return "assistant";
+  if (target.closest(".bio-page")) return "bio";
   return "other";
 }
 
@@ -98,7 +113,7 @@ export default function AnalyticsEvents() {
   useEffect(() => {
     if (pathname.startsWith("/servicios/")) {
       const slug = pathname.split("/").filter(Boolean).pop() || "unknown";
-      track("service_page_view", { service_slug: slug });
+      track(ANALYTICS_EVENTS.servicePageView, { service_slug: slug });
     }
   }, [pathname]);
 
@@ -106,10 +121,10 @@ export default function AnalyticsEvents() {
     applyBusinessContent();
 
     const onOpenAssistant = (event: Event) => {
-      const detail = (event as CustomEvent<{ service?: string }>).detail;
-      track("assistant_open", {
-        source: detail?.service ? "service_card" : "custom_event",
-        service: detail?.service,
+      const detail = (event as CustomEvent<AssistantOpenDetail>).detail;
+      track(ANALYTICS_EVENTS.assistantOpen, {
+        trigger: detail?.trigger ?? (detail?.service ? "service_card" : "programmatic"),
+        service_name: detail?.service,
       });
     };
 
@@ -117,7 +132,7 @@ export default function AnalyticsEvents() {
       const target = event.target instanceof Element ? event.target : null;
       if (!target) return;
 
-      const location = clickLocation(target);
+      const uiLocation = clickLocation(target);
       const anchor = target.closest("a");
       const button = target.closest("button");
 
@@ -126,27 +141,28 @@ export default function AnalyticsEvents() {
         const label = (anchor.textContent || "").trim().replace(/\s+/g, " ").slice(0, 100);
 
         if (href.includes("wa.me/")) {
-          track("whatsapp_click", { location, link_text: label });
-          if (target.closest("#domicilio")) track("home_service_click", { location: "domicilio", channel: "whatsapp" });
-          if (target.closest(".ai-premium-wrap")) track("assistant_lead", { channel: "whatsapp" });
+          track(ANALYTICS_EVENTS.whatsappClick, { ui_location: uiLocation, ui_label: label });
+          if (target.closest("#domicilio")) track(ANALYTICS_EVENTS.homeServiceClick, { ui_location: "domicilio", channel: "whatsapp" });
+          if (target.closest(".ai-premium-wrap")) track(ANALYTICS_EVENTS.assistantLead, { channel: "whatsapp" });
         }
 
-        if (href.startsWith("tel:")) track("phone_click", { location, link_text: label });
-        if (href.includes("google.com/maps") || href.includes("maps.google")) track("location_click", { location: "ubicacion", link_text: label });
+        if (href.startsWith("tel:")) track(ANALYTICS_EVENTS.phoneClick, { ui_location: uiLocation, ui_label: label });
+        if (href.includes("google.com/maps") || href.includes("maps.google") || href.includes("maps.app.goo.gl")) {
+          track(ANALYTICS_EVENTS.locationClick, { ui_location: "ubicacion", ui_label: label });
+        }
       }
 
       if (button) {
         const label = (button.textContent || "").trim().replace(/\s+/g, " ").slice(0, 120);
-        if (button.matches(".ai-fab")) track("assistant_open", { source: "floating_button" });
+        if (button.matches(".ai-fab")) track(ANALYTICS_EVENTS.assistantOpen, { trigger: "floating_button" });
         if (button.matches(".nav-cta") || (button.matches(".primary-btn") && /diagn[oó]stico|evaluaci[oó]n/i.test(label))) {
-          track("quote_open", { location, button_text: label });
+          track(ANALYTICS_EVENTS.quoteOpen, { ui_location: uiLocation, ui_label: label });
         }
         if (button.matches(".send-btn")) {
-          if (button.closest(".quiz-modal")) track("quiz_submit", { location: "orientation_quiz", channel: "whatsapp" });
-          else if (button.closest(".quote-modal")) track("quote_submit", { location, channel: "whatsapp" });
+          if (button.closest(".quiz-modal")) track(ANALYTICS_EVENTS.quizSubmit, { ui_location: "orientation_quiz", channel: "whatsapp" });
+          else if (button.closest(".quote-modal")) track(ANALYTICS_EVENTS.quoteSubmit, { ui_location: uiLocation, channel: "whatsapp" });
         }
 
-        // Radix dialogs mount after the click. Apply copy once after they render instead of observing the whole DOM.
         window.setTimeout(applyBusinessContent, 80);
       }
     };
