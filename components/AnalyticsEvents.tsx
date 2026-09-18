@@ -8,17 +8,37 @@ type GtagWindow = Window & { gtag?: (...args: unknown[]) => void };
 type AssistantOpenDetail = { service?: string; trigger?: "service_card" | "programmatic" };
 
 const ANALYTICS_EVENTS = {
+  trafficContext: "traffic_context",
+  bioPageView: "bio_page_view",
   servicePageView: "service_page_view",
   assistantOpen: "assistant_open",
   whatsappClick: "whatsapp_click",
   homeServiceClick: "home_service_click",
   assistantLead: "assistant_lead",
   phoneClick: "phone_click",
+  emailClick: "email_click",
   locationClick: "location_click",
+  googleReviewClick: "google_review_click",
+  socialClick: "social_click",
   quoteOpen: "quote_open",
   quizSubmit: "quiz_submit",
   quoteSubmit: "quote_submit",
 } as const;
+
+const RESERVED_TRAFFIC_KEYS = new Set([
+  "source",
+  "medium",
+  "campaign",
+  "campaign_id",
+  "term",
+  "content",
+]);
+
+function safeParams(params: EventParams) {
+  return Object.fromEntries(
+    Object.entries(params).filter(([key, value]) => value !== undefined && !RESERVED_TRAFFIC_KEYS.has(key)),
+  ) as EventParams;
+}
 
 function track(name: string, params: EventParams = {}, attempt = 0) {
   if (typeof window === "undefined") return;
@@ -32,8 +52,48 @@ function track(name: string, params: EventParams = {}, attempt = 0) {
   gtag("event", name, {
     page_path: window.location.pathname,
     page_title: document.title,
-    ...params,
+    ...safeParams(params),
   });
+}
+
+function inferEntryChannel() {
+  const url = new URL(window.location.href);
+  const referrer = document.referrer ? new URL(document.referrer) : null;
+  const referrerHost = referrer?.hostname.replace(/^www\./, "") || "";
+  const entryUtmSource = url.searchParams.get("utm_source") || "";
+  const entryUtmMedium = url.searchParams.get("utm_medium") || "";
+  const entryUtmCampaign = url.searchParams.get("utm_campaign") || "";
+
+  let entryChannel = "direct_or_unattributed";
+
+  if (entryUtmSource || entryUtmMedium || entryUtmCampaign) entryChannel = "tagged_campaign";
+  else if (/google\./i.test(referrerHost)) entryChannel = "google";
+  else if (/instagram\.com$/i.test(referrerHost)) entryChannel = "instagram";
+  else if (/facebook\.com$/i.test(referrerHost) || /fb\.com$/i.test(referrerHost)) entryChannel = "facebook";
+  else if (/tiktok\.com$/i.test(referrerHost)) entryChannel = "tiktok";
+  else if (/youtube\.com$/i.test(referrerHost) || /youtu\.be$/i.test(referrerHost)) entryChannel = "youtube";
+  else if (referrerHost && referrerHost !== window.location.hostname.replace(/^www\./, "")) entryChannel = "external_referral";
+
+  return {
+    entry_channel: entryChannel,
+    entry_referrer_host: referrerHost || "none",
+    entry_landing_path: window.location.pathname,
+    entry_utm_source: entryUtmSource || "none",
+    entry_utm_medium: entryUtmMedium || "none",
+    entry_utm_campaign: entryUtmCampaign || "none",
+  };
+}
+
+function trackTrafficContext() {
+  if (typeof window === "undefined") return;
+  const key = "godiag_traffic_context_sent";
+
+  try {
+    if (window.sessionStorage.getItem(key)) return;
+    window.sessionStorage.setItem(key, "1");
+  } catch {}
+
+  track(ANALYTICS_EVENTS.trafficContext, inferEntryChannel());
 }
 
 function clickLocation(target: Element) {
@@ -48,6 +108,14 @@ function clickLocation(target: Element) {
   if (target.closest(".ai-panel")) return "assistant";
   if (target.closest(".bio-page")) return "bio";
   return "other";
+}
+
+function socialNetworkFromHref(href: string) {
+  if (/instagram\.com/i.test(href)) return "instagram";
+  if (/facebook\.com|fb\.com/i.test(href)) return "facebook";
+  if (/tiktok\.com/i.test(href)) return "tiktok";
+  if (/youtube\.com|youtu\.be/i.test(href)) return "youtube";
+  return "";
 }
 
 function replaceText(selector: string, from: string, to: string) {
@@ -111,6 +179,12 @@ export default function AnalyticsEvents() {
   const pathname = usePathname();
 
   useEffect(() => {
+    trackTrafficContext();
+
+    if (pathname === "/bio") {
+      track(ANALYTICS_EVENTS.bioPageView, { entry_surface: "bio" });
+    }
+
     if (pathname.startsWith("/servicios/")) {
       const slug = pathname.split("/").filter(Boolean).pop() || "unknown";
       track(ANALYTICS_EVENTS.servicePageView, { service_slug: slug });
@@ -123,7 +197,7 @@ export default function AnalyticsEvents() {
     const onOpenAssistant = (event: Event) => {
       const detail = (event as CustomEvent<AssistantOpenDetail>).detail;
       track(ANALYTICS_EVENTS.assistantOpen, {
-        trigger: detail?.trigger ?? (detail?.service ? "service_card" : "programmatic"),
+        interaction_trigger: detail?.trigger ?? (detail?.service ? "service_card" : "programmatic"),
         service_name: detail?.service,
       });
     };
@@ -139,28 +213,43 @@ export default function AnalyticsEvents() {
       if (anchor) {
         const href = anchor.getAttribute("href") || "";
         const label = (anchor.textContent || "").trim().replace(/\s+/g, " ").slice(0, 100);
+        const socialNetwork = socialNetworkFromHref(href);
 
         if (href.includes("wa.me/")) {
           track(ANALYTICS_EVENTS.whatsappClick, { ui_location: uiLocation, ui_label: label });
-          if (target.closest("#domicilio")) track(ANALYTICS_EVENTS.homeServiceClick, { ui_location: "domicilio", channel: "whatsapp" });
-          if (target.closest(".ai-premium-wrap")) track(ANALYTICS_EVENTS.assistantLead, { channel: "whatsapp" });
+          if (target.closest("#domicilio")) track(ANALYTICS_EVENTS.homeServiceClick, { ui_location: "domicilio", contact_channel: "whatsapp" });
+          if (target.closest(".ai-premium-wrap") || target.closest(".bio-modal")) track(ANALYTICS_EVENTS.assistantLead, { contact_channel: "whatsapp", ui_location: uiLocation });
         }
 
         if (href.startsWith("tel:")) track(ANALYTICS_EVENTS.phoneClick, { ui_location: uiLocation, ui_label: label });
+        if (href.startsWith("mailto:")) track(ANALYTICS_EVENTS.emailClick, { ui_location: uiLocation, ui_label: label });
+
         if (href.includes("google.com/maps") || href.includes("maps.google") || href.includes("maps.app.goo.gl")) {
           track(ANALYTICS_EVENTS.locationClick, { ui_location: "ubicacion", ui_label: label });
+        }
+
+        if (/g\.page\/r\/.*\/review|google.*review/i.test(href)) {
+          track(ANALYTICS_EVENTS.googleReviewClick, { ui_location: uiLocation, ui_label: label });
+        }
+
+        if (socialNetwork) {
+          track(ANALYTICS_EVENTS.socialClick, {
+            ui_location: uiLocation,
+            social_network: socialNetwork,
+            ui_label: label,
+          });
         }
       }
 
       if (button) {
         const label = (button.textContent || "").trim().replace(/\s+/g, " ").slice(0, 120);
-        if (button.matches(".ai-fab")) track(ANALYTICS_EVENTS.assistantOpen, { trigger: "floating_button" });
+        if (button.matches(".ai-fab")) track(ANALYTICS_EVENTS.assistantOpen, { interaction_trigger: "floating_button" });
         if (button.matches(".nav-cta") || (button.matches(".primary-btn") && /diagn[oó]stico|evaluaci[oó]n/i.test(label))) {
           track(ANALYTICS_EVENTS.quoteOpen, { ui_location: uiLocation, ui_label: label });
         }
         if (button.matches(".send-btn")) {
-          if (button.closest(".quiz-modal")) track(ANALYTICS_EVENTS.quizSubmit, { ui_location: "orientation_quiz", channel: "whatsapp" });
-          else if (button.closest(".quote-modal")) track(ANALYTICS_EVENTS.quoteSubmit, { ui_location: uiLocation, channel: "whatsapp" });
+          if (button.closest(".quiz-modal")) track(ANALYTICS_EVENTS.quizSubmit, { ui_location: "orientation_quiz", contact_channel: "whatsapp" });
+          else if (button.closest(".quote-modal")) track(ANALYTICS_EVENTS.quoteSubmit, { ui_location: uiLocation, contact_channel: "whatsapp" });
         }
 
         window.setTimeout(applyBusinessContent, 80);
