@@ -24,3 +24,32 @@ Modelos usados: `llama-3.3-70b-versatile` para la conversación y `llama-3.1-8b-
 5. Presionar **Deploy**.
 
 Vercel ejecutará automáticamente `npm install` y `npm run build`.
+
+## Reseñas de Google
+
+La sección muestra las cinco opiniones reales consultadas el 4 de octubre de 2026.
+`/api/google-reviews` consulta Google Places API (New) desde el servidor, sin exponer
+la clave al navegador. Para activar la actualización, configurar en Vercel
+`GOOGLE_PLACES_API_KEY` de un proyecto con Places API (New) habilitada y volver a desplegar.
+Opcionalmente configurar `GOOGLE_PLACE_ID` para evitar la búsqueda inicial.
+Sin clave o si Google falla, se conservan las opiniones originales y su fecha de consulta;
+la interfaz nunca indica que está sincronizada cuando no lo está.
+
+Places devuelve hasta cinco opiniones destacadas, la puntuación y el número total
+actuales. No garantiza mostrar todas las opiniones nuevas; el enlace al perfil permite
+leerlas todas. Para un historial completo se requiere Google Business Profile API con
+OAuth del propietario. La clave debe permanecer en variables de servidor y restringirse
+a Places API. Google Cloud puede requerir facturación; no se activa ningún servicio de
+pago automáticamente. No se agregan estrellas de reseñas propias al marcado SEO.
+
+### Sincronización completa (recomendada)
+
+El endpoint también admite Google Business Profile API y prioriza esta conexión.
+Configurar `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`,
+`GOOGLE_BUSINESS_REFRESH_TOKEN` y `GOOGLE_BUSINESS_LOCATION`
+(`accounts/ACCOUNT_ID/locations/LOCATION_ID`). Requiere proyecto aprobado para GBP
+API, perfil verificado y autorización OAuth del propietario con scope
+`https://www.googleapis.com/auth/business.manage`. Estas credenciales deben configurarse
+en Vercel; nunca enviarlas por chat ni incorporarlas al repositorio.
+La API pagina todas las reseñas y las ordena por actualización: cada visita obtiene
+las existentes y las nuevas. Sin autorización no se puede activar esta conexión.

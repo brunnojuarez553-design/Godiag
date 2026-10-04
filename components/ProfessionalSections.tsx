@@ -2,6 +2,7 @@
 
 import { ArrowRight, CircuitBoard, Gauge, MapPin, Microscope, ScanLine, Settings2, ShieldCheck, Truck, Wrench } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import GoogleReviews from "@/components/GoogleReviews";
 import CertificationsGallery from "@/components/CertificationsGallery";
 
 const whatsapp = "584222872237";
@@ -115,20 +116,7 @@ export default function ProfessionalSections() {
         </div>
       </section>
 
-      <section className="reviews-ready section" id="resenas">
-        <Reveal as="div" className="reviews-ready-card">
-          <div>
-            <span className="kicker">REPUTACIÓN REAL</span>
-            <h2>La próxima capa de confianza:<br />reseñas verificadas.</h2>
-            <p>La sección queda preparada para integrar opiniones reales de Google cuando el perfil de Google Business esté activo. No mostramos testimonios inventados ni valoraciones que el negocio todavía no tenga verificadas.</p>
-          </div>
-          <div className="reviews-status">
-            <span>GOOGLE BUSINESS</span>
-            <b>Próximamente</b>
-            <small>Ubicación · horarios · fotos · reseñas · contacto</small>
-          </div>
-        </Reveal>
-      </section>
+      <GoogleReviews />
 
       <CertificationsGallery />
     </>

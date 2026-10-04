@@ -22,6 +22,7 @@ import "./premium-finish.css";
 import "./final-audit.css";
 import "./theme.css";
 import "./desktop-menu.css";
+import "./google-reviews.css";
 
 const logo = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788232533/IMG_1016_y4atye.jpg";
 const specialistImage = "https://res.cloudinary.com/dvvuwigmy/image/upload/v1788231287/IMG_1017_rx0uzq.jpg";
@@ -91,7 +92,9 @@ const localBusinessSchema = {
     { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "09:00", closes: "15:00" },
   ],
   areaServed: { "@type": "City", name: "Caracas" },
+  hasMap: "https://maps.app.goo.gl/1A8QkEmg8wAKNteX7",
   sameAs: [
+    "https://maps.app.goo.gl/1A8QkEmg8wAKNteX7",
     "https://www.instagram.com/godiag.ve",
     "https://www.tiktok.com/@godiag.ve",
     "https://www.facebook.com/share/1BvVCyMgEn/",
